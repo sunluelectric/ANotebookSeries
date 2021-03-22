@@ -1,0 +1,2 @@
+\chapcontentsline{chapsection}{\raggedright \ssubnumberline {2.1}Rate of Change of a Function}{15}
+\chapcontentsline{chapsection}{\raggedright \ssubnumberline {2.2}Derivative of a Function}{15}
