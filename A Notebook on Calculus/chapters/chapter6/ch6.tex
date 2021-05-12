@@ -98,8 +98,102 @@ This can also be solved using \eqref{ch6eq:motivatingtotaldiff}. At the minimum 
 \end{eqnarray}
 which yields $x_1=x_2=0$.
 
-\section{Partial and Total Derivative} \label{ch6sec:partialtotalderivative}
+\section{Partial Derivative} \label{ch6sec:partialtotalderivative}
+
+In the case of single input scalar function $f(x), x \in \mathbb{R}$, there is no point to define partial and total derivative, as the derivative with respect to that single variable by itself is the total derivative.
+
+In the case of multivariable function with multiple inputs, $f(x), x \in \mathbb{R}^{R\times 1}$, the definition partial derivative is given below.
+
+\begin{VF}
+	\textbf{Definition of Partial Integral}:
+	\\
+	\\
+	Consider function $y = f(x_1,...,x_n)$ where $y$ is the scalar output and $x = \left[x_1, ..., x_n\right]^T$ is a $n\times 1$ vector input. The partial derivative of $y=f(x)$ with respect to $x_i$ is given by
+	\begin{eqnarray}
+		\dfrac{\partial}{\partial x_i}f(x) = \lim_{\Delta x_i \rightarrow 0} \dfrac{f(x_1,..., x_i + \Delta x_i,...,x_n)-f(x_1,...,x_n)}{\Delta x_i}, \label{ch6eq:formalpartialderivative}
+	\end{eqnarray}
+	with $x_1,...,x_{i-1}, x_{i+1},..., x_n$ remaining constant, and only $x_i$ is allowed to vary.
+	
+\end{VF}
+
+Here is another example to help better understand partial derivative. Consider $z=f(x, y)$ a multivariable function of both inputs $x$, $y$ as follows
+\begin{eqnarray}
+	z = f(x,y) = x^2 + \textup{sin}(y), \label{ch6eq:partialdiffchainexp1}
+\end{eqnarray}
+where $y = g(x)$ is a single input function of $x$ as follows
+\begin{eqnarray}
+	y = g(x) = e^x. \label{ch6eq:partialdiffchainexp2}
+\end{eqnarray}
+
+Apparently, the value of $z$ ultimately depends on $x$ alone, but in the intermediate calculation, $z$ depends on both $x$ and $y$. The calculation flow is visualized in Fig. \ref{ch6fig_chainexp}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=200pt]{chapters/chapter6/figures/chainexp.png}
+	\caption{The calculation of $z$ using $x$ and $y$.} \label{ch6fig_chainexp}
+\end{figure}
+
+In this case, the total derivative $\dfrac{d}{dx}f(x, y)$ can be expressed as follows
+\begin{eqnarray}
+	\dfrac{d}{dx}f(x, y) &=& \dfrac{\partial}{\partial x} f(x, y) + \dfrac{\partial}{\partial y}f(x, y) \dfrac{d}{dx}y. \label{ch6eq:partialvstotal}
+\end{eqnarray}
+where in this example,
+\begin{eqnarray}
+	\dfrac{\partial}{\partial x} f(x, y) &=& 2x \nonumber \\
+	\dfrac{\partial}{\partial y} f(x, y) &=& \textup{cos}(y) \nonumber \\
+	\dfrac{d}{dx}y &=& e^x \nonumber
+\end{eqnarray}
+and finally
+\begin{eqnarray}
+	\dfrac{d}{dx}f(x, y) &=& 2x + \textup{cos}(e^x)e^x \nonumber
+\end{eqnarray}
+
+Sometimes \eqref{ch6eq:partialvstotal} is rewritten as follows
+\begin{eqnarray}
+	df(x, y) &=& \dfrac{\partial}{\partial x} f(x, y) dx + \dfrac{\partial}{\partial y}f(x, y) dy \nonumber \\
+	dy &=& \left(\dfrac{d}{dx}y\right) dx \nonumber
+\end{eqnarray}
+where $d(\cdot)$ represents the infinitesimal change of a variable.
+
+Equation \eqref{ch6eq:partialvstotal} serves as a good example to show the relationship and difference between the total derivative $\dfrac{d}{dx}f(x, y)$ and the partial derivative $\dfrac{\partial}{\partial x} f(x, y)$. When calculating total derivative, all variables that would affect the value of the function must be taken into consideration, while when calculating partial derivative, only one input variable is studied, with the rest variables remaining constant.  
+
+For a function with $1$ output and $n$ inputs, sometimes it is convenient to put the partial derivative to each input in a vector. For example, for $y=f(x)$ where $x = \left[x_1,...,x_n\right]^T$, denote
+\begin{eqnarray}
+	\dfrac{\partial}{\partial x}f(x) = \left[\begin{array}{ccc}
+	\dfrac{\partial}{\partial x_1}f(x) &
+	\ldots &
+	\dfrac{\partial}{\partial x_n}f(x)
+	\end{array}\right] \label{ch6eq:scalarbyvector}
+\end{eqnarray}
+as the \textit{scalar-by-vector derivative}. Notice that \eqref{ch6eq:scalarbyvector} is usually given as a row vector. In some research papers the result is given as a column vector, i.e. the transpose of \eqref{ch6eq:scalarbyvector}.
+
+For a function with $m$ outputs and $1$ input $y=f(x)$ where $y = \left[y_1,...,y_m\right]^T = \left[f_1(x),...,f_m(x)\right]^T$, its \textit{vector-by-scalar derivative} is given by
+\begin{eqnarray}
+	\dfrac{\partial}{\partial x}f(x) &=& \left[\begin{array}{c}
+	\dfrac{\partial}{\partial x}f_1(x) \\
+	\vdots \\
+	\dfrac{\partial}{\partial x}f_m(x)
+	\end{array}\right]. \label{ch6eq:vectorbyscalar}
+\end{eqnarray}
+
+And finally for a function with $m$ outputs and $n$ inputs $y=f(x)$ where $y = \left[y_1,...,y_m\right]^T = \left[f_1(x),...,f_m(x)\right]^T$ and $x = \left[x_1,...,x_n\right]^T$, the \textit{vector-by-vector} derivative is given by
+\begin{eqnarray}
+	\dfrac{\partial}{\partial x}f(x) &=& \left[\begin{array}{ccc}
+	\dfrac{\partial}{\partial x_1}f_1(x) & \ldots & \dfrac{\partial}{\partial x_n}f_1(x) \\
+	\vdots & \ddots & \vdots \\
+	\dfrac{\partial}{\partial x_1}f_m(x) & \ldots & \dfrac{\partial}{\partial x_n}f_m(x) \\
+	\end{array}\right]. \label{ch6eq:vectorbyvector}
+\end{eqnarray}
+
+Partial derivative and the above equations \eqref{ch6eq:scalarbyvector}, \eqref{ch6eq:vectorbyscalar} and \eqref{ch6eq:vectorbyvector} have many applications. Two of those most popular use cases are \textit{gradient} and \textit{Jacobian matrix}, which will be introduced in coming Sections \ref{ch6sec:gradient} and \ref{ch6sec:jacobianmatrix} respectively.
 
 \section{Gradient} \label{ch6sec:gradient}
+
+
+
+
+
+
+
 
 \section{Jacobian Matrix} \label{ch6sec:jacobianmatrix}
