@@ -69,16 +69,16 @@ In \eqref{ch6eq:motivatingresult1}, consider $\Delta x_1 \rightarrow 0$ and $\De
 Equation \eqref{ch6eq:motivatingresult2} can be extended to more general cases where $(x_1, x_2) = (1, 1)$ is not specified. The terms $\dfrac{d}{dx_1}f(x_1,1)$ and $\dfrac{d}{dx_2}f(1,x_2)$ needs to be changed accordingly. For example, $\dfrac{d}{dx_1}f(x_1,1)$ given by \eqref{ch6eq:motivatingexpdx1} shall be changed to
 \begin{eqnarray}
 	\left.\dfrac{d}{dx_1}f(x_1,x_2)\right|_{x_2 \textup{~is constant}} &=& 4x_1 + 2x_2 \nonumber
-\end{eqnarray} 
-with $x_2$ being any arbitrary constant. 
+\end{eqnarray}
+with $x_2$ being any arbitrary constant.
 
-The denotation $\left.\dfrac{d}{dx_1}f(x_1,x_2)\right|_{x_2 \textup{~is constant}}$ can sometimes become ambiguous if not handled carefully. One of the reasons could be that ``$d(\cdot)$'' is used as infinitesimal change as shown before. In this case both $dx_1$ and $dx_2$ contribute to $df(x_1,x_2)$, but we would want $\dfrac{d}{dx_1}f(x_1,x_2)$ here to reflect the deviation of $f(x_1,x_2)$ caused by $dx_1$ only, and it is not convenient to list down all the other variables and put ``is/are constant'' everywhere in the equation. Therefore, instead of saying $\left.\dfrac{d}{dx_1}f(x_1,x_2)\right|_{x_2 \textup{~is constant}}$, we denote 
+The denotation $\left.\dfrac{d}{dx_1}f(x_1,x_2)\right|_{x_2 \textup{~is constant}}$ can sometimes become ambiguous if not handled carefully. One of the reasons could be that ``$d(\cdot)$'' is used as infinitesimal change as shown before. In this case both $dx_1$ and $dx_2$ contribute to $df(x_1,x_2)$, but we would want $\dfrac{d}{dx_1}f(x_1,x_2)$ here to reflect the deviation of $f(x_1,x_2)$ caused by $dx_1$ only, and it is not convenient to list down all the other variables and put ``is/are constant'' everywhere in the equation. Therefore, instead of saying $\left.\dfrac{d}{dx_1}f(x_1,x_2)\right|_{x_2 \textup{~is constant}}$, we denote
 \begin{eqnarray}
 	\dfrac{\partial}{\partial x_1} f(x_1, x_2) &=& 4x_1 + 2x_2. \nonumber
 \end{eqnarray}
 The operator $\dfrac{\partial}{\partial x}$ is called \textit{partial derivative} (with respect to $x$), often followed by a multivariable function $f(x,y)$ where $x$ is one of its inputs. It is similar to the derivative, but emphasizing that the interested function is multivariable, and the derivative of this function with respect to ONLY ONE variable is being studied (and the rest variables assumed constant). Since $\partial f(x)$ is rarely or never used as the infinitesimal of $f(x)$, it will hopefully be less ambiguous.
 
-The formal definition of $\partial x$ is given in next Section \ref{ch6sec:partialtotalderivative}.
+The formal definition of partial derivative is given in next Section \ref{ch6sec:partialtotalderivative}.
 
 Equation \eqref{ch6eq:motivatingresult2} for general $(x_1,x_2)$, therefore, becomes
 \begin{eqnarray}
@@ -91,10 +91,10 @@ The minimum $y=f(x_1,x_2)$ and its associated $x_1$ and $x_2$ can be found by re
 \end{eqnarray}
 Therefore, the minimum $y$ is $y=0$, at $x_1 = 0$ and $x_1 + x_2 = 0$, i.e., $x_1 = x_2 = 0$.
 
-This can also be solved using \eqref{ch6eq:motivatingtotaldiff}. At the minimum point of $y$, $\dfrac{\partial}{\partial x_2}f(x_1,x_2)$ and $\dfrac{\partial}{\partial x_1}f(x_1,x_2)$ must both zero. Otherwise, it is always possible to add/subtract a small $\Delta x_1$ or $\Delta x_2$ to further decrease $y$. Thus, from \eqref{ch6eq:motivatingexample}
+This can also be solved using \eqref{ch6eq:motivatingtotaldiff}. At the minimum point of $y$, $\dfrac{\partial}{\partial x_2}f(x_1,x_2)$ and $\dfrac{\partial}{\partial x_1}f(x_1,x_2)$ must be both zero. Otherwise, it is always possible to add/subtract a small $\Delta x_1$ or $\Delta x_2$ to further decrease $y$. Thus, from \eqref{ch6eq:motivatingexample}
 \begin{eqnarray}
 	\dfrac{\partial}{\partial x_1}f(x_1,x_2) &=& 4x_1 + 2x_2 = 0 \nonumber \\
-	\dfrac{\partial}{\partial x_2}f(x_1,x_2) &=& 2x_1 + 2x_1 = 0
+	\dfrac{\partial}{\partial x_2}f(x_1,x_2) &=& 2x_1 + 2x_1 = 0 \nonumber
 \end{eqnarray}
 which yields $x_1=x_2=0$.
 
@@ -155,7 +155,7 @@ Sometimes \eqref{ch6eq:partialvstotal} is rewritten as follows
 \end{eqnarray}
 where $d(\cdot)$ represents the infinitesimal change of a variable.
 
-Equation \eqref{ch6eq:partialvstotal} serves as a good example to show the relationship and difference between the total derivative $\dfrac{d}{dx}f(x, y)$ and the partial derivative $\dfrac{\partial}{\partial x} f(x, y)$. When calculating total derivative, all variables that would affect the value of the function must be taken into consideration, while when calculating partial derivative, only one input variable is studied, with the rest variables remaining constant.  
+Equation \eqref{ch6eq:partialvstotal} serves as a good example to show the relationship and difference between the total derivative $\dfrac{d}{dx}f(x, y)$ and the partial derivative $\dfrac{\partial}{\partial x} f(x, y)$. When calculating total derivative, all variables that would affect the value of the function must be taken into consideration, while when calculating partial derivative, only one input variable is studied, with the rest variables remaining constant.
 
 For a function with $1$ output and $n$ inputs, sometimes it is convenient to put the partial derivative to each input in a vector. For example, for $y=f(x)$ where $x = \left[x_1,...,x_n\right]^T$, denote
 \begin{eqnarray}
@@ -185,13 +185,79 @@ And finally for a function with $m$ outputs and $n$ inputs $y=f(x)$ where $y = \
 	\end{array}\right]. \label{ch6eq:vectorbyvector}
 \end{eqnarray}
 
-Partial derivative and the above equations \eqref{ch6eq:scalarbyvector}, \eqref{ch6eq:vectorbyscalar} and \eqref{ch6eq:vectorbyvector} have many applications. Two of those most popular use cases are \textit{gradient} and \textit{Jacobian matrix}, which will be introduced in coming Sections \ref{ch6sec:gradient} and \ref{ch6sec:jacobianmatrix} respectively.
+Partial derivative and the above equations \eqref{ch6eq:scalarbyvector}, \eqref{ch6eq:vectorbyscalar} and \eqref{ch6eq:vectorbyvector} have many applications. Two of those most popular use cases are \textit{gradient} and \textit{Jacobian matrix}. Since they are so important and widely used, it is worth especially introducing them in specific Sections \ref{ch6sec:gradient} and \ref{ch6sec:jacobianmatrix}.
 
 \section{Gradient} \label{ch6sec:gradient}
 
+For a scalar-valued multivariable function $y=f(x)$ where $y$ is a scalar and $x$ is a vector $x = \left[\begin{array}{ccc}
+                                                                               x_1 & \ldots & x_n
+                                                                             \end{array}\right] \in \mathbb{R}^n$, the gradient studies the ``direction'' of $\Delta x$ in $\mathbb{R}^n$ space that causes $y$ to increase/decrease the fastest. 
+
+The gradient of such function $f(x)$ is a vector function of $x$, denoted by $\nabla f(x)$. Notice that $\nabla f(x) \in \mathbb{R}^n$ is a vector in the same space with $x$, since it indicates a ``direction'' of $x$.
+
+Section \ref{ch6subsec:gradientmotivatingexp} gives a motivating example of gradient, and Section \ref{ch6subsec:gradientdef} gives its formal definition.
+
+\subsection{Motivating Example} \label{ch6subsec:gradientmotivatingexp}
+
+The following motivating example helps to illustrate the calculation and use case of gradient.
+
+\begin{shortbox}
+\Boxhead{A Motivating Example}
+
+Consider the following function $y=f(x_1,x_2)$
+\begin{eqnarray}
+    y = f(x_1,x_2) = 2\textup{sin}(x_1) + \textup{sin}\left(\dfrac{x_1}{2} + \pi\right) + \textup{sin}(2x_2) \label{ch6eq:gradientexp_hill}
+\end{eqnarray}
+where $x_1\in[-3,3]$ and $x_2\in[-2,2]$. The 3-D plot and the contour line of the function are given in Figs \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour} respectively. 
+
+The objective is to obtain such $x_1$ and $x_2$ to maximize $y$. By applying a glomal optimization on \eqref{ch6eq:gradientexp_hill}, $x_1 = 1.3764$, $x_2=0.7854$ can be obtained. However, in this example we are assuming that the global optimization is not applicable due to the lack of information or computational power. Try to obtain the target coordinate $x_1$ and $x_2$ without using global optimization.
+
+\end{shortbox}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_3d.eps}
+	\caption{Plot of $y=f(x_1, x_2)$ in 3-D.} \label{ch6fig:gradientexp_3d}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_contour.eps}
+	\caption{Contour line of $y=f(x_1, x_2)$.} \label{ch6fig:gradientexp_contour}
+\end{figure}
+
+We are using iterations to find the maximum point of $y$ and associated $x_1$ and $x_2$ as follows.
+
+Step 1: Start at initial point $x^0 = [1,0]$, which is marked by a red dot on both Figs. \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour}.
+
+Step 2: Determine a small change $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. The length of this small change $|\Delta x^k| = \sqrt{\left(\Delta x_1^k\right)^2 + \left(\Delta x_2^k\right)^2} = \lambda$ is a constant. Determine such $[\Delta x_1^k, \Delta x_2^k]$ that maximize $f(x_1^k+\Delta x_1^k, x_2^k+\Delta x_2^k)$.
+
+Step 3: Let $x^{k+1} = x^k + \Delta x^k$.
+
+Steps 2 and 3 are executed recursively until $f(x_1^{k+1}, x_2^{k+1}) \approx f(x_1^k+\Delta x_1^k, x_2^k)$. In this way, hopefully $x^k$ can slowly ``climb up'' to the maximum point of $y$ in Fig. \ref{ch6fig:gradientexp_3d}.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Gradient of a Multivariable Function} \label{ch6subsec:gradientdef}
 
 
 
