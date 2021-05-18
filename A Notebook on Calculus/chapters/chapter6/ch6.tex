@@ -191,7 +191,7 @@ Partial derivative and the above equations \eqref{ch6eq:scalarbyvector}, \eqref{
 
 For a scalar-valued multivariable function $y=f(x)$ where $y$ is a scalar and $x$ is a vector $x = \left[\begin{array}{ccc}
                                                                                x_1 & \ldots & x_n
-                                                                             \end{array}\right] \in \mathbb{R}^n$, the gradient studies the ``direction'' of $\Delta x$ in $\mathbb{R}^n$ space that causes $y$ to increase/decrease the fastest. 
+                                                                             \end{array}\right] \in \mathbb{R}^n$, the gradient studies the ``direction'' of $\Delta x$ in $\mathbb{R}^n$ space that causes $y$ to increase/decrease the fastest.
 
 The gradient of such function $f(x)$ is a vector function of $x$, denoted by $\nabla f(x)$. Notice that $\nabla f(x) \in \mathbb{R}^n$ is a vector in the same space with $x$, since it indicates a ``direction'' of $x$.
 
@@ -208,7 +208,7 @@ Consider the following function $y=f(x_1,x_2)$
 \begin{eqnarray}
     y = f(x_1,x_2) = 2\textup{sin}(x_1) + \textup{sin}\left(\dfrac{x_1}{2} + \pi\right) + \textup{sin}(2x_2) \label{ch6eq:gradientexp_hill}
 \end{eqnarray}
-where $x_1\in[-3,3]$ and $x_2\in[-2,2]$. The 3-D plot and the contour line of the function are given in Figs \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour} respectively. 
+where $x_1\in[-3,3]$ and $x_2\in[-2,2]$. The 3-D plot and the contour line of the function are given in Figs \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour} respectively.
 
 The objective is to obtain such $x_1$ and $x_2$ to maximize $y$. By applying a glomal optimization on \eqref{ch6eq:gradientexp_hill}, $x_1 = 1.3764$, $x_2=0.7854$ can be obtained. However, in this example we are assuming that the global optimization is not applicable due to the lack of information or computational power. Try to obtain the target coordinate $x_1$ and $x_2$ without using global optimization.
 
@@ -229,7 +229,7 @@ We are using iterations to find the maximum point of $y$ and associated $x_1$ an
 
 Step 1: Start at initial point $x^0 = [1,0]$, which is marked by a red dot on both Figs. \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour}.
 
-Step 2: Determine a small change $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. The length of this small change $|\Delta x^k| = \sqrt{\left(\Delta x_1^k\right)^2 + \left(\Delta x_2^k\right)^2} = \lambda$ is a constant. Determine such $[\Delta x_1^k, \Delta x_2^k]$ that maximize $f(x_1^k+\Delta x_1^k, x_2^k+\Delta x_2^k)$.
+Step 2: Determine a small change $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. Such $[\Delta x_1^k, \Delta x_2^k]$ shall maximize $f(x_1^k+\Delta x_1^k, x_2^k+\Delta x_2^k)$ as much as possible, without introducing too much computational complexity.
 
 Step 3: Let $x^{k+1} = x^k + \Delta x^k$.
 
