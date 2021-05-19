@@ -233,14 +233,37 @@ Step 2: Determine a small change $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. Su
 
 Step 3: Let $x^{k+1} = x^k + \Delta x^k$.
 
-Steps 2 and 3 are executed recursively until $f(x_1^{k+1}, x_2^{k+1}) \approx f(x_1^k+\Delta x_1^k, x_2^k)$. In this way, hopefully $x^k$ can slowly ``climb up'' to the maximum point of $y$ in Fig. \ref{ch6fig:gradientexp_3d}.
+Steps 2 and 3 are executed recursively until $f(x_1^{k+1}, x_2^{k+1}) \approx f(x_1^k, x_2^k)$. In this way, hopefully $x^k$ can slowly ``climb up'' to the maximum point of $y$ in Fig. \ref{ch6fig:gradientexp_3d}.
 
+The remaining problem is how to find $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$ in Step 2 to best maximize $f(x_1^k+\Delta x_1^k, x_2^k+\Delta x_2^k)$ with minimum information and calculation load. 
 
+Notice that $\Delta x^k$ can be interpreted as a vector that indicates the ``direction'', along which trace the value of $y$ increases the fastest. An intuitive way is to find the tangent plane to the surface. From space analytic geometry, we know that a pair of unparalleled vector can uniquely define a plane, and such pair of vector is not difficult to find, as
+\begin{eqnarray}
+  && \left(1,0,\left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k}\right) \label{ch6eq:gradientexp_v1} \\
+  && \left(0,1,\left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}\right) \label{ch6eq:gradientexp_v2}
+\end{eqnarray}
+must be such a pair of vector. This is because \eqref{ch6eq:gradientexp_v1} is the tangent of the 2-D intersect of $y=f(x_1,x_2)$ and $x_2 = x_2^k$ (i.e. $y=f(x_1,x_2^k)$), therefore must be tangent to the original 3-D surface $y=f(x_1,x_2)$. The same applies to \eqref{ch6eq:gradientexp_v2}, making it also tangent to $y=f(x_1,x_2)$. And obviously the two lines are unparalleled since one of them lies on plane $x_1=x_1^k$ and the other on plane $x_2=x_2^k$, which are two perpendicular planes.
 
+Take the $x^k=x^0=[1,0]$ as an example. The intersect of $y=f(x_1,x_2)$ and $x_2 = 0$ is given as the red solid line in Fig. \ref{ch6fig:gradientexp_3d2}, and its tangent at $\left(1,0,f(1,0)\right)$, i.e. equation \eqref{ch6eq:gradientexp_v1}, is given by the red dashed line. The same is applied for the intersect of $y=f(x_1,x_2)$ and $x_1 = 1$ and its tangent equation \eqref{ch6eq:gradientexp_v2} as the blue lines.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_3d2.eps}
+	\caption{Plot of vectors given by \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}.} \label{ch6fig:gradientexp_3d2}
+\end{figure}
 
+The two vectors \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}, as indicated by the red and blue dashed lines respectively in Fig. \ref{ch6fig:gradientexp_3d2} are unparalleled and intersect at $\left(1,0,f(1,0)\right)$. Therefore, the vectors can uniquely determine a plane which is the tangent plan for $y=f(x_1,x_2)$ at $\left(1,0,f(1,0)\right)$, as shown by Fig. \ref{ch6fig:gradientexp_3d3}.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_3d3.eps}
+	\caption{Formulation of the tangent plane from vectors given by \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}.} \label{ch6fig:gradientexp_3d3}
+\end{figure}
 
+The next step is to find a vector on the tangent plane along which $y$ increases the fastest. The direction of this vector will be used as a guidance in selecting $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. This vector can be derived using space analytic geometry and it is briefly introduced as follows. Apparently, since the vector is on the tangent plan, it can be represented as a linear combination of \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2} as
+\begin{eqnarray}
+    && \left(\lambda_1, \lambda_2, \lambda_1\left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} + \lambda_2\left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} \right) . \nonumber
+\end{eqnarray}
 
 
 
