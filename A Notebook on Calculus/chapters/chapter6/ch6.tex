@@ -210,8 +210,6 @@ Consider the following function $y=f(x)$ where $x = [x_1,x_2]^T$ is a vector and
 \end{eqnarray}
 where $x_1\in[-3,3]$ and $x_2\in[-2,2]$. The 3-D plot and the contour line of the function are given in Figs \ref{ch6fig:gradientexp_3d} and \ref{ch6fig:gradientexp_contour} respectively.
 
-%The objective is to obtain such $x_1$ and $x_2$ to maximize $y$. By applying a glomal optimization on \eqref{ch6eq:gradientexp_hill}, $x_1 = 1.3764$, $x_2=0.7854$ can be obtained. However, in this example we are assuming that the global optimization is not applicable due to the lack of information or computational power. Try to obtain the target coordinate $x_1$ and $x_2$ without using global optimization.
-
 Consider initial point $x^0 = [x_1^0, x_2^0]^T = [1,0]^T$. Let $x$ deviate a little bit from $x^0$ to get $x^1 = [x_1^1, x_2^1]^T = [x_1^0 + \Delta x_1^0, x_2^0 + \Delta x_2^0]^T$. The objective is to find such $\Delta x^0 = [\Delta x_1^0, \Delta x_2^0]^T$ to hopefully get $f(x^1)$ as large as possible.
 
 \end{shortbox}
@@ -227,20 +225,18 @@ Consider initial point $x^0 = [x_1^0, x_2^0]^T = [1,0]^T$. Let $x$ deviate a lit
 	\caption{Contour line of $y=f(x_1, x_2)$.} \label{ch6fig:gradientexp_contour}
 \end{figure}
 
-Notice that $\Delta x^0$ can be interpreted as a vector that indicates the ``direction'', along which trace the value of $y$ increases the fastest. An intuitive way is to find the tangent plane to the surface at $x=[1,0]^T$, and let $\Delta x^0$ be the direction where it climbs up the tangent plane the fastest. 
+Notice that $\Delta x^0$ can be interpreted as a vector that points to the ``direction'' of $x$ where $y$ increases the fastest. An intuitive way is to find the tangent plane to the surface given by \eqref{ch6eq:gradientexp_hill} at $x^0=[1,0]^T$, and let $\Delta x^0$ be the direction where it climbs up the tangent plane the fastest.
 
-From space analytic geometry, we know that a pair of unparalleled vector can uniquely define a plane, and such pair of vector is not difficult to find, as
+From space analytic geometry, we know that a pair of unparalleled vector on the tangent plane can uniquely define the plane, and such pair of vector is not difficult to find, as
 \begin{eqnarray}
  \vec{v}_1 &=& \left(\begin{array}{ccc}
-                       1, & 0, & \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^0}
+                       1, & 0, & \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0}
                      \end{array}\right) \label{ch6eq:gradientexp_v1} \\
  \vec{v}_2 &=& \left(\begin{array}{ccc}
-                       0, & 1, & \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^0}
+                       0, & 1, & \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}
                      \end{array}\right) \label{ch6eq:gradientexp_v2}
 \end{eqnarray}
-must be such a pair of vector. This is because \eqref{ch6eq:gradientexp_v1} is the tangent of the 2-D intersect of $y=f(x_1,x_2)$ and $x_2 = x_2^k$ (i.e. $y=f(x_1,x_2^k)$), therefore must be tangent to the original 3-D surface $y=f(x_1,x_2)$. The same applies to \eqref{ch6eq:gradientexp_v2}, making it also tangent to $y=f(x_1,x_2)$. And obviously the two lines are unparalleled since one of them lies on plane $x_1=x_1^k$ and the other on plane $x_2=x_2^k$, which are two perpendicular planes.
-
-At $x^0=[1,0]$, the intersect of $y=f(x_1,x_2)$ and $x_2 = 0$ is given as the red solid line in Fig. \ref{ch6fig:gradientexp_3d2}, and its tangent at $\left(1,0,f(1,0)\right)$, i.e. equation \eqref{ch6eq:gradientexp_v1}, is given by the red dashed line. The same is applied for the intersect of $y=f(x_1,x_2)$ and $x_1 = 1$ and its tangent equation \eqref{ch6eq:gradientexp_v2} as the blue lines.
+must be such a pair of vector. This is because \eqref{ch6eq:gradientexp_v1}, as shown by the red dashed line in Fig. \ref{ch6fig:gradientexp_3d2}, is the tangent of the 2-D intersection of $y=f(x)$ and $x_2 = x_2^0$ shown by the red solid line, therefore must be tangent to the original 3-D surface $y=f(x)$ at $x^0$. The same applies to \eqref{ch6eq:gradientexp_v2}. The tangent plane derived from these two vectors is shown in Fig. \ref{ch6fig:gradientexp_3d3}.
 
 \begin{figure}
 	\centering
@@ -248,22 +244,18 @@ At $x^0=[1,0]$, the intersect of $y=f(x_1,x_2)$ and $x_2 = 0$ is given as the re
 	\caption{Plot of vectors given by \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}.} \label{ch6fig:gradientexp_3d2}
 \end{figure}
 
-The two vectors \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}, as indicated by the red and blue dashed lines respectively in Fig. \ref{ch6fig:gradientexp_3d2} are unparalleled and intersect at $\left(1,0,f(1,0)\right)$. Therefore, the vectors can uniquely determine a plane which is the tangent plan for $y=f(x_1,x_2)$ at $\left(1,0,f(1,0)\right)$, as shown by Fig. \ref{ch6fig:gradientexp_3d3}.
-
 \begin{figure}
 	\centering
 	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_3d3.eps}
 	\caption{Formulation of the tangent plane from vectors given by \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2}.} \label{ch6fig:gradientexp_3d3}
 \end{figure}
 
-The next step is to find a vector $\vec{v}$ on the tangent plane along which $y$ increases the fastest. The direction of this vector will be used as a guidance in selecting $\Delta x^k = [\Delta x_1^k, \Delta x_2^k]$. This vector can be derived using space analytic geometry and it is briefly introduced as follows.
-
-For convenience, we will do a plane transformation to the tangent plane so that it crosses the origin $(0,0,0)$. This can be done by mapping $\left(x_1^k,x_2^k,f(x_1^k,x_2^k)\right)$ to $(0,0,0)$. The vector $\vec{v}$ must fulfill the following two conditions: (a) it must be on the tangent plane; (b) it must be perpendicular to the intersection line of the tangent plane and the $y=0$ plane.
+The next step is to find a vector $\vec{v}$ on the tangent plane along which $y$ increases the fastest. For convenience, we will do a plane transformation to the tangent plane so that it crosses the origin $(0,0,0)$. This can be done by mapping $\left(x_1^k,x_2^k,f(x_1^k,x_2^k)\right)$ to $(0,0,0)$. The vector $\vec{v}$ must fulfill the following two conditions: (a) it must be on the tangent plane; (b) it must be perpendicular to the intersection line of the tangent plane and the $y=0$ plane.
 
 Consider (a). Since the vector is on the tangent plan, it can be represented as a linear combination of \eqref{ch6eq:gradientexp_v1} and \eqref{ch6eq:gradientexp_v2} as
 \begin{eqnarray}
     \vec{v}&=& \left(\begin{array}{ccc}
-              \lambda_1, & \lambda_2, & \lambda_1\left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} + \lambda_2\left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}
+              \lambda_1, & \lambda_2, & \lambda_1\left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} + \lambda_2\left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}
             \end{array} \right) . \label{ch6eq:gradient_v}
 \end{eqnarray}
 
@@ -271,73 +263,88 @@ Consider (b). The analytical expression for the tangent plane can be obtained by
 \begin{eqnarray}
   \vec{n} &=& \vec{v}_1 \times \vec{v}_2 \nonumber \\
   &=& \left(\begin{array}{ccc}
-              -\left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k}, & -\left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}, & 1
+              -\left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0}, & -\left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}, & 1
             \end{array}\right) \nonumber
 \end{eqnarray}
 Therefore, the tangent plan is given by (cross origin $(0,0,0)$)
 \begin{eqnarray}
-  y &=& \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} x_1 + \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} x_2 \nonumber
+  y &=& \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} x_1 + \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0} x_2 \nonumber
 \end{eqnarray}
 And its intersection with plane $y=0$ is
 \begin{eqnarray}
-  \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} x_1 + \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} x_2 &=& 0 \label{ch6eq:gradient_intersectline}
+  \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} x_1 + \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0} x_2 &=& 0 \label{ch6eq:gradient_intersectline}
 \end{eqnarray}
-Vector $\vec{v}$ must be perpendicular to \eqref{ch6eq:gradient_intersectline}. A quick way is to pick a vector from \eqref{ch6eq:gradient_intersectline}, for example,
+Vector $\vec{v}$ must be perpendicular to \eqref{ch6eq:gradient_intersectline}. The direction of the intersection can be represented by a vecotr. From \eqref{ch6eq:gradient_intersectline}, for example,
 \begin{eqnarray}
-   \vec{v}_{\textup{intersect}} &=& \left(\begin{array}{ccc}
-              \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}, & -\left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k}, & 0
+   \vec{v}_{\textup{ints}} &=& \left(\begin{array}{ccc}
+              \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}, & -\left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0}, & 0
             \end{array}\right), \label{ch6eq:gradient_intersectvector}
 \end{eqnarray}
-and make sure $\vec{v}_{\textup{intersect}}$ is perpendicular to $\vec{v}$. From \eqref{ch6eq:gradient_v} and \eqref{ch6eq:gradient_intersectvector}, equating $\vec{v} \cdot \vec{v}_{\textup{intersect}} = 0$ gives
+is a good choice. Vector $\vec{v}_{\textup{ints}}$ in \eqref{ch6eq:gradient_intersectvector} is perpendicular to $\vec{v}$ in \eqref{ch6eq:gradient_v}. From \eqref{ch6eq:gradient_v} and \eqref{ch6eq:gradient_intersectvector}, equating $\vec{v} \cdot \vec{v}_{\textup{ints}} = 0$ gives
 \begin{eqnarray}
-  \lambda_1 \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} &=& \lambda_2 \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} \label{ch6eq:gradient_lambdarestrict}
+  \lambda_1 \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0} &=& \lambda_2 \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} \label{ch6eq:gradient_lambdarestrict}
 \end{eqnarray}
 
-Equation \eqref{ch6eq:gradient_lambdarestrict} has infinite number of solutions, all of which result in the same direction of $\vec{v}$. For example, select $\lambda_1 = \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k}$, $\lambda_2 = \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}$. Substituting $\lambda_1$ and $\lambda_2$ into \eqref{ch6eq:gradient_v} gives
+Equation \eqref{ch6eq:gradient_lambdarestrict} has infinite number of solutions, resulting in infinite number of $\vec{v}$, all of which point to the same direction. For example, select $\lambda_1 = \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0}$, $\lambda_2 = \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}$ as the solution. Substituting $\lambda_1$ and $\lambda_2$ into \eqref{ch6eq:gradient_v} gives
 \begin{eqnarray}
   \vec{v} &=& \left(\begin{array}{cc}
-              \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k}, & \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k},
+              \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0}, & \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0},
             \end{array} \right. \nonumber \\
-            && \left. \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} + \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k} \right). \label{ch6eq:gradient_finalv}
+            && \left. \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} + \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0} \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0} \right). \label{ch6eq:gradient_finalv}
 \end{eqnarray}
 
-Equation \eqref{ch6eq:gradient_finalv} gives the guidance of the direction from $x^k$ to $x^{k+1}$ which can hopefully maximize $f(x_1^{k+1}, x_2^{k+1})$. Therefore, $\Delta x^k$ can be obtained as follows.
+Equation \eqref{ch6eq:gradient_finalv} gives the guidance of the direction from $x^0$ to $x^{1}$ which can hopefully maximize $f(x^1)$. Therefore, $\Delta x^0$ can be obtained as follows.
 \begin{eqnarray}
-  \Delta x^k &=& \left[\begin{array}{cc}
-                         \Delta x_1^k & \Delta x_2^k
-                       \end{array}\right]^T \nonumber \\
-  &=& \alpha \left[\begin{array}{c}
-                         \left.\dfrac{\partial y}{\partial x_1}\right|_{x=x^k} \\
-                         \left.\dfrac{\partial y}{\partial x_2}\right|_{x=x^k}
+  \Delta x^0 &=& \alpha \left[\begin{array}{c}
+                         \left.\dfrac{\partial f(x)}{\partial x_1}\right|_{x=x^0} \\
+                         \left.\dfrac{\partial f(x)}{\partial x_2}\right|_{x=x^0}
                        \end{array}\right] \nonumber \\
-  &=& \alpha \left.\nabla f(x)\right|_{x=x^k}
+  &=& \alpha \left.\nabla f(x)\right|_{x=x^0} \label{ch6eq:gradientdeltaxresult}
 \end{eqnarray}
 where $\alpha > 0$ is an adjustable parameter to determine the progressing rate for each iteration and
 \begin{eqnarray}
   \nabla f(x) &=& \left[\begin{array}{c}
-                         \dfrac{\partial y}{\partial x_1} \\
-                         \dfrac{\partial y}{\partial x_2}
+                         \dfrac{\partial f(x)}{\partial x_1} \\
+                         \dfrac{\partial f(x)}{\partial x_2}
                        \end{array}\right] \label{ch6eq:gradientdef}
-\end{eqnarray}  
-is defined as the \textit{gradient} of $f(x)$, which by itself is a vector function of $x$.
+\end{eqnarray}
+is defined as the \textit{gradient} of $f(x)$, which by itself is a vector function of $x$ that has the same dimension with $x$. In this example, since $x$ is a $2\times 1$ vector, $\nabla f(x)$ is also $2 \times 1$. Substituting \eqref{ch6eq:gradientexp_hill} into \eqref{ch6eq:gradientdef} gives
+\begin{eqnarray}
+  \nabla f(x) &=& \left[\begin{array}{c}
+                         2\textup{cos}(x_1) + \dfrac{1}{2}\textup{cos}\left(\dfrac{x_1}{2}+\pi\right) \\
+                         2\textup{cos}(2x_2)
+                       \end{array}\right]. \label{ch6eq:gradientresult}
+\end{eqnarray}
+Substituting $x^0=[1,0]^T$ into \eqref{ch6eq:gradientresult} and \eqref{ch6eq:gradientdeltaxresult} gives
+\begin{eqnarray}
+  \Delta x^0 &=& \alpha \left[\begin{array}{c}
+                         0.6418 \\
+                         2
+                       \end{array}\right] \nonumber
+\end{eqnarray}
 
+The above procedures can be used to iteratively calculate $x^k$ as follows.
+\begin{eqnarray}
+  \Delta x^k &=& \alpha \left.\nabla f(x)\right|_{x=x^k} \nonumber \\
+  x^{k+1} &=& x^k + \Delta x^k \nonumber
+\end{eqnarray}
+until $\left.\nabla f(x)\right|_{x=x^k} \approx 0$ or $f(x^{k+1})-f(x^k) \approx 0$. Following the same concept, each $f(x^{k+1})$ will be slightly larger than $f(x^k)$ and eventually the maximum value of $f(x)$ and its associated $x$ can be achieved. In this example, calculating $x^1$ to $x^{20}$ gives the following trajectory of $x$ as shown in Figs. \ref{ch6fig:gradientexp_3d4} and \ref{ch6fig:gradientexp_3d5}. The value $\alpha = 0.05$ is used. The maximum $y=5.32$ can be achieved at $x^{20} = [1.32, 0.77]^T$. Note that this is already a practically good approximation to the actual maximum, as shown in Figs. \ref{ch6fig:gradientexp_3d4} and \ref{ch6fig:gradientexp_3d5} To get a even better approximation, consider using smaller $\alpha$ and increase the iteration time.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_3d_trajectory.eps}
+	\caption{Trajectory of $x$ until the maximum $y=f(x)$ is achieved.} \label{ch6fig:gradientexp_3d4}
+\end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{figure}
+	\centering
+	\includegraphics[width=250pt]{chapters/chapter6/figures/gradientexp_contour_trajectory.eps}
+	\caption{Trajectory of $x$ until the maximum $y=f(x)$ is achieved on contour line plot.} \label{ch6fig:gradientexp_3d5}
+\end{figure}
 
 \subsection{Gradient of a Multivariable Function} \label{ch6subsec:gradientdef}
 
+The gradient of $f(x)$ in \eqref{ch6eq:gradientdef} for the motivating example holds true for general multivariable functions, as long as $f(x)$ is differentiable. The formal definition of gradient is given as follows. 
 
 
 
