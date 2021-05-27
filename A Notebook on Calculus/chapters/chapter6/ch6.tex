@@ -344,8 +344,59 @@ until $\left.\nabla f(x)\right|_{x=x^k} \approx 0$ or $f(x^{k+1})-f(x^k) \approx
 
 \subsection{Gradient of a Multivariable Function} \label{ch6subsec:gradientdef}
 
-The gradient of $f(x)$ in \eqref{ch6eq:gradientdef} for the motivating example holds true for general multivariable functions, as long as $f(x)$ is differentiable. The formal definition of gradient is given as follows. 
+The gradient of $f(x)$ in \eqref{ch6eq:gradientdef} for the motivating example holds true for general multivariable functions, as long as $f(x)$ is differentiable. The formal definition of gradient is given as follows.
 
+\begin{VF}
+	\textbf{Definition of Gradient}:
+	\\
+	\\
+Consider a scalar-valued differentiable function $y=f(x)$ where $x = [x_1,...,x_n]^T \in \mathbb{R}^{n \times 1}$. The gradient of $f(x)$ is a vector function of $x$ denoted by $\nabla f(x) \in \mathbb{R}^{n \times 1}$ as follows. The symbol $\nabla$ is called the \textit{nabla symbol}.
+\begin{eqnarray}
+  \nabla f(x) &=& \left[\begin{array}{c}
+                          \dfrac{\partial}{\partial x_1}f(x) \\
+                          \vdots \\
+                          \dfrac{\partial}{\partial x_n}f(x)
+                        \end{array}\right]. \nonumber
+\end{eqnarray}
 
+The gradient of $f(x)$ at point $x=p$ can be calculated by
+\begin{eqnarray}
+  \nabla f(p) &=& \left.\left[\begin{array}{c}
+                         \dfrac{\partial}{\partial x_1}f(x) \\
+                          \vdots \\
+                          \dfrac{\partial}{\partial x_n}f(x)
+                        \end{array}\right]\right|_{x = p}. \nonumber
+\end{eqnarray}
+which can be interpreted as the direction and rate of fastest increase of $f(x)$ at $x=p$.
+	
+\end{VF}
+
+In case where the direction and rate of fastest decrease of $f(x)$ is required, $-\nabla f(x)$ can be used. Note that $-\nabla f(x)$ is the direction and rate of fastest increase $-f(x)$.
+
+Do note that local maximum/minimum may become an issue while using gradient-based methods to search for maximum/minimum of a function, depending on the function itself and also the initial point $x_0$ of the iterations.
 
 \section{Jacobian Matrix} \label{ch6sec:jacobianmatrix}
+
+Jacobian matrix is widely used in linear system analysis. For example, it can be used when linearizing a non-linear vector function. The use of Jacobian matrix differs from case to case, thus is not introduced in details here. Only the definition is given as follows.
+
+\begin{VF}
+	\textbf{Definition of Jacobian Matrix}:
+	\\
+	\\
+    Consider a vector function $y=f(x)$ where $y = \left[y_1,...,y_m\right]^T \in \mathbb{R}^{m \times 1}$ and $x = [x_1,...,x_n]^T \in \mathbb{R}^{n \times 1}$. The Jacobian matrix of $f(x)$ is an $m \times n$ matrix, usually denoted by $J$ given by
+	\begin{eqnarray}
+	  J &=& \left[\begin{array}{c}
+	                \nabla^T f_1(x) \\
+	                \vdots \\
+	                \nabla^T f_m(x)
+	              \end{array}\right] \nonumber \\
+        &=& \left[\begin{array}{ccc}
+                    \dfrac{\partial}{\partial x_1}f_1(x) & \ldots & \dfrac{\partial}{\partial x_n}f_1(x) \\
+                    \vdots & \ddots & \vdots \\
+                    \dfrac{\partial}{\partial x_1}f_m(x) & \ldots & \dfrac{\partial}{\partial x_n}f_m(x)
+                  \end{array}\right], \nonumber
+	\end{eqnarray}
+where $f_i(x)$ is the $i$th element among the $m$ elements in $f(x)$ and $\nabla^T f_i(x)$ is the transpose of $\nabla f_i(x)$.
+\end{VF}
+
+Sometimes the characteristics of $J$ reveals insights of function $f(x)$, and can be very helpful in evaluating system performance under particular situations.
