@@ -1,4 +1,4 @@
-\chapter{Integral}
+\chapter{Integral} \label{ch3}
 
 Consider a continuous function $f(x)$ defined in $[a, b]$. We want to find the ``antiderivative'' of $f(x)$, i.e. find a function $F(x)$ whose derivative is $f(x)$. In Section \ref{ch3section:motivatingexample}, a motivating example is given to illustrate a use case for such ``antiderivative''. The formal definition of integral is given in Section \ref{ch3sec:integraloffunc}, and the calculation of integral for common functions are given in Section \ref{ch3sec:calculateintegraloffunc}.
 
@@ -13,15 +13,15 @@ Consider
 \begin{eqnarray}
     y &=& x^2, 0 \leq x \leq 1. \label{ch3eq:motivatingexample}
 \end{eqnarray}
-A plot of \eqref{ch3eq:motivatingexample} is given in Fig. \ref{ch3fig:motivatingexp}. To obtain the area of the red shape, approximate the red area with the sum of $N$ trapezoids, as shown by the blue dashed curves in Fig. \ref{ch3fig:motivatingexp}. 
+A plot of \eqref{ch3eq:motivatingexample} is given in Fig. \ref{ch3fig:motivatingexp}. To obtain the area of the red shape, approximate the red area with the sum of $N$ trapezoids, as shown by the blue dashed curves in Fig. \ref{ch3fig:motivatingexp}.
 
-Q1:  Calculate the sum of the area of the $N$ trapezoids. 
+Q1:  Calculate the sum of the area of the $N$ trapezoids.
 
 Q2: On top of Q1, let $N \rightarrow \infty$ to obtain the area of the red shape.
 
-Q3: Given $0 \leq a \leq 1$, calculate the area of the trapezoids in between two vertical lines $x=0$ and $x=a$. 
+Q3: Given $0 \leq a \leq 1$, calculate the area of the trapezoids in between two vertical lines $x=0$ and $x=a$.
 
-Q4: Given $0 \leq a \leq 1$, calculate the area of the red in between two vertical lines $x=0$ and $x=a$. 
+Q4: Given $0 \leq a \leq 1$, calculate the area of the red in between two vertical lines $x=0$ and $x=a$.
 
 \end{shortbox}
 
@@ -31,7 +31,7 @@ Q4: Given $0 \leq a \leq 1$, calculate the area of the red in between two vertic
 \caption{Plot of \eqref{ch3eq:motivatingexample} and $N=3$ trapezoids.} \label{ch3fig:motivatingexp}
 \end{figure}
 
-Notice that in Fig. \ref{ch3fig:motivatingexp}, $N=3$ trapezoids is used in the plot for clearer demonstration. In practice, more trapezoids shall be considered to get a better approximation. We can all agree on that with a larger choice of $N$, a better approximation can be obtained. When $N \rightarrow \infty$, the blue dashed trapezoids approaches the red shape geometrically. 
+Notice that in Fig. \ref{ch3fig:motivatingexp}, $N=3$ trapezoids is used in the plot for clearer demonstration. In practice, more trapezoids shall be considered to get a better approximation. We can all agree on that with a larger choice of $N$, a better approximation can be obtained. When $N \rightarrow \infty$, the blue dashed trapezoids approaches the red shape geometrically.
 
 The area of the $i$-th trapezoid can be calculated as follows. (Let the left side smallest triangle be the first trapezoid, and the right side largest trapezoid be the $N$-th trapezoid.)
 \begin{eqnarray}
@@ -86,7 +86,7 @@ The upper edge of the trapezoids for $N=3$ is given by \ref{ch3eq:motivatingexpN
 \caption{Calculation of the area of trapezoids. Variables $N=3$ and $a=0.5$ are used in the plot for demonstration.} \label{ch3fig:motivatingexpN3tra}
 \end{figure}
 
-The area of the trapezoids in between $x=0$ and $x=a$ for $N=3$ is given by the red dashed area in Fig. \ref{ch3fig:motivatingexpN3tra}, where $a=0.5$ is used in the plot just for demonstration. The area as a function of $a$ is given as 
+The area of the trapezoids in between $x=0$ and $x=a$ for $N=3$ is given by the red dashed area in Fig. \ref{ch3fig:motivatingexpN3tra}, where $a=0.5$ is used in the plot just for demonstration. The area as a function of $a$ is given as
 \begin{eqnarray}
    s_{T}^a &=& \left\{\begin{array}{cc}
         \dfrac{1}{6}a^2 & 0 \leq a \leq \dfrac{1}{3} \\
@@ -102,13 +102,13 @@ The following can be observed from \eqref{ch3eq:motivatingexpN3eq} and \eqref{ch
     \item VERY IMPORTANT: Equation \eqref{ch3eq:motivatingexpN3eq} is the derivative of \eqref{ch3eq:motivatingexpN3eqint} for $0 < x < 1$, if replacing the notation ``$a$'' in \eqref{ch3eq:motivatingexpN3eqint} with ``$x$''.
 \end{itemize}
 
-The last statement above might be difficult to comprehend and explain, but it can be verified rather easily using \eqref{ch3eq:motivatingexpN3eq} and \eqref{ch3eq:motivatingexpN3eqint}. 
+The last statement above might be difficult to comprehend and explain, but it can be verified rather easily using \eqref{ch3eq:motivatingexpN3eq} and \eqref{ch3eq:motivatingexpN3eqint}.
 
 Notice that in this motivating example, $y=x^2$, $0 < a < 1$ and $N=3$ are chosen for demonstration purpose without losing generality, thus, this statement shall hold true for any continuous $y=f(x)$ in \eqref{ch3eq:motivatingexample} and any arbitrarily large $N$. We could have chosen $N\rightarrow\infty$ for any $y=f(x)$ to calculate the area in $x=a$, $x=b$, $y=0$ and $y=f(x)$ to get precise (not approximated, since $N\rightarrow\infty$) result.
 
 Furthermore, when $N\rightarrow\infty$, we know that the trapezoids edge given by \eqref{ch3eq:motivatingexpN3eq} will perfectly overlap $y=f(x)$. And we know that \eqref{ch3eq:motivatingexpN3eq} will always be the derivative of the area equation \eqref{ch3eq:motivatingexpN3eqint}. Thus, we can derive \eqref{ch3eq:motivatingexpN3eqint} for the $N\rightarrow\infty$ case by simply looking for a function $F(x)$ whose derivative is $f(x)$. After that, substituting $a$ and $b$ into $F(b)-F(a)$ gives the precise area surrounded by $x = a$, $x = b$, $y=0$ and $y=f(x)$.
 
-An intuitive explanation to this statement is given as follows. 
+An intuitive explanation to this statement is given as follows.
 
 The increment of the area function $F(x)$ from any value $x = a$ to $x = a + \Delta x$ is by definition the area in between $x=a$, $x=a + \Delta x$, $y=0$ and $y=f(x)$. Since $\Delta x$ is very small (in fact, when $N\rightarrow\infty$, $\Delta x \rightarrow 0$), $f(a+\Delta x) \rightarrow f(a)$ and this small area is $f(a)\times\Delta x$. On the other hand, the derivative of $F(x)$ at $x = a$ is defined as this increment $f(a)\times\Delta x$ divided by $\Delta x$. Therefore, the derivative of $F(x)$ at $x=a$ is $f(a)$. Alternatively, we can say \textit{the area function $F(x)$ for $y=f(x)$ is the ``antiderivative'' of $f(x)$}, and in the next section we will meet its official name, the ``integral''.
 
@@ -154,7 +154,7 @@ where $a$ and $b$ are called the lower and upper bound of the integral, respecti
 
 Equation \eqref{ch3eq:generaldefiniteintegral2} can be solved by finding such $F(x)$ that $\frac{d}{dx}F(x) = f(x)$, and
 \begin{eqnarray}
-    S = \int_a^b f(x)dx = F(b) - F(a). \nonumber
+    S = \int_a^b f(x)dx = F(b) - F(a). \label{ch3eq:calculatedefiniteintegral}
 \end{eqnarray}
 Function $F(x)$ is called the \textit{indefinite integral} of function $f(x)$, and it is denoted by
 \begin{eqnarray}
@@ -179,7 +179,7 @@ is not continuous or differentiable at any $x$, and it is not Riemann integrable
 
 \section{Calculation of the Integral of a Function} \label{ch3sec:calculateintegraloffunc}
 
-Some commonly seen indefinite integral is given in Table \ref{chi3table:commonintegrals}. When calculating indefinite integral, there is always an arbitrary constant $c$ in the result, as the constant in $F(x)$ does not affect the derivative $f(x)$. 
+Some commonly seen indefinite integral is given in Table \ref{chi3table:commonintegrals}. When calculating indefinite integral, there is always an arbitrary constant $c$ in the result, as the constant in $F(x)$ does not affect the derivative $f(x)$.
 \begin{table}
 %\noautomaticrules
 \tabletitle{Indefinite integral of commonly seen functions.} \label{chi3table:commonintegrals}
@@ -227,11 +227,11 @@ where $F(x) = \int f(x)dx$.
 
 In general, the definite integral of a continuous function can be calculated by substituting the upper and lower bound into the indefinite integral and do the following subtraction
 \begin{eqnarray}
-    \int_a^b f(x)dx = -\int_b^a f(x)dx = F(b) - F(a). \nonumber 
+    \int_a^b f(x)dx = -\int_b^a f(x)dx = F(b) - F(a). \nonumber
 \end{eqnarray}
 Notice that sometimes $F(b)-F(a)$ is also denoted by $\left.F(x)\right|_a^b$.
 
-As illustrated in the motivating example in Section \ref{ch3section:motivatingexample}, for $a<b$, $\int_a^b f(x)dx$ can be interpreted as the accumulated area between $y=f(x)$ and $y=0$, within boundary $x=a$ and $x=b$. 
+As illustrated in the motivating example in Section \ref{ch3section:motivatingexample}, for $a<b$, $\int_a^b f(x)dx$ can be interpreted as the accumulated area between $y=f(x)$ and $y=0$, within boundary $x=a$ and $x=b$.
 
 When $f(x)\geq 0$, $\int_a^b f(x)dx \geq 0$ is the area surrounded by $y=f(x)$, $y=0$, $x=a$ and $x=b$. When $f(x)\leq0$, $\int_a^b f(x)dx \leq 0$ is the negative of the area. Otherwise, $\int_a^b f(x)dx$ is the difference of area above and below $y=0$ as shown in Fig. \ref{ch3fig:explainintegrial}.
 \begin{figure}
