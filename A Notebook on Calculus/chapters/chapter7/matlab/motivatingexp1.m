@@ -1,4 +1,4 @@
-% motivatingexp.m
+% motivatingexp1.m
 %% Plot cone v1
 cone_circle_theta = linspace(0, 2*pi, 100);
 cone_circle_x = 2*ones(length(cone_circle_theta), 1);

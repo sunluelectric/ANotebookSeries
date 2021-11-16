@@ -37,6 +37,64 @@ Substituting \eqref{ch7eq:motivatingsz} and \eqref{ch7eq:motivatingrz} into \eqr
 \end{eqnarray}
 which is consistent with what we learned in primary school: the volume of a cone is one third of its bottom area multiplied by its height.
 
+The above motivating example 1 implies the volume of an object might be formulated as an one-dimensional integration. As a first step, a direction, such as $z$-axis as given in the motivating example 1, is chosen. Next, imagine using planes to intersect the object. Each plane shall be perpendicular to the selected direction, as given by the red plane in Fig. \ref{ch7fig:motivatingexp1}. Notice that the red plane is perpendicular to the direction of $z$-axis. The intersection area shall be a function of the intersection position, as given by \eqref{ch7eq:motivatingsz}. Finally, the volume can be calculated as the integral of the area function over the direction, as given by \eqref{ch7eq:motivatingv}.
+
+In many cases, the calculation of the intersection area can be less simple and intuitive than \eqref{ch7eq:motivatingsz}. An example is given by the following motivating example.
+
+\begin{shortbox}
+	\Boxhead{Motivating Example 2}
+	
+	Consider calculating the volume surrounded by the following surfaces:
+	\begin{eqnarray}
+		0\leq &x& \leq 2\pi \nonumber \\
+		0\leq &y& \leq 2\pi \nonumber \\
+		0\leq &z& \leq f(x,y) = y\textup{cos}(x+y)+2\pi \label{ch7eq:motivatingexp2f}
+	\end{eqnarray}
+	
+\end{shortbox}
+
+We will use the same method adopted from the motivating example 1 to solve motivating example 2. The volume to be calculated is plotted in Fig. \ref{ch7fig:motivatingexp2} (only the top surface). The $x$-axis direction is chosen for the integral in motivating example 2. 
+
+It can be spotted soon that motivating example 2 is more complicated than 1 as the intersection area, in this case $S(x)$ as a function of position $x$, cannot be obtained as intuitively as \eqref{ch7eq:motivatingsz}. 
+
+As an example for illustration, in Fig. \ref{ch7fig:motivatingexp2} the red surface is the intersection surface at $x=2$, and $S(x)$ at $x=2$ should be the area surrounded by the red line. At a first glance, it seems that $S(x)$ does not have an analytical expression as the red line shape is quite arbitrary.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=200pt]{chapters/chapter7/figures/motivatingexp2.eps}
+	\caption{Calculation of the volume surrounded by arbitrary surfaces.} \label{ch7fig:motivatingexp2}
+\end{figure}
+
+However, this is not true. The area surrounded by the red line in Fig. \ref{ch7fig:motivatingexp2} can be calculated with the knowledge introduced in Chapter \ref{ch3} as follows. Substituting constant $x=2$ into \eqref{ch7eq:motivatingexp2f} gives
+\begin{eqnarray}
+	z = f(2,y) = y\textup{cos}(y+2) + 2\pi, 0\leq y\leq2\pi \nonumber
+\end{eqnarray}
+which is the analytical expression of the red line (intersecting with the top surface). Therefore, the corresponding area in Fig. \ref{ch7fig:motivatingexp2} is
+\begin{eqnarray}
+	S(x)|_{x=2} &=& \int_{0}^{2\pi} f(2,y) dy \nonumber \\ &=& \int_{0}^{2\pi}\left(y\textup{cos}(y+2) + 2\pi\right)dy \nonumber \\
+	&=& \left.\left(y\textup{sin}(y+2)+\textup{cos}(y+2) + 2\pi y\right)\right|_{0}^{2\pi} \nonumber \\
+	&=& 2\pi\textup{sin}(2) + 4\pi^2 \nonumber
+\end{eqnarray}
+
+Without specifying $x$ as any particular value, $S(x)$ is in general given by
+\begin{eqnarray}
+	S(x) &=& \int_{0}^{2\pi} f(x,y) dy \label{ch7eq:motivatingexp2sx0} \\ &=& \int_{0}^{2\pi}\left(y\textup{cos}(x+y)+2\pi\right)dy \label{ch7eq:motivatingexp2sx} \\
+	&=& \left.\left(y\textup{sin}(x+y)+\textup{cos}(x+y) + 2\pi y\right)\right|_{0}^{2\pi} \label{ch7eq:motivatingexp2sx2} \\
+	&=& 2\pi\textup{sin}(x) + 4\pi^2 \label{ch7eq:motivatingexp2sx3}
+\end{eqnarray}
+where \eqref{ch7eq:motivatingexp2sx2} is derived from \eqref{ch7eq:motivatingexp2sx} by treating $x$ as a constant value. Using  \eqref{ch7eq:motivatingexp2sx0} and \eqref{ch7eq:motivatingexp2sx3}, the volume in motivating example 2 can be calculated as
+\begin{eqnarray}
+	V &=& \int_{0}^{2\pi} S(x) dx \nonumber \\
+	&=& \int_{0}^{2\pi} \left[\int_{0}^{2\pi}f(x,y)dy\right]dx \label{ch7eq:motivatingexp2doubleintegral} \\
+	&=& \int_{0}^{2\pi} \left[ \int_{0}^{2\pi}\left(y\textup{cos}(x+y)+2\pi\right)dy\right] dx \nonumber \\
+	&=& \int_{0}^{2\pi} \left(2\pi\textup{sin}(x) + 4\pi^2\right) dx \nonumber \\
+	&=& \left.\left(-2\pi\textup{cos}(x) + 4\pi^2 x\right)\right|_{0}^{2\pi} \nonumber \\
+	&=& 8\pi^3 \nonumber
+\end{eqnarray}
+
+In \eqref{ch7eq:motivatingexp2doubleintegral}, two integrals are calculated one after another to finally obtain the volume of motivating example 2, where $dx$ and $dy$ are the infinitesimal change along $x$-axis and $y$-axis respectively, just like $\Delta x\rightarrow 0$ in Chapter \ref{ch3}.
+
+Equation \eqref{ch7eq:motivatingexp2doubleintegral} can be alternatively comprehended as follows.
 
 \section{Multiple Integral} \label{ch7sec:multipleintegral}
 
