@@ -25,14 +25,14 @@ The volume of the cone can be obtained by letting the thickness of each cylinder
 \begin{eqnarray}
   V &=& \int_{0}^{3}S(z)dz, \label{ch7eq:motivatingv} \\
   S(z) &=& \pi R(z)^2, \label{ch7eq:motivatingsz} \\
-  R(z) &=& \dfrac{3-z}{3}, 0\leq z\leq 3, \label{ch7eq:motivatingrz} 
+  R(z) &=& \dfrac{3-z}{3}, 0\leq z\leq 3, \label{ch7eq:motivatingrz}
 \end{eqnarray}
-where $R(z)$ and $S(z)$ are the bottom circle radius and area of the thin cylinder at vertical position $z$, and $S(z)dz$ can be interpreted as the volume of this thin cylinder. 
+where $R(z)$ and $S(z)$ are the bottom circle radius and area of the thin cylinder at vertical position $z$, and $S(z)dz$ can be interpreted as the volume of this thin cylinder.
 
 Substituting \eqref{ch7eq:motivatingsz} and \eqref{ch7eq:motivatingrz} into \eqref{ch7eq:motivatingv} gives
 \begin{eqnarray}
-  V = \int_{0}^{3} \dfrac{\pi}{9} \left(3-z\right)^2 dz 
-  = \left.\dfrac{\pi}{27}(z-3)^3 \right|_0^3 
+  V = \int_{0}^{3} \dfrac{\pi}{9} \left(3-z\right)^2 dz
+  = \left.\dfrac{\pi}{27}(z-3)^3 \right|_0^3
   = \pi \nonumber
 \end{eqnarray}
 which is consistent with what we learned in primary school: the volume of a cone is one third of its bottom area multiplied by its height.
@@ -53,9 +53,9 @@ In many cases, the calculation of the intersection area can be less simple and i
 	
 \end{shortbox}
 
-We will use the same method adopted from the motivating example 1 to solve motivating example 2. The volume to be calculated is plotted in Fig. \ref{ch7fig:motivatingexp2} (only the top surface). The $x$-axis direction is chosen for the integral in motivating example 2. 
+We will use the same method adopted from the motivating example 1 to solve motivating example 2. The volume to be calculated is plotted in Fig. \ref{ch7fig:motivatingexp2} (only the top surface). The $x$-axis direction is chosen for the integral in motivating example 2.
 
-It can be spotted soon that motivating example 2 is more complicated than 1 as the intersection area, in this case $S(x)$ as a function of position $x$, cannot be obtained as intuitively as \eqref{ch7eq:motivatingsz}. 
+It can be spotted soon that motivating example 2 is more complicated than 1 as the intersection area, in this case $S(x)$ as a function of position $x$, cannot be obtained as intuitively as \eqref{ch7eq:motivatingsz}.
 
 As an example for illustration, in Fig. \ref{ch7fig:motivatingexp2} the red surface is the intersection surface at $x=2$, and $S(x)$ at $x=2$ should be the area surrounded by the red line. At a first glance, it seems that $S(x)$ does not have an analytical expression as the red line shape is quite arbitrary.
 
@@ -92,9 +92,11 @@ where \eqref{ch7eq:motivatingexp2sx2} is derived from \eqref{ch7eq:motivatingexp
 	&=& 8\pi^3 \nonumber
 \end{eqnarray}
 
-In \eqref{ch7eq:motivatingexp2doubleintegral}, two integrals are calculated one after another to finally obtain the volume of motivating example 2, where $dx$ and $dy$ are the infinitesimal change along $x$-axis and $y$-axis respectively, just like $\Delta x\rightarrow 0$ in Chapter \ref{ch3}.
+In \eqref{ch7eq:motivatingexp2doubleintegral}, two integrals are calculated one after another to finally obtain the volume of motivating example 2. There is an alternative way of understanding \eqref{ch7eq:motivatingexp2doubleintegral} that gives more insights to the problem. From \ref{ch3}, we know that $dx$ and $dy$ are the infinitesimal change along $x$-axis and $y$-axis respectively, and the two-step integrals are essentially the calculation of infinite sum of $f(x,y)$ multiplied by $\Delta x$ and $\Delta y$ as given in the equation below, with $\Delta x, \Delta y \rightarrow 0$.
 
-Equation \eqref{ch7eq:motivatingexp2doubleintegral} can be alternatively comprehended as follows.
+
+
+
 
 \section{Multiple Integral} \label{ch7sec:multipleintegral}
 
