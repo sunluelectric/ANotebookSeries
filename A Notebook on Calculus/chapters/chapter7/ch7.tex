@@ -92,9 +92,12 @@ where \eqref{ch7eq:motivatingexp2sx2} is derived from \eqref{ch7eq:motivatingexp
 	&=& 8\pi^3 \nonumber
 \end{eqnarray}
 
-In \eqref{ch7eq:motivatingexp2doubleintegral}, two integrals are calculated one after another to finally obtain the volume of motivating example 2. There is an alternative way of understanding \eqref{ch7eq:motivatingexp2doubleintegral} that gives more insights to the problem. From \ref{ch3}, we know that $dx$ and $dy$ are the infinitesimal change along $x$-axis and $y$-axis respectively, and the two-step integrals are essentially the calculation of infinite sum of $f(x,y)$ multiplied by $\Delta x$ and $\Delta y$ as given in the equation below, with $\Delta x, \Delta y \rightarrow 0$.
-
-
+In \eqref{ch7eq:motivatingexp2doubleintegral}, two integrals are calculated one after another to finally obtain the volume of motivating example 2. There is an alternative way of understanding \eqref{ch7eq:motivatingexp2doubleintegral} that gives more insights to the problem. From \ref{ch3}, we know that $dx$ and $dy$ are the infinitesimal change along $x$-axis and $y$-axis respectively, and the two-step integrals are essentially the calculation of infinite sum of $f(x,y)$ multiplied by $\Delta x$ and $\Delta y$ as given in the equation below, with $\Delta x, \Delta y \rightarrow 0$. To conclude, \eqref{ch7eq:motivatingexp2doubleintegral} can be rewritten as
+\begin{eqnarray}
+  \int_{0}^{2\pi} \left[\int_{0}^{2\pi}f(x,y)dy\right]dx &=& \lim_{\Delta x, \Delta y \rightarrow 0} \sum_{i} \left[\sum_{j} f(x_{i},y_{j}) \Delta y \right] \Delta x \nonumber \\
+  &=& \lim_{\Delta x, \Delta y \rightarrow 0} \sum{i,j} f(x_i,y_j) \Delta x \Delta y \label{ch7eq:motivatingexp2deltaxy}
+\end{eqnarray}
+where \eqref{ch7eq:motivatingexp2deltaxy} represents the sum of a volume of cubes with the bottom area $\Delta x \times \Delta y$ and different height $f(x_i,y_j)$.
 
 
 

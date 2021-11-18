@@ -124,13 +124,13 @@ Consider a function $f(x)$ defined on interval $[a, b]$. Let $[a, b]$ be split i
 
 If for any arbitrarily small $\varepsilon$, there is always such $\delta$ that as long as $\lambda < \delta$,
 \begin{eqnarray}
-    \left|\sum_{N}f(x_i)\lambda_i - S\right| < \varepsilon, \nonumber
+    \left|\sum_{i}f(x_i)\lambda_i - S\right| < \varepsilon, \nonumber
 \end{eqnarray}
 for a constant $S$, then $S$ is called the Riemann integral of function $f(x)$ on interval $[a, b]$.
 
 \end{VF}
 
-The segment splitting and sampling used in Riemann integral is more general than what Section \ref{ch3section:motivatingexample} has been using. In Section \ref{ch3section:motivatingexample}, we have been assuming even splitting segment $\lambda_i = \lambda_j$ for any two segments, and also determinant sampling in the segment $x_i = \underset{x}{\operatorname{arg}} f(x) = \frac{1}{2}\left(f(x_l) + f(x_r)\right)$ where $x_l$, $x_r$ are the left and right boundary of the segment respectively. By assuming continuous function $f(x)$ in Section \ref{ch3section:motivatingexample}, it is guaranteed that such $x_i$ exists. The approach used in Section \ref{ch3section:motivatingexample} is only a special case of Riemann integral, but it would work just fine for most of the cases.
+The segment splitting and sampling used in Riemann integral is more general than what Section \ref{ch3section:motivatingexample} has been using. In Section \ref{ch3section:motivatingexample}, we have been assuming even splitting segment $\lambda_i = \lambda_j$ for any two segments, and also determinant sampling in the segment $x_i = \underset{x}{\operatorname{\textup{arg}}} f(x) = \frac{1}{2}\left(f(x_l) + f(x_r)\right)$ where $x_l$, $x_r$ are the left and right boundary of the segment respectively. By assuming continuous function $f(x)$ in Section \ref{ch3section:motivatingexample}, it is guaranteed that such $x_i$ exists. The approach used in Section \ref{ch3section:motivatingexample} is only a special case of Riemann integral, but it would work just fine for most of the cases.
 
 A more intuitive definition of definite integral is given below. The idea is inherited from the motivating example in Section \ref{ch3section:motivatingexample}. It is not as ``strong'' as the Riemann's definition, but should be sufficient for most of the use cases.
 
@@ -142,7 +142,7 @@ A more intuitive definition of definite integral is given below. The idea is inh
 
 Consider a continuous function $f(x)$ defined on interval $[a, b]$. Let $[a, b]$ be split into $N$ consecutive segments with equal length $\Delta x$. Let $x_i$ be a sample in the $i$-th segment. The \textit{definite integral} of $f(x)$ on interval $[a, b]$ is given by the following equation
 \begin{eqnarray}
-    S &=& \lim_{\Delta x\rightarrow 0} \sum_N f(x_i)\Delta x, \label{ch3eq:generaldefiniteintegral}
+    S &=& \lim_{\Delta x\rightarrow 0} \sum_i f(x_i)\Delta x, \label{ch3eq:generaldefiniteintegral}
 \end{eqnarray}
 if the right side limit exists.
 
