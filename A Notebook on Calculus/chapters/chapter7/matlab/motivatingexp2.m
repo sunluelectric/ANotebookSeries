@@ -72,13 +72,87 @@ for iter_x = 1:length(x_cube)-1
         s_cube2.FaceAlpha = 0.5;
     end
 end
-
-
-
 grid on
 xlabel('$x$', 'interpreter', 'latex')
 ylabel('$y$', 'interpreter', 'latex')
 zlabel('$z$', 'interpreter', 'latex')
+
+%%
+
+figure
+hold on
+s = surf(X,Y,Z);
+s.EdgeColor = 'none';
+s.FaceColor = [0,0,0.8];
+s.FaceAlpha = 0.2;
+
+x_cube = linspace(0,2*pi,20);
+y_cube = linspace(0,2*pi,20);
+for iter_x = 6
+    for iter_y = 1:length(y_cube)-1
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x+1)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y+1)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        x_cube_central = mean(x_cube_single);
+        y_cube_central = mean(y_cube_single);
+        cube_height = y_cube_central*cos(x_cube_central+y_cube_central)+2*pi;
+        Z_cube_single = cube_height*ones(2,2);
+        s_cube0 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube0.FaceColor = [0.8,0.2,0.2];
+        s_cube0.FaceAlpha = 0.5;
+        
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y+1)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        Z_cube_single = [cube_height,0;cube_height,0];
+        s_cube1 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube1.FaceColor = [0.8,0.2,0.2];
+        s_cube1.FaceAlpha = 0.5;
+        
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x+1)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        Z_cube_single = [cube_height,cube_height;0,0];
+        s_cube2 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube2.FaceColor = [0.8,0.2,0.2];
+        s_cube2.FaceAlpha = 0.5;
+    end
+end
+for iter_x = 1:length(x_cube)-1
+    for iter_y = 6
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x+1)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y+1)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        x_cube_central = mean(x_cube_single);
+        y_cube_central = mean(y_cube_single);
+        cube_height = y_cube_central*cos(x_cube_central+y_cube_central)+2*pi;
+        Z_cube_single = cube_height*ones(2,2);
+        s_cube0 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube0.FaceColor = [0.2,0.8,0.2];
+        s_cube0.FaceAlpha = 0.5;
+        
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y+1)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        Z_cube_single = [cube_height,0;cube_height,0];
+        s_cube1 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube1.FaceColor = [0.2,0.8,0.2];
+        s_cube1.FaceAlpha = 0.5;
+        
+        x_cube_single = [x_cube(iter_x),x_cube(iter_x+1)];
+        y_cube_single = [y_cube(iter_y),y_cube(iter_y)];
+        [X_cube_single,Y_cube_single] = meshgrid(x_cube_single,y_cube_single);
+        Z_cube_single = [cube_height,cube_height;0,0];
+        s_cube2 = surf(X_cube_single,Y_cube_single,Z_cube_single);
+        s_cube2.FaceColor = [0.2,0.8,0.2];
+        s_cube2.FaceAlpha = 0.5;
+    end
+end
+grid on
+xlabel('$x$', 'interpreter', 'latex')
+ylabel('$y$', 'interpreter', 'latex')
+zlabel('$z$', 'interpreter', 'latex')
+
 
 
 
