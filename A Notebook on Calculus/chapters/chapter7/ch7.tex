@@ -125,23 +125,30 @@ both shall give the same result as the sequence of integral over $x$ or $y$ is i
 
 \section{Multiple Integral} \label{ch7sec:multipleintegral}
 
-The definition of double integral is given below.
+The definition of double integral is given below. Higher order of integral can be achieved by expanding the double integral into a higher dimension hyperspace.
 
 \begin{VF}
     \textbf{Definition of Double Integral}:
     \\
     \\
 Given a function $f(x,y)$, the double integral of $f$ over the rectangle $R$ is defined by
-\begin{eqnarray*}
-  \iint_{R} f(x,y)dxdy &=& \lim_{m, n\rightarrow \infty}\sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij},y_{ij})\Delta x \Delta y \label{ch7eq:doubleintegraldef}
-\end{eqnarray*}
-if this limit exists. In \eqref{ch7eq:doubleintegraldef}, $f(x_{ij},y_{ij})$ is an arbitrary sample of $f(x,y)$ in the $i$th and $j$th interval for $x$ and $y$ respectively.
+\begin{eqnarray}
+  \iint_{R} f(x,y)dA &=& \lim_{m, n\rightarrow \infty}\sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij},y_{ij})\Delta A \label{ch7eq:doubleintegraldef}
+\end{eqnarray}
+if this limit exists. In \eqref{ch7eq:doubleintegraldef}, $f(x_{ij},y_{ij})$ is an arbitrary sample of $f(x,y)$ in the associated infinitesimal area $\Delta A$.
+
+If $f(x,y)$ is continuous on the rectangle $R = \left\{(x,y)| a\leq x \leq b, c \leq y \leq d \right\}$, then
+\begin{eqnarray}
+  \iint_{R} f(x,y)dA &=& \iint_{R} f(x,y)dx dy \nonumber \\
+  &=& \int_{a}^{b}\int_{c}^{d} f(x,y) dxdy \nonumber \\
+  &=& \lim_{m, n\rightarrow \infty}\sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij},y_{ij})\Delta x \Delta y \label{ch7eq:doubleintegraldefxy}
+\end{eqnarray}
 
 \end{VF}
 
-Equation \eqref{ch7eq:doubleintegraldef} can be interpreted as follows. The rectangular is divided into $m\times n$ infinitesimal ``squares'', whose length and width given by $\Delta x$, $\Delta y$ respectively. An example is given in Fig. \ref{ch7fig:motivatingexp2p2} where the bottom of each red cube is such a square. The volume of such a cube is then approximated using $f(x_{ij},y_{ij})\Delta x \Delta y$, where $f(x_{ij},y_{ij})$ is an arbitrary sample of $f(x,y)$ within the associated square. With the populating of the number of cubes, the right side $f(x_{ij},y_{ij})\Delta x \Delta y$ may converge (to the volume between $z=f(x,y)$ and $z=0$ in the given rectangle $R$). If it indeed converges, then the converged value is denoted by the double integral $\iint_{R} f(x,y)dxdy$, where $dxdy$ represents the 2-dimensional infinitesimal square $\Delta x \Delta y$ when they both approach zero.
+Equation \eqref{ch7eq:doubleintegraldefxy} can be interpreted as follows. The rectangular is divided into $m\times n$ infinitesimal ``squares'', whose length and width given by $\Delta x$, $\Delta y$ respectively. An example is given in Fig. \ref{ch7fig:motivatingexp2p2} where the bottom of each red cube is such a square. The volume of such a cube is then approximated using $f(x_{ij},y_{ij})\Delta x \Delta y$, where $f(x_{ij},y_{ij})$ is an arbitrary sample of $f(x,y)$ within the associated square. With the populating of the number of cubes, the right side $f(x_{ij},y_{ij})\Delta x \Delta y$ may converge (to the volume between $z=f(x,y)$ and $z=0$ in the given rectangle $R$). If it indeed converges, then the converged value is denoted by the double integral $\iint_{R} f(x,y)dxdy$, where $dxdy$ represents the 2-dimensional infinitesimal square $\Delta x \Delta y$ when they both approach zero.
 
-
+Equation \eqref{ch7eq:doubleintegraldef} can be expanded to hyperspace for multiple integral with more than 2 variables. In practice, there is no limit to the maximum order of integral in an equation.
 
 
 
