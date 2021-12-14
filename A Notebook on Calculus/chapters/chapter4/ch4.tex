@@ -1,6 +1,10 @@
 \chapter{Applications}
 
-This chapter introduces some interesting and widely known use cases of derivatives and integrals. Section \ref{ch4sec:newtonsmethod} introduces Newton's method, a widely used numerical method to solve equation $f(x) = 0$ for some continuous function $f(x)$. Section \ref{ch4sec:taylorseries} introduces Taylor serious, a widely used numerical method to approximate the value of $f(x)$ near a specific $x_0$.
+This chapter introduces some interesting and widely known use cases of derivatives and integrals. 
+
+Section \ref{ch4sec:newtonsmethod} introduces Newton's method, a widely used numerical method to solve equation $f(x) = 0$ for some continuous function $f(x)$. 
+
+Section \ref{ch4sec:taylorseries} introduces Taylor serious, a widely used numerical method to approximate the value of $f(x)$ near a specific $x_0$.
 
 \section{Newton's Method} \label{ch4sec:newtonsmethod}
 
@@ -38,7 +42,7 @@ with $\theta \in (0,1)$, and $f^{(n)}(x)$ the $n$-th order derivative of $f(x)$,
 
 Equation \eqref{ch4eq:taylorseries} uses $P(x,x_0)$ to approximate $f(x)$. It can be seen from \eqref{ch4eq:taylorseriesremainder} that with $n\rightarrow \infty$ or $x \rightarrow x_0$, the remainder $R(x,x_0) = f(x) - P(x,x_0)$ approaches zero (notice that $f^{(n+1)}$ is assumed bounded). This implies that the approximation performs better when higher order Taylor series is used, or when the target point $x$ is close to the evaluated point $x_0$.
 
-The following Fig. \ref{ch4fig:taylordemo} gives an example of using Taylor series to approximate function $y=2^x$ at $x_0=0$. In this example, it can be seen that the approximation gets better when higher order Taylor series is used. 
+The following Fig. \ref{ch4fig:taylordemo} gives an example of using Taylor series to approximate function $y=2^x$ at $x_0=0$. In this example, it can be seen that the approximation gets better when higher order Taylor series is used.
 \begin{figure}
 \centering
 \includegraphics[width=250pt]{chapters/chapter4/figures/taylorseriesexp.eps}
