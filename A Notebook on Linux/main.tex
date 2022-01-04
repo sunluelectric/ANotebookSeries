@@ -1,0 +1,118 @@
+% ---
+% This LaTeX template is obtained from ``https://www.overleaf.com/talex/templates/tagged/book'' under ``Krantz book template''
+% The template is downloaded from the above website on March 15, 2021.
+% ---
+\documentclass[krantz1,ChapterTOCs]{krantz}
+\usepackage{fixltx2e,fix-cm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage[dvips]{hyperref}
+
+\usepackage{footnote}
+
+
+\frenchspacing
+\tolerance=5000
+
+\makeindex
+
+\include{frontmatter/preamble} %place custom commands and macros here
+
+\begin{document}
+
+\frontmatter
+
+\title{A Notebook on Linux Operating System}
+\author{Lu Sun, and many more.}
+
+\maketitle
+
+\include{frontmatter/dedication}
+%\cleardoublepage
+%\setcounter{page}{7} %previous pages will be reserved for frontmatter to be added in later.
+\tableofcontents
+\include{frontmatter/foreword}
+\include{frontmatter/preface}
+\listoffigures
+\listoftables
+%\include{frontmatter/contributor}
+%\include{frontmatter/symbollist}
+
+\mainmatter
+
+\part{General Introduction}
+
+% Linux as an Operating System
+\include{chapters/chapter1/ch1}
+
+% Linux Selection and Installation
+\include{chapters/chapter2/ch2}
+
+
+\part{Linux Basics}
+
+% Shells Basics
+\include{chapters/chapter3/ch3}
+
+% Text file Editing
+\include{chapters/chapter4/ch4}
+
+% Managing files
+\include{chapters/chapter5/ch5}
+
+% Managing Software
+\include{chapters/chapter6/ch6}
+
+% Managing Task
+\include{chapters/chapter7/ch7}
+
+\part{Linux Advanced}
+
+% Linux admin basics
+
+% Managing Account
+
+% Managing Disks
+
+% Advanced software management
+
+\part{Linux Server Management}
+
+% General Introduction to Linux server administration
+
+% Network configuration
+
+% Managing service and printer
+
+% Managing Web server, FTP, NFS and Samba
+
+% Server troubleshooting
+
+\part{Linux Security}
+
+% Linux Security
+
+% Security Enhanced Linux
+
+% Firewall
+
+\part{Linux on Cloud}
+
+% General introduction to cloud computing
+
+% Linux on Cloud
+
+% Cloud APP development and Service management
+
+
+\bibliographystyle{plain}
+\bibliography{reference}
+
+\printindex
+
+\end{document}
