@@ -79,7 +79,7 @@ In Linux, navigate to home directory. Create the following path and file \verb|~
 \\
 It is desirable to re-map some keys to speed up editing. For example, people may want to map \verb|jj| to \verb|Esc| in insert mode for more convenient mode switching to normal mode (consequent ``jj'' is rarely used in English). Other people may feel like mapping \verb|j|, \verb|k|, \verb|i| to \verb|h|, \verb|j|, \verb|k| respectively in normal and visual modes, making the navigation more intuitive. In that case, a different key needs to be mapped for \verb|i| since it is an important key for switching to insert mode.
 
-It is possible re-map certain key (or keys combination) in selected modes. The following configuration in \textit{vimrc} file re-maps the aforementioned keys. 
+It is possible re-map certain key (or keys combination) in selected modes. The following configuration in \textit{vimrc} file re-maps the aforementioned keys.
 \begin{verbatim}
 inoremap jj <Esc>
 noremap j h
@@ -111,10 +111,95 @@ syntax on
 colorscheme default
 \end{verbatim}
 
+The following command displays the row index and cursor line (a underline at cursor position) of the text, which can become handy during the programming. Furthermore, it sets auto-wrap of text when a single row is longer than the displaying screen.
+\begin{verbatim}
+set number
+set cursorline
+set wrap
+\end{verbatim}
 
+The following command opens a ``menu'' when using cmdline mode, making it easier to key in commands.
+\begin{verbatim}
+set wildmenu
+\end{verbatim}
 
+Many users in the community have posted their recommended \textit{Vim} user profile configuration online, such as on \textit{GitHub}. For the convenience of the reader, in the rest of the notebook, we will assume that \textbf{no re-map of keys combinations or shortcuts} are implemented, when introducing the commands.
 
 \subsection{Commonly Used Operations in Normal Mode}
+
+The operations, such as delete, cut, copy, paste, replace and search, are mostly done in normal mode through shortcut keys. For example, \verb|dd| delete (cut) the entire row at the cursor and \verb|p| paste the row to its new position. For beginners, remembering shortcut keys can be difficult. In such case, it is recommended for us to look for the consistent patterns of the different commands, instead of brute-force remembering the keys only.
+
+Many \textit{Vim} shortcut keys in normal mode has the following structure, i.e. an operator command followed by a motion command, as shown below.
+\begin{verbatim}
+<operator><motion>
+\end{verbatim}
+The operator command tells \textit{Vim} what to do (say, copy), and the motion command tells the applicable range of the operation (say, the entire row, or the single word, or the single character, of the cursor position). Of course for some operator commands, they can be used alone without the motion command.
+
+We will use the most commonly used operator commands, \textbf{delete/cut}, \textbf{copy} (called ``\textbf{yank}'' in \textit{Vim}), \textbf{paste} and \textbf{replace} (called ``\textbf{change}'' in \textit{Vim}) to demonstrate the above idea.
+
+In this demonstration, we will be editing the following lines taken from Wikipedia under ``William Shakespeare''. In the text file, each sentence takes a new row as given by Figure \ref{ch4fig:vimdemo1}.
+
+\begin{shortbox}
+William Shakespeare (bapt. 26 April 1564 – 23 April 1616) was an English playwright, poet and actor, widely regarded as the greatest writer in the English language and the world's greatest dramatist.
+
+He is often called England's national poet and the ``Bard of Avon'' (or simply ``the Bard'').
+\end{shortbox}
+
+\begin{figure}
+\centering
+\includegraphics[width=250pt]{chapters/chapter4/figures/vimdemo1.png}
+\caption{A piece of text of ``William Shakespeare'', for demonstration.} \label{ch4fig:vimdemo1}
+\end{figure}
+
+To quickly delete/cut a single character, use either \verb|x| or \verb|X|. Each time \verb|x| is input in normal mode, it deletes the current cursor selected character, and automatically select the next character in the text. Each time \verb|X| is input in normal mode, it keeps the current cursor selected character while deleting the previous character in front of the cursor. In this sense, \verb|x| and \verb|X| play like \verb|delete| and \verb|backspace| respectively in other text editors such as \textit{notepad++}.
+
+Operators \verb|x| and \verb|X| do not require consequent motion command, as they simply delete/cut one character immediately each time they are pressed. What if you want to delete multiple characters from the cursor? You can press \verb|x| or \verb|X| multiple times, or alternatively you can ask \textit{Vim} to ``emulate'' doing that for you, as long as you tell \textit{Vim} what actions (key combinations) and how many times you want perform. For example, \verb|20x| is equivalent with physically pressing \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| is equivalent of pressing \verb|l| for 10 times, making the navigation faster.
+
+Operator \verb|d| does similar things as \verb|x| and \verb|X| but requiring a motion command, for more flexible usage. The motion shall tell \textit{Vim} what to delete/cut. 
+
+For example, \verb|dl| deletes to the right, i.e. deletes the current cursor selected character, and automatically select the next character. It is the same as if \verb|x| is pressed. Similarly, \verb|dh| deletes  to the left, just like \verb|X|. What if you want to delete 20 characters to the right? You can key in \verb|dl| for 20 times. Or alternatively, just like the case for \verb|x|, you can tell \textit{Vim} to do it by using \verb|20dl|. Or, you can change the motion, by using \verb|d20l|, where ``20l'' as a whole plays as the motion of ``to the right for 20 characters''. Or, you can do a combination by using things like \verb|5d4l|, since $20=5\times 4$. All of the above gives you the same result (they will be a difference in the clipboard if later you want to paste them).
+
+Thanks to the ``operator-motion'' structure, \verb|d| can be used even more flexibly. For example, by using word-related motions, \verb|d| can delete/cut by words instead of by characters. Move the cursor to the beginning of a word, (for example, ``S'' in ``Shakespeare''), use \verb|dw| to delete the word. The word motion \verb|w| is similar with \verb|l|, except that \verb|l| directs to the next character, while \verb|w| directs to the beginning character of next word. Motion \verb|w| can also be used to navigate in the text. Similarly, \verb|b| directs to the beginning character of the current word (if the cursor is at the middle of the current word) or previous word (if the cursor is already at the beginning of the current word). Thus, \verb|db| can be used to delete word to the left. You can use something like \verb|d10b|, \verb|10db|, \verb|d20w|, \verb|5d4w| to delete multiple words at a time.
+
+When in the middle of a word, \verb|dw| will delete the characters from the current cursor position till the beginning character of the next word. For example, if the cursor is currently at ``k'' in ``Shakespeare'', \verb|dw| will delete ``kespeare '' (notice that the space between ``Shakespeare'' and ``(bapt.'' will also be deleted). To delete from the beginning of the word instead of from the middle of the word, you can use \verb|b| first to navigate back to the beginning of the word. Alternatively, use ``inner-word'' motion \verb|iw| to indicate that you want to delete inner word. When the cursor is at ``k'' in ``Shakespeare'', use \verb|diw| to delete the entire word.
+
+So far we have introduced the delete/cut operator \verb|d|, and character motion \verb|h| (left), \verb|l| (right), and also word motion \verb|b| (left), \verb|w| (right). There are similar motions for sentence \verb|(| (previous), \verb|)| (next) and paragraph \verb|{| (previous), \verb|}| (next). Finally, there is the inner-word motion \verb|iw| to indicate the current word of cursor, whichever the cursor is inside the word. Similarly, there are inner-sentence motion \verb|is| and inner-paragraph motion \verb|ip|. There are also inner-quotation motion \verb|i'|, \verb|i"|, \verb|i`| and inner-block motion \verb|i(|, \verb|i<|, \verb|i{|, and many more. For example, when cursor is at ``A'' of ``26 April 1564'', \verb|di(| will delete everything inside ``()'', i.e. deleting ``bapt. 26 April 1564 - 23 April 1616''.
+
+To conclude, the operators and motions so far are concluded in the listed in Tabs. \ref{ch4tab:deletecut} and \ref{ch4tab:motion}. Notice that motions \verb|aw|, \verb|as|, \verb|ap| are also given in the table. They are similar with their corresponding \verb|iw|, \verb|is|, \verb|ip| except that when deleting, the consequent blank space (for word and sentence) or blank row (for paragraph) will also be deleted. (Notice that \textit{Vim} marks the end of a sentence using ``.'', ``?'' or ``!'' followed by a blank space or tab or line, and the end of a paragraph by an empty row.)
+
+\begin{table}
+  \centering \caption{Commonly used operators related to delete/cut.}\label{ch4tab:deletecut}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Operator & Description \\ \hline
+    \verb|x| & Delete/Cut the character at cursor. \\ \hdashline
+    \verb|X| & Delete/Cut the character before cursor. \\ \hdashline
+    \verb|dd| & Delete/Cut the entire row. \\ \hdashline
+    \verb|d| & Delete/Cut something, depending on the motion. A sequential motion is required. \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}
+  \centering \caption{Commonly used motions.}\label{ch4tab:motion}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Motion & Description \\ \hline
+    \verb|h|, \verb|l| & One character to the left or right. \\ \hdashline
+    \verb|j|, \verb|k| & One row to the up or down. \\ \hdashline
+    \verb|b|, \verb|w| & One word to the previous or next. \\ \hdashline
+    \verb|(|, \verb|)| & One sentence to the previous or next. \\ \hdashline
+    \verb|\{|, \verb|\}| & One paragraph to the previous or next. \\ \hdashline
+    \verb|iw|, \verb|is|, \verb|ip| & inner-word, inner-sentence, inner-paragraph. \\ \hdashline
+    \verb|aw|, \verb|as|, \verb|ap| & a word, a sentence, a paragraph (including the end blank). \\ \hdashline
+    \verb|i'|, \verb|i"|, \verb|i`| & inner-quotation for different types of quotations. \\ \hdashline
+    \verb|i(|, \verb|i<|, \verb|i[|, \verb|i\{| & inner-block for different types of brackets. \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+
+
 
 
 
