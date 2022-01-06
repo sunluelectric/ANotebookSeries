@@ -155,7 +155,7 @@ To quickly delete/cut a single character, use either \verb|x| or \verb|X|. Each 
 
 Operators \verb|x| and \verb|X| do not require consequent motion command, as they simply delete/cut one character immediately each time they are pressed. What if you want to delete multiple characters from the cursor? You can press \verb|x| or \verb|X| multiple times, or alternatively you can ask \textit{Vim} to ``emulate'' doing that for you, as long as you tell \textit{Vim} what actions (key combinations) and how many times you want perform. For example, \verb|20x| is equivalent with physically pressing \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| is equivalent of pressing \verb|l| for 10 times, making the navigation faster.
 
-Operator \verb|d| does similar things as \verb|x| and \verb|X| but requiring a motion command, for more flexible usage. The motion shall tell \textit{Vim} what to delete/cut. 
+Operator \verb|d| does similar things as \verb|x| and \verb|X| but requiring a motion command, for more flexible usage. The motion shall tell \textit{Vim} what to delete/cut.
 
 For example, \verb|dl| deletes to the right, i.e. deletes the current cursor selected character, and automatically select the next character. It is the same as if \verb|x| is pressed. Similarly, \verb|dh| deletes  to the left, just like \verb|X|. What if you want to delete 20 characters to the right? You can key in \verb|dl| for 20 times. Or alternatively, just like the case for \verb|x|, you can tell \textit{Vim} to do it by using \verb|20dl|. Or, you can change the motion, by using \verb|d20l|, where ``20l'' as a whole plays as the motion of ``to the right for 20 characters''. Or, you can do a combination by using things like \verb|5d4l|, since $20=5\times 4$. All of the above gives you the same result (they will be a difference in the clipboard if later you want to paste them).
 
@@ -189,11 +189,11 @@ To conclude, the operators and motions so far are concluded in the listed in Tab
     \verb|j|, \verb|k| & One row to the up or down. \\ \hdashline
     \verb|b|, \verb|w| & One word to the previous or next. \\ \hdashline
     \verb|(|, \verb|)| & One sentence to the previous or next. \\ \hdashline
-    \verb|\{|, \verb|\}| & One paragraph to the previous or next. \\ \hdashline
+    \lstinline{\{}, \lstinline{\}} & One paragraph to the previous or next. \\ \hdashline
     \verb|iw|, \verb|is|, \verb|ip| & inner-word, inner-sentence, inner-paragraph. \\ \hdashline
     \verb|aw|, \verb|as|, \verb|ap| & a word, a sentence, a paragraph (including the end blank). \\ \hdashline
     \verb|i'|, \verb|i"|, \verb|i`| & inner-quotation for different types of quotations. \\ \hdashline
-    \verb|i(|, \verb|i<|, \verb|i[|, \verb|i\{| & inner-block for different types of brackets. \\
+    \verb|i(|, \verb|i<|, \verb|i[|, \lstinline{\}} & inner-block for different types of brackets. \\
     \hline
   \end{tabularx}
 \end{table}
