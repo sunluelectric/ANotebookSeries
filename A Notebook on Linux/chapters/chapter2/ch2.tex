@@ -12,7 +12,9 @@ Linux command line tool, usually known as Linux shell, was invented before the g
 
 There are different versions of shells. The most commonly used shell is the ``bash shell'' which stands for ``Bourne Again Shell'', derived from the ``Bourne Shell'' used in UNIX.
 
-Some other shells such as ``C Shell'' and ``Korn Shell'' are also favored among certain users or certain Linux distributions. In this notebook, however, we will mostly focus on only the bash shell.
+Some other shells such as ``C Shell'' and ``Korn Shell'' are also favored among certain users or certain Linux distributions. In case where your Linux distribution does not have these shells pre-installed, you can install and use these shells just like installing other software.
+
+In this notebook, we will mostly focus on only the bash shell.
 
 \section{Basic Concepts}
 
@@ -21,7 +23,7 @@ After opening the shell or terminal, you will see a string (usually containing u
 username@hostname:~$
 \end{verbatim}
 
-The \verb|$| and \verb|#| is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the prompt is \verb|$| while for the root user, the prompt is \verb|#|. 
+The \verb|$| and \verb|#| is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the prompt is \verb|$| while for the root user, the prompt is \verb|#|.
 
 By saying root user, we are referring to a special user whose username is ``root'' by default. This user has a user ID (UID) of $0$, which gives him the unlimited administration privilege over the machine. To avoid possible mis-operation by human error, root user shall not be used unless it is definitely necessary. For this reason, in many applications the root user is deactivated (for example, by setting its login password to invalid).
 
@@ -34,11 +36,42 @@ root@hostname:/home/regularuser#
 
 More about sudo privilege, \verb|sudo| and \verb|su| commands are introduced later parts of the notebook.
 
-\section{Useful Commands}
+You can key in a command after the prompt, and complete the command by the \verb|Enter| key. A Linux shell command usually has the following form.
+
+\section{Useful Basic Commands}
+
+Some useful commands are put into different categories as follows.
+
+\vspace{0.1in}
+\noindent \textbf{Display System Information}
+\vspace{0.1in}
+
+The following commands are used to display computer, OS, user, and date time information.
 
 
 
+\vspace{0.1in}
+\noindent \textbf{Navigation of Folders}
+\vspace{0.1in}
 
+ 
+
+
+
+\vspace{0.1in}
+\noindent \textbf{Display Variable and File Contents}
+\vspace{0.1in}
+
+
+
+\vspace{0.1in}
+\noindent \textbf{Alias and Shortcuts}
+\vspace{0.1in}
+
+\section{Shell Environment Configuration}
+
+
+\section{Shell Script Programming}
 
 
 
