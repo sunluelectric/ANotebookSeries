@@ -23,11 +23,11 @@ After opening the shell or terminal, you will see a string (usually containing u
 username@hostname:~$
 \end{verbatim}
 
-The \verb|$| and \verb|#| is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the prompt is \verb|$| while for the root user, the prompt is \verb|#|.
+The above displayed string is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the ending of the prompt is \verb|$| while for the root user, the ending is \verb|#|.
 
-By saying root user, we are referring to a special user whose username is ``root'' by default. This user has a user ID (UID) of $0$, which gives him the unlimited administration privilege over the machine. To avoid possible mis-operation by human error, root user shall not be used unless it is definitely necessary. For this reason, in many applications the root user is deactivated (for example, by setting its login password to invalid).
+By saying root user, we are referring to a special user whose username is ``root'' by default and a user ID (UID) of $0$. This UID gives him the administration privilege over the machine, such as adding/removing users, change ownership of files etc. To avoid significant damage by human error, root user shall not be used unless it is definitely necessary. For this reason, in many servers the root user is deactivated (for example, by setting its login password to invalid).
 
-Notice that root user is different from regular user with \textit{sudo privilege}, though a regular user with sudo privilege can temporarily switch to root user by using \verb|su| as follows.
+Notice that a root user is different from regular user who is equipped with \textit{sudo privilege}, though a regular user with sudo privilege can temporarily switch to root user by using \verb|su| as follows.
 \begin{verbatim}
 regularuser@hostname:~$ sudo su
 [sudo] password for regularuser:
@@ -50,9 +50,12 @@ Some useful commands are put into different categories as follows.
 \noindent \textbf{Show Administration Information}
 \vspace{0.1in}
 
-The system hardware (including disk usage), OS, hostname, current user name, and system clock information is some of the most useful information from administration perspective. The following commands can be used to access the information.
+Administrative users may need to frequently check the basic system information, such as hardware configuration, OS version, username, hostname, disk usage, running process, system clock, etc. Some useful commands are summarized below.
 
- 
+The following command \verb|lshw| lists down hardware information in details. Sudo privilege is recommended when using this command, to give detailed and accurate information of the system. Since the displayed information is so detailed and can take up many screens, sometimes it is more convenient to use \verb|-short| argument. 
+\begin{verbatim}
+$ sudo lshw
+\end{verbatim}
 
 
 
