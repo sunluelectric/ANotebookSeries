@@ -65,6 +65,23 @@ The above basic commands and their relationships are summarized in Fig.~\ref{ch3
 \caption{A flowchart for simple creating, editing and saving of a text file using \textit{Vim}.} \label{ch3fig:vimbasicoperationflowchart}
 \end{figure}
 
+There are other shortcuts to switch from normal mode to insert mode. Some of them are summarized in Table \ref{ch3tab:switchtoinsert}.
+
+\begin{table}
+  \centering \caption{Commonly used shortcuts to switch from normal mode to insert mode.}\label{ch3tab:switchtoinsert}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Operator & Description \\ \hline
+    \verb|i| & Insert before the character at the cursor. \\ \hdashline
+    \verb|I| & Insert at the beginning of the row at the cursor. \\ \hdashline
+    \verb|a| & Insert after the character at the cursor. \\ \hdashline
+    \verb|A| & Insert at the end of the row at the cursor. \\ \hdashline
+    \verb|o| & Create a new row below the cursor and switch to insert mode. \\ \hdashline
+    \verb|O| & Create a new row above the cursor and switch to insert mode. \\ 
+    \hline
+  \end{tabularx}
+\end{table}
+
 \subsection{Configure Customizable User Profile}
 
 With the basic operations introduced in Section \ref{ch3subsec:vimgeneralintro}, we are able to create and edit a text file as we want to, just like using any other text editor. Though at this point the advantages of using \textit{Vim} over other text editors are not obvious yet, the \textit{Vim} editor is finally useful now.
@@ -171,7 +188,7 @@ When in the middle of a word, \verb|dw| will delete the characters from the curr
 
 So far we have introduced the delete/cut operator \verb|d|, and character motion \verb|h| (left), \verb|l| (right), and also word motion \verb|b| (left), \verb|w| (right). There are similar motions for sentence \verb|(| (previous), \verb|)| (next) and paragraph \verb|{| (previous), \verb|}| (next). Finally, there is the inner-word motion \verb|iw| to indicate the current word of cursor, whichever the cursor is inside the word. Similarly, there are inner-sentence motion \verb|is| and inner-paragraph motion \verb|ip|. There are also inner-quotation motion \verb|i'|, \verb|i"|, \verb|i`| and inner-block motion \verb|i(|, \verb|i<|, \verb|i{|, and many more. For example, when cursor is at ``A'' of ``26 April 1564'', \verb|di(| will delete everything inside ``()'', i.e. deleting ``bapt. 26 April 1564 - 23 April 1616''.
 
-To conclude, the operators and motions so far are listed in Tabs. \ref{ch3tab:deletecut} and \ref{ch3tab:motion}. Notice that motions \verb|aw|, \verb|as|, \verb|ap| are also given in the table. They are similar with their corresponding \verb|iw|, \verb|is|, \verb|ip| except that when deleting, the consequent blank space (for word and sentence) or blank row (for paragraph) will also be deleted. (Notice that \textit{Vim} marks the end of a sentence using ``.'', ``?'' or ``!'' followed by a blank space or tab or line, and the end of a paragraph by an empty row.)
+To conclude, the operators and motions so far are listed in Tabs. \ref{ch3tab:deletecut} and \ref{ch3tab:motion}. Notice that motions \verb|aw|, \verb|as|, \verb|ap| are also given in the table. They are similar with their corresponding \verb|iw|, \verb|is|, \verb|ip| except that when deleting, the consequent blank space (for word and sentence) or blank row (for paragraph) will also be deleted. (Notice that \textit{Vim} marks the end of a sentence using ``.'', ``?'' or ``!'' followed by a space, tab or blank row, and the end of a paragraph by an empty row.)
 
 \begin{table}
   \centering \caption{Commonly used operators related to delete/cut, change, copy and paste.}\label{ch3tab:deletecut}
@@ -204,7 +221,11 @@ To conclude, the operators and motions so far are listed in Tabs. \ref{ch3tab:de
     \verb|iw|, \verb|is|, \verb|ip| & inner-word, inner-sentence, inner-paragraph. \\ \hdashline
     \verb|aw|, \verb|as|, \verb|ap| & a word, a sentence, a paragraph (including the end blank). \\ \hdashline
     \verb|i'|, \verb|i"|, \verb|i`| & inner-quotation for different types of quotations. \\ \hdashline
-    \verb|i(|, \verb|i<|, \verb|i[|, \lstinline{\}} & inner-block for different types of brackets. \\
+    \verb|i(|, \verb|i<|, \verb|i[|, \lstinline{\}} & inner-block for different types of brackets. \\ \hdashline
+    \verb|0| & Beginning of the row. \\ \hdashline
+    \verb|$| & Ending of the row. \\ \hdashline
+    \verb|gg| & Beginning of the text. \\ \hdashline
+    \verb|G| & Beginning of the last row of the text. \\
     \hline
   \end{tabularx}
 \end{table}
@@ -232,7 +253,7 @@ exec "nohlsearch"
 set incsearch
 set ignorecase
 \end{verbatim}
-where ``hlsearch'' highlights all matching results in the text, and ``incsearch'' allows highlighting texts while keying in the word or phrase. Each time ``hlsearch'' is enabled, \textit{Vim} will remember the keywords from the previous search and automatically hight them in the text, which can be confusing sometimes. The command \verb|exec "nohlsearch"| (\verb|exec| command in the user profile make \textit{Vim} execute that command when starting a new session) that comes after \verb|set hlsearch| resolves this issue by forcing \textit{Vim} to clear its memory. Finally, ``ignorecase'' allows case insensitive while searching.
+where \verb|hlsearch| highlights all matching results in the text, and \verb|incsearch| allows highlighting texts while keying in the word or phrase. Each time highlight search is enabled, \textit{Vim} will remember the keywords from the previous search and automatically hight them in the text, which can be confusing sometimes. The command \verb|exec "nohlsearch"| (\verb|exec| command in the user profile make \textit{Vim} execute that command when starting a new session) that comes after \verb|set hlsearch| resolves this issue by forcing \textit{Vim} to clear its memory. Finally, \verb|ignorecase| allows case insensitive while searching.
 
 In normal mode, use \verb|/<keyword>| to search keywords or phrase. With the above setup, search for ``he'' using \verb|/he| will lead to the following result given in Fig.~\ref{ch3fig:vimdemo2}.
 \begin{figure}
@@ -256,7 +277,7 @@ The use of a mouse makes selecting a block of text very intuitive. As your eyes 
 
 When using \textit{Vim}, mouse is mostly useless. The visual mode of \textit{Vim} provides users a similar experience when selecting a block of text almost as if using a mouse.
 
-It is possible to select multiple rows of text in visual mode, and then apply an operation all at rows simultaneously. 
+It is possible to select multiple rows of text in visual mode, and then apply an operation all at rows simultaneously.
 
 
 
