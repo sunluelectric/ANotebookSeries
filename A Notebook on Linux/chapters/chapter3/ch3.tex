@@ -72,11 +72,11 @@ With the basic operations introduced in Section \ref{ch3subsec:vimgeneralintro},
 Before introducing more advanced features of \textit{Vim} for more convenient user experience, we can now customize user profile to suit our individual habit. Notice that the customization is completely optional and personal. This section only introduces the ideas and basic methods of such customization, such as re-mapping keys and create user-defined shortcuts. Everything introduced here are merely examples and it is completely up to the user how to design and implement his own profile.
 
 In Linux, navigate to home directory. Create the following path and file \verb|~/.vim/vimrc| or \verb|~/.vimrc|. Open the \textit{vimrc} file as a blank file using \textit{Vim}. The individual user profile can be customized here.
-\\
-\\
+
+\vspace{0.1in}
 \noindent \textbf{Mapping of Keys}
-\\
-\\
+\vspace{0.1in}
+
 It is desirable to re-map some keys to speed up editing. For example, people may want to map \verb|jj| to \verb|Esc| in insert mode for more convenient mode switching to normal mode (consequent ``jj'' is rarely used in English). Other people may feel like mapping \verb|j|, \verb|k|, \verb|i| to \verb|h|, \verb|j|, \verb|k| respectively in normal and visual modes, making the navigation more intuitive. In that case, a different key needs to be mapped for \verb|i| since it is an important key for switching to insert mode.
 
 It is possible re-map certain key (or keys combination) in selected modes. The following configuration in \textit{vimrc} file re-maps the aforementioned keys.
@@ -100,11 +100,11 @@ map S :w<CR>
 map Q :q<CR>
 \end{verbatim}
 where \verb|<nop>| stands for ``no operation'' and \verb|CR| stands for the ``enter'' key on the keyboard. The keyword \verb|map| differs from \verb|noremap| in the sense that \verb|map| is for recursive mapping.
-\\
-\\
+
+\vspace{0.1in}
 \noindent \textbf{Syntax Highlight, Color Scheme and Others}
-\\
-\\
+\vspace{0.1in}
+
 By default \textit{Vim} displays white color contents on black background. Use the following command in \textit{vimrc} to enable syntax highlighting or change color scheme. Use \verb|:colorscheme| in normal mode in \textit{Vim} to check for available color schemes.
 \begin{verbatim}
 syntax on
@@ -125,7 +125,7 @@ set wildmenu
 
 Many users in the community have posted their recommended \textit{Vim} user profile configuration online, such as on \textit{GitHub}. For the convenience of the reader, in the rest of the notebook, we will assume that \textbf{no re-map of keys combinations or shortcuts} are implemented, when introducing the commands.
 
-Notice that the configurations introduced in this section can also be activated with the \textit{Vim} already started. Simply type \verb|:| to switch from normal mode to cmdline mode, then key in the configuration. For example, \verb|:syntax on| to activate the syntax display.  
+Notice that the configurations introduced in this section can also be activated with the \textit{Vim} already started. Simply type \verb|:| to switch from normal mode to cmdline mode, then key in the configuration. For example, \verb|:syntax on| to activate the syntax display.
 
 \subsection{Commonly Used Operations in Normal Mode}
 
@@ -136,11 +136,11 @@ Many \textit{Vim} shortcut keys in normal mode has the following structure, i.e.
 <operator><motion>
 \end{verbatim}
 The operator command tells \textit{Vim} what to do (say, copy), and the motion command tells the applicable range of the operation (say, the entire row, or the single word, or the single character, of the cursor position). Of course for some operator commands, they can be used alone without the motion command.
-\\
-\\
+
+\vspace{0.1in}
 \noindent \textbf{Delete/Cut, Change, Copy and Paste}
-\\
-\\
+\vspace{0.1in}
+
 We will use the most commonly used operator commands, delete/cut, change, copy (also known as ``yank'' in \textit{Vim}) and paste to demonstrate the above idea.
 
 In this demonstration, we will be editing the following lines taken from Wikipedia under ``William Shakespeare''. In the text file, each sentence takes a new row as given by Figure \ref{ch3fig:vimdemo1}.
@@ -220,11 +220,11 @@ In addition to the motions given in Table \ref{ch3tab:motion}, another commonly 
 ABCDEFG;HIJKLMN;OPQ;RST;UVW;XYZ
 \end{verbatim}
 In normal mode, using \verb|f| followed by a character will navigate the cursor to the nearest corresponding character that appears in the text. For example, \verb|fG| will move the cursor to letter ``G''. Similarly, \verb|f;| will move the cursor to the ``;'' between ``G'' and ``H''. Key in \verb|f;| again and the cursor will move to ``;'' between ``N'' and ``O''. From here key in \verb|2f:| and the cursor will go to ``;'' between ``T'' and ``U'', as it is equivalent to typing \verb|f;| twice.
-\\
-\\
+
+\vspace{0.1in}
 \noindent \textbf{Search in the Text}
-\\
-\\
+\vspace{0.1in}
+
 It is common that we want to search for a particular keywords or phrase, and highlight all of its appearances in the text. To make the searching result highlighted, add the following line to the user profile at \textit{vimrc}.
 \begin{verbatim}
 set hlsearch
@@ -246,16 +246,17 @@ To disable the existing searching highlight, either start searching a new keywor
 \begin{verbatim}
 noremap <Space> :nohlsearch<CR>
 \end{verbatim}
-so that \verb|Space| can be used to clear the search highlights. 
-\\
-\\
+so that \verb|Space| can be used to clear the search highlights.
+
+\vspace{0.1in}
 \noindent \textbf{Visual Mode}
-\\
-\\
+\vspace{0.1in}
+
 The use of a mouse makes selecting a block of text very intuitive. As your eyes move across the text, you can start selecting at any specific character or row by click-and-hold the mouse key, and end selecting at any specific character or row by simply letting it go. The selected text will be highlighted, as if the cursor expands from one character to the entire block of text. You can then perform operations such as delete or copy of the selected block of text.
 
-When using \textit{Vim}, mouse is mostly useless. The visual mode of \textit{Vim} provides users a similar experience when selecting a block of text almost as if using a mouse. 
+When using \textit{Vim}, mouse is mostly useless. The visual mode of \textit{Vim} provides users a similar experience when selecting a block of text almost as if using a mouse.
 
+It is possible to select multiple rows of text in visual mode, and then apply an operation all at rows simultaneously. 
 
 
 
