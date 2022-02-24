@@ -1,10 +1,10 @@
 %\chapterauthor{Author Name}{Author Affiliation}
 %\chapterauthor{Second Author}{Second Author Affiliation}
-\chapter{General Introduction to Linux}
+\chapter{Brief Introduction to Linux}
 
 This chapter gives a brief introduction to Linux, including some of its key features and advantages/disadvantages comparing with other operating systems.
 
-\section{Brief Introduction to Linux}
+\section{Brief Introduction}
 
 Linux is an operating system (OS). An OS is essentially a special piece of software running on a machine (computer, server, mobile devices, or other electrical device that is capable and sophisticated enough to host an OS) that manages hardware resources of the system and provide services to the application software in the upper layer. An OS shall be able to
 \begin{itemize}
@@ -34,7 +34,7 @@ The initial motivation of Linux is to create a UNIX-like operating system that c
 
 Many modern computer systems including MacOS and Linux are derived from UNIX. UNIX operating system was created by AT\&T in 1969 as a better software development environment that AT\&T used internally. In 1973, UNIX was rewritten in C language, thus adding more useful features such as portability. Today, C is still the primary language used to create UNIX (and also Linux) kernels.
 
-AT\&T, who originally owned UNIX, tried to make money from UNIX. Back then AT\&T was restricted from selling computers by the government. Therefore, AT\&T decided to license UNIX source code to universities for a nominal fee. Researchers from universities start learning and improving UNIX, which speed up the development of UNIX. In 1976, UNIX V6 became the first UNIX that was widely spread. UNIX V6 is developed at UC Berkeley and was named the Berkeley Software Distribution (BSD). 
+AT\&T, who originally owned UNIX, tried to make money from UNIX. Back then AT\&T was restricted from selling computers by the government. Therefore, AT\&T decided to license UNIX source code to universities for a nominal fee. Researchers from universities start learning and improving UNIX, which speed up the development of UNIX. In 1976, UNIX V6 became the first UNIX that was widely spread. UNIX V6 is developed at UC Berkeley and was named the Berkeley Software Distribution (BSD).
 
 From then on, UNIX moved towards two separate directions: BSD continued forward in the ``open'' and ``share'' manner, while AT\&T started steering UNIX toward commercialization. By 1984 AT\&T was pretty ready to start selling commercialized UNIX, namely ``AT\&T: UNIX System Laboratories (USL)''. USL did not sell very well. As said, AT\&T could only sell the OS source code, but not a PC that comes with the OS. For this reason the price for the source code had to be higher than other OS (such as Microsoft Windows). Other companies, such as SCO and Sun Microsystems, were more successful than AT\&T by selling UNIX based PC and workstations for high-end users. Overall, UNIX source code was extremely expensive.
 
@@ -63,11 +63,7 @@ Today, there are hundreds of Linux distributions in the community. The most famo
   \end{itemize}
 \end{itemize}
 
-Some of the main features of Red Hat distributions are as follows. Red Hat created the RPM packaging format to manage the installation and upgrading of software. The RPM packaging contains not only the software files but also its metadata, including version tracking, the creator, the configuration files, etc. In the OS, a local RPM database is used to track all software on the machine.
-
-Anaconda installer simplifies the installation of Red Hat Linux, meantime leaving the user enough room for customization.
-
-Red Hat OS is integrated with simple graphical tools for device management (such as adding a printer), user management and other administration work.
+Some of the main features of Red Hat distributions are as follows. Red Hat created the RPM packaging format to manage the installation and upgrading of software. The RPM packaging contains not only the software files but also its metadata, including version tracking, the creator, the configuration files, etc. In the OS, a local RPM database is used to track all software on the machine. Anaconda installer simplifies the installation of Red Hat Linux, meantime leaving users enough flexibility for customization. Red Hat OS is integrated with simple graphical tools for device management (such as adding a printer), user management and other administration work.
 
 Red Hat Enterprise Linux (RHEL) is a commercial, stable and well-supported product that works on features needed to handle mission-critical application for big business and government. To use RHEL, customers buy subscriptions which allow them to deploy any version of RHEL as desired. Different levels of support are available for RHEL depending on customers needs. Many add-on features, including cloud computing integration, are available for the customers.
 
@@ -75,13 +71,13 @@ CentOS is a ``recreation'' simplified version of RHEL using freely available RHE
 
 Fedora, different from RHEL, is a free, cutting-edge Linux distribution sponsored by Red Hat. It is less stable and plays as the ``testbed'' for Red Hat to interact with the community. From this perspective, Fedora is very similar to RHEL, just with more dynamics and uncertainties.
 
-Ubuntu is the most successful Debian Linux distribution. Not only does Ubuntu have a easy-to-use software managing tool like other Debian distributions, it also adds a simple graphical installer and other graphical tools. It focuses on full-featured desktop system while still offering popular server packages. Ubuntu has a very active community to support its development.
+Ubuntu is the most successful Debian Linux distribution. It not only has an easy-to-use software managing tool like other Debian distributions, but also builds in a simple graphical installer and other graphical tools. It focuses on full-featured desktop system while still offering popular server packages. Ubuntu has a very active community to support its development.
 
 Ubuntu has larger software pool than Fedora. Ubuntu and its associated software usually have a longer ``lifespan'' than Fedora in the sense that Ubuntu is target for more stable use but Fedora is more of a ``testbed''. In this sense, Ubuntu is more for casual users and Fedora more for advanced users or developers, especially developers for RHEL.
 
 \section{Linux Graphical Desktop}
 
-Though not necessary for Linux, both Ubuntu and Fedora distributions (and many other Linux distributions) support graphical desktops. By default, GNOME graphical desktop environment is integrated with both systems installation on a personal computer. There are of course other choice of graphical desktops available on line, such as KDE desktop, LXDE or Xfce. GNOME and KDE are more for regular computers while LXDE and Xfce are more light in size, thus more for low-power demanding systems.
+Though not necessary for Linux, both Ubuntu and Fedora distributions (and many other Linux distributions) support graphical desktops. By default, both systems come with GNOME graphical desktop environment. There are of course other choice of graphical desktops available on line, such as KDE, LXDE and Xfce desktops. GNOME and KDE are more for regular computers while LXDE and Xfce are more light in size, thus more for low-power demanding systems.
 
 Figs. \ref{ch1fig:gnomedemo}, \ref{ch1fig:kdedemo}, \ref{ch1fig:lxdedemo} and \ref{ch1fig:xfcedemo} give the flavors of each desktop environment mentioned above. From the figures we can see that GNOME adopts a more Linux/MacOS style desktop environment, while KDE has a ``Windows 7'' style desktop. LXDE and Xfce are more simple in graphics presentations and they are more for embedded systems.
 
@@ -115,9 +111,9 @@ It is possible to install multiple desktop environment in one computer. In such 
 
 Linux can be installed on a local PC hard disk, or on a mobile device such as a thumb drive. The installation of different distributions might differ. Thanks to the graphical installation tools for the popular distributions, the installations can be done easily by just following the instructions on the associated official sites.
 
-Instructions of installing Ubuntu is given by \textit{https://ubuntu.com/}
+Instructions of installing Ubuntu is given by \textit{https://ubuntu.com}
 
-Instructions of installing Fedora is given by \textit{https://getfedora.org/}
+Instructions of installing Fedora is given by \textit{https://getfedora.org}
 
 For the use of RHEL, consult with Red Hat at \textit{https://www.redhat.com}
 
