@@ -41,9 +41,9 @@ You can key in a command after the prompt, and execute the command by pressing t
 $ <command> <configuration-arguments> <input>
 \end{verbatim}
 
-\section{Useful Basic Commands}
+\section{Useful Commands}
 
-Selected useful commands are categorized as follows. Notice that some commands have flexible use cases and it is impossible to illustrate all details about the commands. Consider use one of the following two methods to check the detailed manual about a command.
+Selected useful commands are categorized in this section. Notice that some commands have flexible use cases and it is impossible to illustrate all their details. Consider use the following two methods to check the detailed manual about a command.
 \begin{verbatim}
 $ man <command>
 $ <command> --help
@@ -54,7 +54,15 @@ To execute a command, the command must have been stored somewhere in the PATH en
 $ echo $PATH
 <directory 1>:<directory 2>:<directory 3>: ...
 \end{verbatim}
-where \verb|echo| displays the content of a variable, and \verb|$PATH| is a build-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permenently to enable new commands.
+where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permenently to enable new commands. 
+
+Most Linux-defiend user commands are stored under \verb|/bin|, \verb|/usr/bin|, and administrative commands in \verb|/sbin|, \verb|/usr/sbin|. User's self-defined commands can be stored under \verb|/home/<username>/bin|. To determine the location of a particular command, use \verb|type| if the command is in \verb|$PATH|, or \verb|locate| to search everywhere accessible in the system. An example is given below.
+\begin{verbatim}
+$ type <command>
+<command location>
+\end{verbatim}
+
+Use \verb|history| to check history commands. Use \verb|!<history command index>| to repeat a history command, or use \verb|!!| to repeat the latest previous command. It is possible to disable history recording function for privacy purpose.
 
 \vspace{0.1in}
 \noindent \textbf{Show Login Information}
@@ -67,7 +75,7 @@ The following commands show basic information of a user.
 $ whoami
 <username>
 $ grep <username> /etc/passwd
-<username>:x:<uid>:<gid>:<gecos>:<home directory>:<shell> 
+<username>:x:<uid>:<gid>:<gecos>:<home directory>:<shell>
 \end{verbatim}
 In the above, \verb|whoami| is used to display the current login user's username. Consequently, \verb|grep| is used to search the user name in the selected file \verb|/etc/passwd| where the user information is stored. This should return the username, the password (for encrypted password, an ``x'' is returned), UID, group id (GID), user id info (GECOS), home directory and default shell location of the user.
 Another command \verb|id| also returns the user id and group id information of the current user as follows.
@@ -81,7 +89,7 @@ $ hostname
 \end{verbatim}
 
 \vspace{0.1in}
-\noindent \textbf{Show Basic System Information}
+\noindent \textbf{Show System Information}
 \vspace{0.1in}
 
 The following command \verb|lshw| lists down hardware information in details. Sudo privilege is recommended when using this command, to give detailed and accurate information of the system. Since the displayed information is so detailed and can take up many screens, sometimes it is more convenient to use \verb|-short| argument.
@@ -109,12 +117,9 @@ The aforementioned \verb|ls| command can be used flexibly. Commonly seen argumen
 \noindent \textbf{Alias and Shortcuts}
 \vspace{0.1in}
 
-\section{Shell Environment Configuration}
+\section{Basic Shell Programming}
 
-
-\section{Shell Script Programming}
-
-
+A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature.  
 
 
 
