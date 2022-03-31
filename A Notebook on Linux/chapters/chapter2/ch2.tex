@@ -2,7 +2,7 @@
 %\chapterauthor{Second Author}{Second Author Affiliation}
 \chapter{Shell}
 
-Linux command line tool, usually known as the ``shell'', is the most powerful tool for Linux operations including configuration and control of the OS as well as other hardware/software of the system. Notice that the use of shell is not compulsory for casual users when the graphical desktop is present. Though the shell is not as intuitive as the graphical tools, the shell is more powerful and flexible, and well-supported by the community.
+Linux command line tool, usually known as the ``shell'', is the most powerful tool for Linux operations including configuration and control of the OS. Notice that the use of the shell is not compulsory for casual users when the graphical desktop is present. Though the shell is not as intuitive as the graphical tools, it is more powerful and flexible, and well-supported by the community.
 
 Linux shell will be used repeatedly in the remaining sections of this notebook for different functions.
 
@@ -25,9 +25,9 @@ username@hostname:~$
 
 The above displayed string is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the ending of the prompt is \verb|$| while for the root user, the ending is \verb|#|.
 
-By saying root user, we are referring to a special user whose username and user ID (UID) ``root'' and $0$ respectively. This UID gives him the administration privilege over the machine, such as adding/removing users, change ownership of files etc. To avoid significant damage by human error, root user shall not be used unless it is definitely necessary. For this reason, in many servers the root user is deactivated (for example, by setting its login password to invalid).
+By saying root user, we are referring to a special user whose username and user ID (UID) ``root'' and $0$ respectively. This UID gives him the administration privilege over the machine, such as adding/removing users, change ownership of files, etc. To avoid vital damage by human error, root user shall not be used unless it is definitely necessary. For this reason, in many servers the root user is deactivated (for example, by setting its login password to invalid).
 
-Notice that a root user is different from regular user who is equipped with \textit{sudo privilege}, though a regular user with sudo privilege can temporarily switch to root user by using \verb|su| as follows.
+Notice that a root user is different from regular user equipped with \textit{sudo privilege}, though a regular user with sudo privilege can temporarily switch to root user by using \verb|su| as follows.
 \begin{verbatim}
 regularuser@hostname:~$ sudo su
 [sudo] password for regularuser:
@@ -43,20 +43,20 @@ $ <command> <configuration-arguments> <input>
 
 \section{Useful Commands}
 
-Selected useful commands are categorized in this section. Notice that some commands have flexible use cases and it is impossible to illustrate all their details. Consider use the following two methods to check the detailed manual about a command.
+Some useful commands are introduced in this section by categories. Notice that many commands can be used flexibly and it is impossible to illustrate all their details. Consider use the following two methods to check the detailed manual about a command.
 \begin{verbatim}
 $ man <command>
 $ <command> --help
 \end{verbatim}
 
-To execute a command, the command must have been stored somewhere in the PATH environment of the shell, which is usually initialized automatically when the shell is started. Check the PATH environment by
+The command to be executed must have been stored somewhere in the PATH environment of the shell. PATH environment is a series of directories (locations) in the system, and it is initialized automatically when the shell is started. Check the PATH environment by
 \begin{verbatim}
 $ echo $PATH
 <directory 1>:<directory 2>:<directory 3>: ...
 \end{verbatim}
-where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permenently to enable new commands. 
+where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permanently to include new commands. 
 
-Most Linux-defiend user commands are stored under \verb|/bin|, \verb|/usr/bin|, and administrative commands in \verb|/sbin|, \verb|/usr/sbin|. User's self-defined commands can be stored under \verb|/home/<username>/bin|. To determine the location of a particular command, use \verb|type| if the command is in \verb|$PATH|, or \verb|locate| to search everywhere accessible in the system. An example is given below.
+Most Linux-defined user commands are stored under \verb|/bin|, \verb|/usr/bin|, and administrative commands in \verb|/sbin|, \verb|/usr/sbin|. Commands local to a specific user can be stored under \verb|/home/<username>/bin|. To determine the location of a particular command, use \verb|type| if the command is in \verb|$PATH|, or \verb|locate| to search everywhere accessible files in the system. An example is given below.
 \begin{verbatim}
 $ type <command>
 <command location>
@@ -65,7 +65,7 @@ $ type <command>
 Use \verb|history| to check history commands. Use \verb|!<history command index>| to repeat a history command, or use \verb|!!| to repeat the latest previous command. It is possible to disable history recording function for privacy purpose.
 
 \vspace{0.1in}
-\noindent \textbf{Show Login Information}
+\noindent \textbf{Show User Information}
 \vspace{0.1in}
 
 Administrative users may need to frequently check the basic system information, such as hardware configuration, OS version, username, hostname, disk usage, running process, system clock, etc. Some useful commands are summarized below.
@@ -77,8 +77,13 @@ $ whoami
 $ grep <username> /etc/passwd
 <username>:x:<uid>:<gid>:<gecos>:<home directory>:<shell>
 \end{verbatim}
-In the above, \verb|whoami| is used to display the current login user's username. Consequently, \verb|grep| is used to search the user name in the selected file \verb|/etc/passwd| where the user information is stored. This should return the username, the password (for encrypted password, an ``x'' is returned), UID, group id (GID), user id info (GECOS), home directory and default shell location of the user.
-Another command \verb|id| also returns the user id and group id information of the current user as follows.
+In the above, \verb|whoami| is used to display the current login user's username. Command \verb|grep| is used to search a content (in this case, the user name) in the selected file \verb|/etc/passwd| where the user information is stored. This should return the username, the password (for encrypted password, an ``x'' is returned), UID, group id (GID), user id info (GECOS), home directory and default shell location of the user.
+Another command \verb|id| also returns the user id and group id information of the current user.
+
+
+\vspace{0.1in}
+\noindent \textbf{Show System Information}
+\vspace{0.1in}
 
 The following commands show the date and hostname of the machine.
 \begin{verbatim}
@@ -88,22 +93,16 @@ $ hostname
 <hostname>
 \end{verbatim}
 
-\vspace{0.1in}
-\noindent \textbf{Show System Information}
-\vspace{0.1in}
-
 The following command \verb|lshw| lists down hardware information in details. Sudo privilege is recommended when using this command, to give detailed and accurate information of the system. Since the displayed information is so detailed and can take up many screens, sometimes it is more convenient to use \verb|-short| argument.
 \begin{verbatim}
 $ sudo lshw
 \end{verbatim}
 
-
-
 \vspace{0.1in}
 \noindent \textbf{Navigate Files and Folders}
 \vspace{0.1in}
 
-The most important commands for navigating in the file system is to display the current working directory (may be included as part of prompt) and list down files and directories in the current working directory. The following commands do the work.
+The most important commands for navigating in the file system is to display the current working directory (may be included as part of prompt) and list down files and directories in the current working directory as follows.
 \begin{verbatim}
 $ pwd
 <absolute working directory>
@@ -117,14 +116,33 @@ The aforementioned \verb|ls| command can be used flexibly. Commonly seen argumen
 \noindent \textbf{Alias and Shortcuts}
 \vspace{0.1in}
 
+Command \verb|alias| is used to create short-cut keys for commands and associated options, which makes it more convenient for the system operators to work on the shell. Some alias has already been created automatically when the shell is started. Use \verb|alias| to check the existing alias in the shell. An example is given below.
+
+\begin{verbatim}
+$ alias
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+\end{verbatim}
+
+A temporary alias can be added to the shell by using 
+\begin{verbatim}
+$ alias <shortcut command>='<original command and options>'
+\end{verbatim}
+for example
+\begin{verbatim}
+$ alias pwd='pwd; ls -CF'
+\end{verbatim}
+
+To permanently add alias to the shell, the alias needs to be added to the bash start script, which is usually \verb|~/.bashrc| for a user.
+
 \section{Basic Shell Programming}
 
 A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature.  
-
-
-
-
-
 
 
 
