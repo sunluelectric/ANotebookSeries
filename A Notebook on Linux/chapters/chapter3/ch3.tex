@@ -16,18 +16,14 @@ Some people claim \textit{Vim} to be the most powerful text file editor as well 
   \item \textit{Vim} is light in size and is suitable to run even on an embedded system.
   \item \textit{Vim} operations are done mostly via mode switch and shortcut keys, so that \textbf{the brain does not need to halt and wait for the hand to grab and move the mouse} which slows down the text editing and interrupts the logic flow.
   \item \textit{Vim} is highly flexible and can be customized according to the user's habit (for example, through \verb|~/.vim/vimrc|), and it allows the users to define shortcut keys.
-  \item \textit{Vim} can automate repetitive operations, such as by using macros.
+  \item \textit{Vim} can automate repetitive operations by defining macros.
   \item \textit{Vim} can be integrated with third-party tools for useful functions such as browsing project folders.
 \end{itemize}
-The above reasons have their point, and it is true \textit{Vim} can be come very powerful and convenient for the user if he is very familiar with it and is very used to it. On the other hand, however, \textit{Vim} is not as intuitive as other text editors such as \textit{gedit} and \textit{notepad++}, and may require a learning curve for beginners.
-
-In this section, \textit{Vim} is introduced as the text editor that will be used for viewing and editing text files, either being configuration files or programming codes.
+\textit{Vim} can be come very powerful and convenient for the user if he is very used to it. On the other hand, however, \textit{Vim} is not as intuitive as other text editors such as \textit{gedit} and \textit{notepad++}, and there might be a learning curve for beginners.
 
 \subsection{General Introduction to Vim} \label{ch3:subsec:vimgeneralintro}
 
-Different from other text editors, \textit{Vim} defines different ``modes'' during the operation, each mode has some unique features. For example, in the \textit{insert} mode, \textit{Vim} takes in the keyboard inputs and put them into the text file. In this concept, many other editors can be taken as a slim version of \textit{Vim} where there is only one mode, the \textit{insert} mode.
-
-In the case of \textit{Vim}, however, there are other equally useful modes that eventually make it unique and powerful. For example, in the \textit{normal} mode (this is the default mode when opening \textit{Vim}), \textit{Vim} uses useful and customizable shortcut keys to quickly navigate the document and perform operations such as cut, copy, paste, replace, search, and macro functions. In the \textit{virtual} mode, \textit{Vim} allows the user to select partial of the document for further editing. In the \textit{cmdline} mode, \textit{Vim} takes order from command lines and interact with Linux to perform tasks such as save, quit or even navigating folders.
+Unlike other text editors, \textit{Vim} defines different ``modes'' during the operation, each mode has some unique features. For example, in the \textit{insert} mode, \textit{Vim} puts keyboard inputs into the text file like an conventional text editor. In the \textit{normal} mode (this is the default mode when opening \textit{Vim}), \textit{Vim} uses useful and customizable shortcut keys to quickly navigate the document and perform operations such as cut, copy, paste, replace, search, and macro functions. In the \textit{virtual} mode, \textit{Vim} allows the user to select partial of the document for further editing. In the \textit{cmdline} mode, \textit{Vim} takes order from command lines and interact with Linux to perform tasks such as save, quit or even navigating folders.
 
 The following Table \ref{ch3tab:vimmodes} summarizes the commonly used modes in Vim.
 \begin{table}
@@ -77,16 +73,16 @@ There are other shortcuts to switch from normal mode to insert mode. Some of the
     \verb|a| & Insert after the character at the cursor. \\ \hdashline
     \verb|A| & Insert at the end of the row at the cursor. \\ \hdashline
     \verb|o| & Create a new row below the cursor and switch to insert mode. \\ \hdashline
-    \verb|O| & Create a new row above the cursor and switch to insert mode. \\ 
+    \verb|O| & Create a new row above the cursor and switch to insert mode. \\
     \hline
   \end{tabularx}
 \end{table}
 
 \subsection{Configure Customizable User Profile}
 
-With the basic operations introduced in Section \ref{ch3subsec:vimgeneralintro}, we are able to create and edit a text file as we want to, just like using any other text editor. Though at this point the advantages of using \textit{Vim} over other text editors are not obvious yet, the \textit{Vim} editor is finally useful now.
+With the basic operations introduced in Section \ref{ch3:subsec:vimgeneralintro}, we are able to create and edit a text file as we want to, just like using any other text editor. Though at this point the advantages of using \textit{Vim} over other text editors are not obvious yet, the \textit{Vim} editor is at least useable.
 
-Before introducing more advanced features of \textit{Vim} for more convenient user experience, we can now customize user profile to suit our individual habit. Notice that the customization is completely optional and personal. This section only introduces the ideas and basic methods of such customization, such as re-mapping keys and create user-defined shortcuts. Everything introduced here are merely examples and it is completely up to the user how to design and implement his own profile.
+Before introducing more advanced features of \textit{Vim} for more convenient user experience, we can now customize the user profile to suit our individual habit. Notice that the customization is completely optional and personal. This section only introduces the ideas and basic methods of such customization, such as re-mapping keys and create user-defined shortcuts. Everything introduced here are merely examples and it is completely up to the user how to design and implement his own profile.
 
 In Linux, navigate to home directory. Create the following path and file \verb|~/.vim/vimrc| or \verb|~/.vimrc|. Open the \textit{vimrc} file as a blank file using \textit{Vim}. The individual user profile can be customized here.
 
@@ -174,9 +170,9 @@ He is often called England's national poet and the ``Bard of Avon'' (or simply `
 \caption{A piece of text of ``William Shakespeare'', for demonstration.} \label{ch3fig:vimdemo1}
 \end{figure}
 
-To quickly delete/cut a single character, use either \verb|x| or \verb|X|. Each time \verb|x| is input in normal mode, it deletes the current cursor selected character, and automatically select the next character in the text. Each time \verb|X| is input in normal mode, it keeps the current cursor selected character while deleting the previous character in front of the cursor. In this sense, \verb|x| and \verb|X| play like \verb|delete| and \verb|backspace| respectively in other text editors such as \textit{notepad++}.
+To quickly delete/cut a single character, use either \verb|x| or \verb|X|. Each time \verb|x| is input in normal mode, it deletes the current cursor selected character, and automatically select the next character in the text. Each time \verb|X| is input in normal mode, it keeps the current cursor selected character while deleting the previous character in front of the cursor. In this sense, \verb|x| and \verb|X| play like \verb|delete| and \verb|backspace| respectively in other text editors.
 
-Operators \verb|x| and \verb|X| do not require consequent motion command, as they simply delete/cut one character immediately each time they are pressed. What if you want to delete multiple characters from the cursor? You can press \verb|x| or \verb|X| multiple times, or alternatively you can ask \textit{Vim} to ``emulate'' doing that for you, as long as you tell \textit{Vim} what actions (key combinations) and how many times you want perform. For example, \verb|20x| is equivalent with physically pressing \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| is equivalent of pressing \verb|l| for 10 times, making the navigation faster.
+Operators \verb|x| and \verb|X| do not require consequent motion command, as they simply delete/cut one character immediately each time they are pressed. What if you want to delete multiple characters from the cursor? You can press \verb|x| or \verb|X| multiple times, or alternatively you can ask \textit{Vim} to do that repeatedly for you, as long as you tell \textit{Vim} what actions (key combinations) and how many times you want perform. For example, \verb|20x| is equivalent with physically pressing \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| is equivalent of pressing \verb|l| for 10 times, making the navigation faster.
 
 Operator \verb|d| does similar things as \verb|x| and \verb|X| but requiring a motion command, for more flexible usage. The motion shall tell \textit{Vim} what to delete/cut.
 
