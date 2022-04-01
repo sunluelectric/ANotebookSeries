@@ -78,7 +78,7 @@ There are other shortcuts to switch from normal mode to insert mode. Some of the
   \end{tabularx}
 \end{table}
 
-\subsection{Configure Customizable User Profile}
+\subsection{Configure User Profile}
 
 With the basic operations introduced in Section \ref{ch3:subsec:vimgeneralintro}, we are able to create and edit a text file as we want to, just like using any other text editor. Though at this point the advantages of using \textit{Vim} over other text editors are not obvious yet, the \textit{Vim} editor is at least useable.
 
@@ -142,21 +142,19 @@ Notice that the configurations introduced in this section can also be activated 
 
 \subsection{Commonly Used Operations in Normal Mode}
 
-The operations, such as delete, cut, copy, paste, replace and search, are mostly done in normal mode through shortcut keys. For example, \verb|dd| delete (cut) the entire row at the cursor and \verb|p| paste the row to its new position. For beginners, remembering shortcut keys can be difficult. In such case, it is recommended for us to look for the consistent patterns of the different commands, instead of brute-force remembering the keys only.
+In normal mode, the most frequently used operation is probably \verb|u|, which stands for undo. Other commonly used operations, such as delete, cut, copy, paste, replace and search, are mostly done in normal mode through shortcut keys. For example, \verb|dd| delete (cut) the entire row at the cursor and \verb|p| paste the content in the clipboard to the cursor position. For beginners, remembering shortcut keys can be difficult. In such case, it is suggested looking for the consistent patterns of the different commands, instead of brute-force remembering the operations.
 
-Many \textit{Vim} shortcut keys in normal mode has the following structure, i.e. an operator command followed by a motion command, as shown below.
+Many \textit{Vim} shortcut keys in normal mode has the following structure, namely an operator command followed by a motion command, as shown below.
 \begin{verbatim}
 <operator><motion>
 \end{verbatim}
-The operator command tells \textit{Vim} what to do (say, copy), and the motion command tells the applicable range of the operation (say, the entire row, or the single word, or the single character, of the cursor position). Of course for some operator commands, they can be used alone without the motion command.
+The operator command tells \textit{Vim} what to do (say, copy), and the motion command tells the applicable range of the operation (say, a row, or a word, or a character). Some operator commands may work alone without motion commands.
 
 \vspace{0.1in}
 \noindent \textbf{Delete/Cut, Change, Copy and Paste}
 \vspace{0.1in}
 
-We will use the most commonly used operator commands, delete/cut, change, copy (also known as ``yank'' in \textit{Vim}) and paste to demonstrate the above idea.
-
-In this demonstration, we will be editing the following lines taken from Wikipedia under ``William Shakespeare''. In the text file, each sentence takes a new row as given by Figure \ref{ch3fig:vimdemo1}.
+The following lines taken from Wikipedia under ``William Shakespeare'' is used as an example to demonstrate delete/cut, change, copy and paste functions. In the text file, each sentence takes a new row as given by Figure \ref{ch3fig:vimdemo1}.
 
 \begin{shortbox}
 William Shakespeare (bapt. 26 April 1564 – 23 April 1616) was an English playwright, poet and actor, widely regarded as the greatest writer in the English language and the world's greatest dramatist.
@@ -170,21 +168,21 @@ He is often called England's national poet and the ``Bard of Avon'' (or simply `
 \caption{A piece of text of ``William Shakespeare'', for demonstration.} \label{ch3fig:vimdemo1}
 \end{figure}
 
-To quickly delete/cut a single character, use either \verb|x| or \verb|X|. Each time \verb|x| is input in normal mode, it deletes the current cursor selected character, and automatically select the next character in the text. Each time \verb|X| is input in normal mode, it keeps the current cursor selected character while deleting the previous character in front of the cursor. In this sense, \verb|x| and \verb|X| play like \verb|delete| and \verb|backspace| respectively in other text editors.
+To quickly delete/cut a single character, use either \verb|x| and \verb|X| to delete the character at the cursor and previous to the cursor respectively. In summary, \verb|x| and \verb|X| play like \verb|delete| and \verb|backspace| respectively in other text editors.
 
-Operators \verb|x| and \verb|X| do not require consequent motion command, as they simply delete/cut one character immediately each time they are pressed. What if you want to delete multiple characters from the cursor? You can press \verb|x| or \verb|X| multiple times, or alternatively you can ask \textit{Vim} to do that repeatedly for you, as long as you tell \textit{Vim} what actions (key combinations) and how many times you want perform. For example, \verb|20x| is equivalent with physically pressing \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| is equivalent of pressing \verb|l| for 10 times, making the navigation faster.
+To delete multiple characters, one way is to press \verb|x| or \verb|X| multiple times. Alternatively, it is possible for \textit{Vim} to automatically repeat the procedure. For example, \verb|20x| tells \textit{Vim} to perform \verb|x| for 20 times. The same applies for other operators or motions commands. For example, \verb|10l| executes \verb|l| for 10 times, making the navigation faster.
 
-Operator \verb|d| does similar things as \verb|x| and \verb|X| but requiring a motion command, for more flexible usage. The motion shall tell \textit{Vim} what to delete/cut.
+Operator \verb|d| also deletes the contents of the text, but it requires a motion command and can be used more flexibly. The motion shall tell \textit{Vim} what to delete/cut.
 
-For example, \verb|dl| deletes to the right, i.e. deletes the current cursor selected character, and automatically select the next character. It is the same as if \verb|x| is pressed. Similarly, \verb|dh| deletes  to the left, just like \verb|X|. What if you want to delete 20 characters to the right? You can key in \verb|dl| for 20 times. Or alternatively, just like the case for \verb|x|, you can tell \textit{Vim} to do it by using \verb|20dl|. Or, you can change the motion, by using \verb|d20l|, where ``20l'' as a whole plays as the motion of ``to the right for 20 characters''. Or, you can do a combination by using things like \verb|5d4l|, since $20=5\times 4$. All of the above gives you the same result (they will be a difference in the clipboard if later you want to paste them).
+For example, \verb|dl| deletes one character to the right, i.e. deletes the character at the cursor just like \verb|x|. Likewise, \verb|dh| deletes one character to the left just like \verb|X|. Similarly, \verb|d20l| deletes 20 characters to the right, where ``20l'' as a whole plays as the motion of ``20 characters to the right''. A combination by using things like \verb|5d4l| also works, since $20=5\times 4$.
 
-Thanks to the ``operator-motion'' structure, \verb|d| can be used even more flexibly. For example, by using word-related motions, \verb|d| can delete/cut by words instead of by characters. Move the cursor to the beginning of a word, (for example, ``S'' in ``Shakespeare''), use \verb|dw| to delete the word. The word motion \verb|w| is similar with \verb|l|, except that \verb|l| directs to the next character, while \verb|w| directs to the beginning character of next word. Motion \verb|w| can also be used to navigate in the text. Similarly, \verb|b| directs to the beginning character of the current word (if the cursor is at the middle of the current word) or previous word (if the cursor is already at the beginning of the current word). Thus, \verb|db| can be used to delete word to the left. You can use something like \verb|d10b|, \verb|10db|, \verb|d20w|, \verb|5d4w| to delete multiple words at a time.
+Command \verb|d| can be used even more flexibly. For example, by using word-related motions, \verb|d| can delete/cut by words instead of by characters. Move the cursor to the beginning of a word, (for example, ``S'' in ``Shakespeare''), use \verb|dw| to delete the word. The word motion \verb|w| is similar with \verb|l|, except that \verb|l| directs to the next character, while \verb|w| directs to the beginning of next word. Similarly, \verb|b| directs to the beginning of the current/previous word. Thus, \verb|db| can be used to delete word to the left. Examples \verb|d10b|, \verb|10db|, \verb|d20w|, \verb|5d4w| can be used to delete multiple words at a time. Motions \verb|w| and \verb|b| can also be used to navigate in the text just like \verb|l| and \verb|h|.
 
-When in the middle of a word, \verb|dw| will delete the characters from the current cursor position till the beginning character of the next word. For example, if the cursor is currently at ``k'' in ``Shakespeare'', \verb|dw| will delete ``kespeare '' (notice that the space between ``Shakespeare'' and ``(bapt.'' will also be deleted). To delete from the beginning of the word instead of from the middle of the word, you can use \verb|b| first to navigate back to the beginning of the word. Alternatively, use ``inner-word'' motion \verb|iw| to indicate that you want to delete inner word. When the cursor is at ``k'' in ``Shakespeare'', use \verb|diw| to delete the entire word.
+When in the middle of a word, \verb|dw| will delete the characters from the cursor to the beginning character of the next word. For example, if the cursor is currently at ``k'' in ``Shakespeare'', \verb|dw| will delete ``kespeare '' (notice that the space between ``Shakespeare'' and ``(bapt.'' will also be deleted). To delete from the beginning of the word instead, you can use \verb|b| first to navigate back to the beginning of the word. Alternatively, use ``inner-word'' motion \verb|iw| to indicate that the whole word of the cursor shall be deleted.
 
-So far we have introduced the delete/cut operator \verb|d|, and character motion \verb|h| (left), \verb|l| (right), and also word motion \verb|b| (left), \verb|w| (right). There are similar motions for sentence \verb|(| (previous), \verb|)| (next) and paragraph \verb|{| (previous), \verb|}| (next). Finally, there is the inner-word motion \verb|iw| to indicate the current word of cursor, whichever the cursor is inside the word. Similarly, there are inner-sentence motion \verb|is| and inner-paragraph motion \verb|ip|. There are also inner-quotation motion \verb|i'|, \verb|i"|, \verb|i`| and inner-block motion \verb|i(|, \verb|i<|, \verb|i{|, and many more. For example, when cursor is at ``A'' of ``26 April 1564'', \verb|di(| will delete everything inside ``()'', i.e. deleting ``bapt. 26 April 1564 - 23 April 1616''.
+In addition to character-related motions \verb|h|, \verb|l| and word-related motions  \verb|b|, \verb|w|, there are similar motions for sentence \verb|(| (previous), \verb|)| (next) and paragraph \verb|{| (previous), \verb|}| (next). There are also inner-sentence motion \verb|is|, inner-paragraph motion \verb|ip|, inner-quotation motion \verb|i'|, \verb|i"|, \verb|i`| and inner-block motion \verb|i(|, \verb|i<|, \verb|i{|, and many more. For example, when the cursor is at ``A'' of ``26 April 1564'', \verb|di(| will delete everything inside ``()'', i.e. deleting ``bapt. 26 April 1564 - 23 April 1616''.
 
-To conclude, the operators and motions so far are listed in Tabs. \ref{ch3tab:deletecut} and \ref{ch3tab:motion}. Notice that motions \verb|aw|, \verb|as|, \verb|ap| are also given in the table. They are similar with their corresponding \verb|iw|, \verb|is|, \verb|ip| except that when deleting, the consequent blank space (for word and sentence) or blank row (for paragraph) will also be deleted. (Notice that \textit{Vim} marks the end of a sentence using ``.'', ``?'' or ``!'' followed by a space, tab or blank row, and the end of a paragraph by an empty row.)
+To conclude, the operators and motions introduced so far are listed in Tables \ref{ch3tab:deletecut} and \ref{ch3tab:motion}. Notice that motions \verb|aw|, \verb|as|, \verb|ap| are also given in the table. They are similar with their corresponding \verb|iw|, \verb|is|, \verb|ip| except that when deleting, the consequent blank space (for word and sentence) or blank row (for paragraph) will also be deleted. 
 
 \begin{table}
   \centering \caption{Commonly used operators related to delete/cut, change, copy and paste.}\label{ch3tab:deletecut}
@@ -226,40 +224,40 @@ To conclude, the operators and motions so far are listed in Tabs. \ref{ch3tab:de
   \end{tabularx}
 \end{table}
 
-To change a piece of text, operator \verb|c| is used, followed by its associated motion to indicate the range of text to be changed. The same motions as given in Table \ref{ch3tab:motion} can be used. Effectively, operator $\verb|c|$ deletes/cut the text indicated by the motion first (just like operator \verb|d|), then switch to insert mode.
+To change contents, use operator \verb|c|, which works the same way as \verb|d| but it automatically switch to insert mode at where the content is removed.
 
-To copy a piece of text of clipboard, use \verb|y| (stands for ``yank'') followed by its associated motion to indicate the range of text. The motions also follow Table \ref{ch3tab:motion}.
+To copy a piece of text to clipboard, use \verb|y| (stands for ``yank'') followed by its associated motion to indicate the range of text. The motions also follow Table \ref{ch3tab:motion}.
 
-To paste the text in the clipboard to the text at the cursor position, use \verb|p|. No motion is required.
+To paste the text in the clipboard to the cursor, use \verb|p|. No motion is required.
 
-In addition to the motions given in Table \ref{ch3tab:motion}, another commonly used method to navigate to a particular position if text is to ``find by character''. For example, consider the following row of text. The cursor is currently at letter ``A''.
+In addition Table \ref{ch3tab:motion}, another commonly used type of motion is to ``find by character''. For example, consider the following row of text. The cursor is currently at letter ``A''.
 \begin{verbatim}
 ABCDEFG;HIJKLMN;OPQ;RST;UVW;XYZ
 \end{verbatim}
-In normal mode, using \verb|f| followed by a character will navigate the cursor to the nearest corresponding character that appears in the text. For example, \verb|fG| will move the cursor to letter ``G''. Similarly, \verb|f;| will move the cursor to the ``;'' between ``G'' and ``H''. Key in \verb|f;| again and the cursor will move to ``;'' between ``N'' and ``O''. From here key in \verb|2f:| and the cursor will go to ``;'' between ``T'' and ``U'', as it is equivalent to typing \verb|f;| twice.
+In normal mode, using \verb|f| followed by a character will navigate the cursor to the nearest corresponding character that appears in the text. For example, \verb|fG| will move the cursor to letter ``G''. Similarly, \verb|f;| will move the cursor to the ``;'' between ``G'' and ``H''. Key in \verb|f;| again and the cursor will move to ``;'' between ``N'' and ``O''. From here key in \verb|2f:| and the cursor will go to ``;'' between ``T'' and ``U'', as it is equivalent to executing \verb|f;| twice. If \verb|df;| is used when the cursor is at letter ``A'', ``ABCDEFG;'' will be deleted.
 
 \vspace{0.1in}
 \noindent \textbf{Search in the Text}
 \vspace{0.1in}
 
-It is common that we want to search for a particular keywords or phrase, and highlight all of its appearances in the text. To make the searching result highlighted, add the following line to the user profile at \textit{vimrc}.
+It is common to search and highlight a particular word or phrase in the text. To make the searching result highlighted, add the following line to the user profile \textit{vimrc}.
 \begin{verbatim}
 set hlsearch
 exec "nohlsearch"
 set incsearch
 set ignorecase
 \end{verbatim}
-where \verb|hlsearch| highlights all matching results in the text, and \verb|incsearch| allows highlighting texts while keying in the word or phrase. Each time highlight search is enabled, \textit{Vim} will remember the keywords from the previous search and automatically hight them in the text, which can be confusing sometimes. The command \verb|exec "nohlsearch"| (\verb|exec| command in the user profile make \textit{Vim} execute that command when starting a new session) that comes after \verb|set hlsearch| resolves this issue by forcing \textit{Vim} to clear its memory. Finally, \verb|ignorecase| allows case insensitive while searching.
+where \verb|hlsearch| enables highlighting all matching results in the text, and \verb|incsearch| enables highlighting texts as the keyword is keying in. \textit{Vim} remembers the keyword from the previous search and may automatically hight them in the text on a new session, which can be problematic sometimes. The command \verb|exec "nohlsearch"| (\verb|exec| command in the user profile make \textit{Vim} execute that command when starting a new session) that comes after \verb|set hlsearch| resolves this issue by forcing \textit{Vim} to clear its memory. Finally, \verb|ignorecase| allows case insensitive while searching.
 
-In normal mode, use \verb|/<keyword>| to search keywords or phrase. With the above setup, search for ``he'' using \verb|/he| will lead to the following result given in Fig.~\ref{ch3fig:vimdemo2}.
+In normal mode, use \verb|/<keyword>| to search keywords or phrase. With the above setup, searching for ``he'' using \verb|/he| leads to the following result given in Fig.~\ref{ch3fig:vimdemo2}.
 \begin{figure}
 \centering
 \includegraphics[width=250pt]{chapters/chapter3/figures/vimdemo2.png}
 \caption{Search ``he'' in the piece of text of ``William Shakespeare''.} \label{ch3fig:vimdemo2}
 \end{figure}
-From Fig.~\ref{ch3fig:vimdemo2}, it can be seen that all appearances of ``he'' (case insensitive) is highlighted, and the cursor is automatically moved to the first appearance, i.e. ``he'' in ``and the world's greatest dramatist''. Click \verb|Enter| to quit searching. Now \verb|h|, \verb|j|, \verb|k| and \verb|l| can be used to navigate the cursor again, with the searching result maintain highlighted. Use \verb|n| and \verb|N| to navigate the cursor from the highlighted results. Notice that in this case, \verb|n| and \verb|N| can be used as motion together with delete/cut, change and copy as given in Table \ref{ch3tab:deletecut}.
+From Fig.~\ref{ch3fig:vimdemo2}, it can be seen that all appearances of ``he'' (case insensitive) is highlighted, and the cursor is automatically moved to its first appearance, i.e. ``he'' in ``and the world's greatest dramatist''. Click \verb|Enter| to confirm the searching content. Use \verb|n| and \verb|N| to navigate the cursor from the highlighted results. Notice that at this point, \verb|n| and \verb|N| can be used as motion together with delete/cut, change and copy as given in Table \ref{ch3tab:deletecut}.
 
-To disable the existing searching highlight, either start searching a new keyword, or key in command \verb|:nohlsearch| in normal mode. For convenience, people may prefer to map it with a customized shortcut key as well, for example in \textit{vimrc} key in
+To quit searching, use \textit{cmdline} command \verb|:nohlsearch| in normal mode and the highlights shall be gone. For convenience, people may prefer to map it with a customized shortcut key as well, for example in \textit{vimrc} use
 \begin{verbatim}
 noremap <Space> :nohlsearch<CR>
 \end{verbatim}
