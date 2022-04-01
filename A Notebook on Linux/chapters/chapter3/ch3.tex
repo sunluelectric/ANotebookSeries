@@ -267,13 +267,19 @@ so that \verb|Space| can be used to clear the search highlights.
 \noindent \textbf{Visual Mode}
 \vspace{0.1in}
 
-The use of a mouse makes selecting a block of text very intuitive. As your eyes move across the text, you can start selecting at any specific character or row by click-and-hold the mouse key, and end selecting at any specific character or row by simply letting it go. The selected text will be highlighted, as if the cursor expands from one character to the entire block of text. You can then perform operations such as delete or copy of the selected block of text.
+The use of a mouse makes selecting a block of text very intuitive. In most text editors, the selected text will be highlighted, as if the cursor expands from one character to the entire block of text. Sequentially, operations such as delete and copy can be performed on the selected text.
 
-When using \textit{Vim}, mouse is mostly useless. The visual mode of \textit{Vim} provides users a similar experience when selecting a block of text almost as if using a mouse.
+The three visual modes of \textit{Vim}, namely ``visual'', ``visual-line'' and ``visual-block'', provide similar experience where the user can select and highlight a block of text.
 
-It is possible to select multiple rows of text in visual mode, and then apply an operation all at rows simultaneously.
+Use \verb|v| to enter the visual mode, then navigate the cursor to select a block of text. This allows the user to select text between any two characters. An example is given by Fig. \ref{ch3fig:vimvm1}. Alternatively, use \verb|V| to enter the visual-line mode where multiple lines can be easily selected, and use \verb|<ctrl>+v| to enter visual-block mode to select a rectangular block of text.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=100pt]{chapters/chapter3/figures/vimvm1.png}
+	\caption{An example of visual mode where a block of text is selected.} \label{ch3fig:vimvm1}
+\end{figure}
 
+In any of the above visual mode, use \verb|:normal + <operation>| to execute operation(s) form the normal mode. This allows convenient editing of multiple lines of text all together.
 
 \subsection{Advanced Interface}
 
