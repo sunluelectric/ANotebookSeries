@@ -8,13 +8,35 @@ Linux shell will be used repeatedly in the remaining sections of this notebook f
 
 \section{Brief Introduction}
 
-\subsection{Shell Types}
-
 Linux command line tool, usually known as Linux shell, was invented before the graphical tools, and it has been more powerful and flexible than the graphical tools from the first day. On those machines where no graphical desktops are installed, the use of shell is critical.
 
-There are different types of shells. The most commonly used shell is the ``bash shell'' which stands for ``Bourne Again Shell'', derived from the ``Bourne Shell'' used in UNIX.
+\subsection{Shell Types}
 
-Some other shells such as ``C Shell'' and ``Korn Shell'' are also popular among certain users or certain Linux distributions. In case where your Linux distribution does not have these shells pre-installed, you can install and use these shells just like installing other software.
+There are different types of shells. The most commonly used shell is the ``bash shell'' which stands for ``Bourne Again Shell'', derived from the ``Bourne Shell'' used in UNIX. An example of Bash shell script is given below, where the first 10 terms in Fibonacci series is calculated ``1, 1, 2, 3, 4, 8, 13, 21, 34, 55''.
+
+\begin{verbatim}
+#!/usr/bin/bash
+n=10
+function fib
+{
+  x=1; y=1
+  i=2
+  echo "$x"
+  echo "$y"
+  while [ $i -lt $n ]
+  do
+      i=`expr $i + 1 `
+      z=`expr $x + $y `
+      echo "$z"
+      x=$y
+      y=$z
+  done
+}
+r=`fib $n`
+echo "$r"
+\end{verbatim}
+
+Some other shells such as ``C Shell'' and ``Korn Shell'' are also popular among certain users or certain Linux distributions. For example, C Shell supports C-like shell programming, which can sometimes be more convenient then Bash shell. In case where your Linux distribution does not have these shells pre-installed, you can install and use these shells just like installing other software.
 
 In this notebook, we will mostly focus on the bash shell.
 
@@ -47,7 +69,7 @@ $ <command> <configuration-arguments> <input>
 
 Some useful commands are introduced in this section by categories.
 
-Text file editing, files management (such as changing ownership of files), software management (such as installation of software, checking version, upgrading software, etc.), process management (such as checking CPU usage, terminating a process) are commonly used in Linux operations. They are not included in this chapter, but introduced separately in later chapters.  
+Text file editing, files management (such as changing ownership of files), software management (such as installation of software, checking version, upgrading software, etc.), process management (such as checking CPU usage, terminating a process) are commonly used in Linux operations. They are not included in this chapter, but introduced separately in later chapters.
 
 \subsection{Set Shell Environment Variables}\label{ch2subsec:shellenvvar}
 
@@ -56,7 +78,7 @@ The command to be executed must have been stored somewhere in the PATH environme
 $ echo $PATH
 <directory 1>:<directory 2>:<directory 3>: ...
 \end{verbatim}
-where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permanently to include new commands. 
+where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permanently to include new commands.
 
 Most Linux-defined user commands are stored under \verb|/bin|, \verb|/usr/bin|, and administrative commands in \verb|/sbin|, \verb|/usr/sbin|. Commands local to a specific user can be stored under \verb|/home/<username>/bin|. To determine the location of a particular command, use \verb|type| if the command is in \verb|$PATH|, or \verb|locate| to search everywhere accessible files in the system. An example is given below.
 \begin{verbatim}
@@ -73,7 +95,7 @@ Similar with \verb|PATH|, there is a list of shell environment variables for the
 		Variable & Description \\ \hline
 		\verb|BASH| & Full pathname of the \verb|bash| command. \\ \hdashline
 		\verb|BASH_VERSION| & Current version of the \verb|bash| command. \\ \hdashline
-		\verb|EUID| & Effective user ID number of the current user, which is assigned when the shell starts, bsed on the user's entry in \verb|/etc/passwd|. \\ \hdashline
+		\verb|EUID| & Effective user ID number of the current user, which is assigned when the shell starts, based on the user's entry in \verb|/etc/passwd|. \\ \hdashline
 		\verb|HISTFILE| & Location of the history file. \\ \hdashline
 		\verb|HISTFILESIZE| & Maximum number of history entries. \\ \hdashline
 		\verb|HISTCMD| & The number index of the current command. \\ \hdashline
@@ -154,7 +176,7 @@ alias ll='ls -alF'
 alias ls='ls --color=auto'
 \end{verbatim}
 
-A temporary alias can be added to the shell by using 
+A temporary alias can be added to the shell by using
 \begin{verbatim}
 $ alias <shortcut command>='<original command and options>'
 \end{verbatim}
@@ -202,7 +224,7 @@ Shell configuration files are loaded each time a new shell starts. User-defined 
 
 \section{Basic Shell Programming}
 
-A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature.  
+A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature.
 
 
 
