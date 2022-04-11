@@ -12,9 +12,9 @@ Linux command line tool, usually known as Linux shell, was invented before the g
 
 \subsection{Shell Types}
 
-There are different types of shells. The most commonly used shell is the ``bash shell'' which stands for ``Bourne Again Shell'', derived from the ``Bourne Shell'' used in UNIX. An example of Bash shell script is given below, where the first 10 terms in Fibonacci series is calculated ``1, 1, 2, 3, 4, 8, 13, 21, 34, 55''.
+There are different types of shells. The most commonly used shell is the ``bash shell'' which stands for ``Bourne Again Shell'', derived from the ``Bourne Shell'' used in UNIX. An example \verb|calculate_fib.sh| written in bash shell script is given below, where the first 10 terms in Fibonacci series is calculated ``1, 1, 2, 3, 4, 8, 13, 21, 34, 55''. This example will used multiple times in this chapter.
 
-\begin{verbatim}
+\begin{lstlisting}
 #!/usr/bin/bash
 n=10
 function fib
@@ -34,36 +34,36 @@ function fib
 }
 r=`fib $n`
 echo "$r"
-\end{verbatim}
+\end{lstlisting}
 
-Some other shells such as ``C Shell'' and ``Korn Shell'' are also popular among certain users or certain Linux distributions. For example, C Shell supports C-like shell programming, which can sometimes be more convenient then Bash shell. In case where your Linux distribution does not have these shells pre-installed, you can install and use these shells just like installing other software.
+Some other shells such as ``C Shell'' and ``Korn Shell'' are also popular among certain users or certain Linux distributions. For example, C Shell supports C-like shell programming, which can sometimes be more convenient then bash shell. In case where your Linux distribution does not have these shells pre-installed, you can install and use these shells just like installing other software.
 
 In this notebook, we will mostly focus on the bash shell.
 
 \subsection{Prompt and Basic Concepts}
 
 After opening the shell or terminal, you will see a string (usually containing username, hostname, current working directory, etc.) followed by either a \verb|$| or \verb|#|, starting from where you can input your shell command. For example, it may look like the following:
-\begin{verbatim}
+\begin{lstlisting}
 username@hostname:~$
-\end{verbatim}
+\end{lstlisting}
 
 The above displayed string is called a \textit{prompt}, indicating the start of a manually input command. By default, for regular user, the ending of the prompt is \verb|$| while for the root user, the ending is \verb|#|. The prompt can be customized by changing the environment variable \verb|PS1|. See Sections \ref{ch2subsec:shellenvvar}, \ref{ch2subsec:others} for details about environment variable and shell configuration, respectively.
 
 By saying root user, we are referring to a special user whose username and user ID (UID) ``root'' and $0$ respectively. This UID gives him the administration privilege over the machine, such as adding/removing users, change ownership of files, etc. To avoid vital damage by human error, root user shall not be used unless it is definitely necessary. For this reason, in many servers the root user is deactivated (for example, by setting its login password to invalid).
 
 Notice that a root user is different from regular user equipped with \textit{sudo privilege}, though a regular user with sudo privilege can temporarily switch to root user by using \verb|su| as follows.
-\begin{verbatim}
+\begin{lstlisting}
 regularuser@hostname:~$ sudo su
 [sudo] password for regularuser:
 root@hostname:/home/regularuser#
-\end{verbatim}
+\end{lstlisting}
 
 More about sudo privilege, \verb|sudo| and \verb|su| commands are introduced later parts of the notebook.
 
 You can key in a command after the prompt, and execute the command by pressing the \verb|Enter| key. A Linux shell command usually has the following form.
-\begin{verbatim}
+\begin{lstlisting}
 $ <command> <configuration-arguments> <input>
-\end{verbatim}
+\end{lstlisting}
 
 \section{Useful Commands}
 
@@ -74,17 +74,17 @@ Text file editing, files management (such as changing ownership of files), softw
 \subsection{Set Shell Environment Variables}\label{ch2subsec:shellenvvar}
 
 The command to be executed must have been stored somewhere in the PATH environment of the shell. PATH environment is a series of directories (locations) in the system, and it is initialized automatically when the shell is started. Check the PATH environment by
-\begin{verbatim}
+\begin{lstlisting}
 $ echo $PATH
 <directory 1>:<directory 2>:<directory 3>: ...
-\end{verbatim}
-where \verb|echo| displays the content of a variable, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permanently to include new commands.
+\end{lstlisting}
+where \verb|echo| displays a line of text, and \verb|$PATH| is a built-in variable that records the PATH environment of the current bash. It is possible to include new directories to PATH environment either temporarily or permanently to include new commands.
 
 Most Linux-defined user commands are stored under \verb|/bin|, \verb|/usr/bin|, and administrative commands in \verb|/sbin|, \verb|/usr/sbin|. Commands local to a specific user can be stored under \verb|/home/<username>/bin|. To determine the location of a particular command, use \verb|type| if the command is in \verb|$PATH|, or \verb|locate| to search everywhere accessible files in the system. An example is given below.
-\begin{verbatim}
+\begin{lstlisting}
 $ type <command>
 <command location>
-\end{verbatim}
+\end{lstlisting}
 
 Similar with \verb|PATH|, there is a list of shell environment variables for the user to monitor and control and status of the system. Table \ref{ch2tab:shellenvironmentvars} summarizes common shell environment variables. Command \verb|echo| can be used to check the values of these variables.
 
@@ -110,54 +110,56 @@ Similar with \verb|PATH|, there is a list of shell environment variables for the
 \end{table}
 
 The environmental variables can be edited and new environmental variables can be created as follows.
-\begin{verbatim}
+\begin{lstlisting}
 <variable name> = <variable value> ; export <variable name>
-\end{verbatim}
+\end{lstlisting}
 
 For example,
-\begin{verbatim}
+\begin{lstlisting}
 PATH = $PATH:/getstuff/bin ; export PATH
-\end{verbatim}
+\end{lstlisting}
 adds a new directory \verb|/getstuff/bin| to the \verb|PATH| environmental variable.
+
+Use command \verb|env| to check a list of environment variables in the shell.
 
 \subsection{Display User Information}
 
 Administrative users may need to frequently check the basic system information, such as hardware configuration, OS version, username, hostname, disk usage, running process, system clock, etc. Some useful commands are summarized below.
 
 The following commands show basic information of a user.
-\begin{verbatim}
+\begin{lstlisting}
 $ whoami
 <username>
 $ grep <username> /etc/passwd
 <username>:x:<uid>:<gid>:<gecos>:<home directory>:<shell>
-\end{verbatim}
+\end{lstlisting}
 In the above, \verb|whoami| is used to display the current login user's username. Command \verb|grep| is used to search a content (in this case, the user name) in the selected file \verb|/etc/passwd| where the user information is stored. This should return the username, the password (for encrypted password, an ``x'' is returned), UID, group id (GID), user id info (GECOS), home directory and default shell location of the user.
 Another command \verb|id| also returns the user id and group id information of the current user.
 
 \subsection{Display Machine Information}
 
 The following commands show the date and hostname of the machine.
-\begin{verbatim}
+\begin{lstlisting}
 $ date
 <date, time and timezone>
 $ hostname
 <hostname>
-\end{verbatim}
+\end{lstlisting}
 
 The following command \verb|lshw| lists down hardware information in details. Sudo privilege is recommended when using this command, to give detailed and accurate information of the system. Since the displayed information is so detailed and can take up many screens, sometimes it is more convenient to use \verb|-short| argument.
-\begin{verbatim}
+\begin{lstlisting}
 $ sudo lshw
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Perform Simple Files Operations}
 
 The most important commands for navigating in the file system is to display the current working directory (may be included as part of prompt) and list down files and directories in the current working directory as follows.
-\begin{verbatim}
+\begin{lstlisting}
 $ pwd
 <absolute working directory>
 $ ls
 <a list of files/directories in the working directory>
-\end{verbatim}
+\end{lstlisting}
 
 The aforementioned \verb|ls| command can be used flexibly. Commonly seen arguments that come with \verb|ls| are \verb|-l| (implement long listing with more details of each item), \verb|-a| (include hidden item in the list) and \verb|-t| (list by time).
 
@@ -165,7 +167,7 @@ The aforementioned \verb|ls| command can be used flexibly. Commonly seen argumen
 
 Command \verb|alias| is used to create short-cut keys for commands and associated options, which makes it more convenient for the system operators to work on the shell. Some alias has already been created automatically when the shell is started. Use \verb|alias| to check the existing alias in the shell. An example is given below.
 
-\begin{verbatim}
+\begin{lstlisting}
 $ alias
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -174,26 +176,26 @@ alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -alF'
 alias ls='ls --color=auto'
-\end{verbatim}
+\end{lstlisting}
 
 A temporary alias can be added to the shell by using
-\begin{verbatim}
+\begin{lstlisting}
 $ alias <shortcut command>='<original command and options>'
-\end{verbatim}
+\end{lstlisting}
 for example
-\begin{verbatim}
+\begin{lstlisting}
 $ alias pwd='pwd; ls -CF'
-\end{verbatim}
+\end{lstlisting}
 
 To permanently add alias to the shell, the alias needs to be added to the bash start script, which is usually \verb|~/.bashrc| for a user. See Section \ref{ch2subsec:others} for details.
 
 \subsection{Others}\label{ch2subsec:others}
 
 Many commands can be used flexibly and it is impossible to illustrate all their details. Consider use the following two methods to check the detailed manual about a command.
-\begin{verbatim}
+\begin{lstlisting}
 $ man <command>
 $ <command> --help
-\end{verbatim}
+\end{lstlisting}
 
 Use \verb|history| to check history commands. Use \verb|!<history command index>| to repeat a history command, or use \verb|!!| to repeat the latest previous command. It is possible to disable history recording function for privacy purpose.
 
@@ -212,22 +214,37 @@ Shell configuration files are loaded each time a new shell starts. User-defined 
 	\end{tabularx}
 \end{table}
 
+\section{A Taste of Bash Shell Script Programming}
 
+A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature. Details are given below.
 
+The pipe (\verb$|$) connects the output of the first command to the input of the second command. The following example searches keyword ``function'' in \verb|calculate_fib.sh| which was given previously.
+\begin{lstlisting}
+$ cat calculate_fib.sh | grep function
+function fib
+\end{lstlisting}
+where \verb|cat| concatenates files and print on the standard output, and \verb|grep| prints lines that match patterns in each file.
 
+The semicolon (\verb|;|) allows inputting multiple commands in the same line in the script. The commands are then executed one after another from left to right.
 
+The ampersand (\verb|&|) can be put in the end of a line so that the command on that line will run in the background. The commands or process running in the background does not occupy the shell standard display, and the users can continue working on other commands in parallel. This is particularly useful when a task is going to take a long time to be executed. To manage the tasks running in the background, check more details in Chapter \ref{ch6}.
 
+Use the dollar sign \verb|$| (not the prompt) to indicate a command expansion. The command in \verb|$(<command>)| will be executed as a whole, then treated as a single input. For example, to display the function defined in \verb|calculate_fib.sh| previously,
+\begin{lstlisting}
+$ echo Display functions: $(cat calculate_fib.sh | grep function)
+Display functions: function fib
+\end{lstlisting}
+Use \verb|$[<arithmetic expression>]| for simple calculations, such as
+\begin{lstlisting}
+$ echo 1+1=$[1+1]
+1+1=2
+\end{lstlisting}
 
+Another example to count the number of files/folders in the current directory is
+\begin{lstlisting}
+$ echo There are $(ls -a | wc -w) files in this directory.
+There are 69 files in this directory.
+\end{lstlisting}
+where \verb|wc| counts the number of lines, words or bytes in a file. 
 
-
-
-
-\section{Basic Shell Programming}
-
-A truly power feature of the shell is its ability to redirect inputs/outputs of commands, thus to chain the commands together. Meta-characters pipe (\verb$|$), ampersand (\verb|&|), semicolon (\verb|;|), right parenthesis (\verb|)|), left parenthesis (\verb|(|), less than sign (\verb|<|) and greater than sign (\verb|>|) are used for this feature.
-
-
-
-
-
-
+Last but not least, \verb|$| is used to expand the value of a variable, either environmental variable or self-defined variable, as explained previously in \ref{ch2subsec:shellenvvar}.
