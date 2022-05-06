@@ -1,6 +1,6 @@
 %\chapterauthor{Author Name}{Author Affiliation}
 %\chapterauthor{Second Author}{Second Author Affiliation}
-\chapter{Shell}
+\chapter{Shell} \label{ch2}
 
 Linux command line tool, usually known as the ``shell'', is the most powerful tool for Linux operations including configuration and control of the OS. Notice that the use of the shell is not compulsory for casual users when the graphical desktop is present. Though the shell is not as intuitive as the graphical tools, it is more powerful and flexible, and well-supported by the community.
 
@@ -245,6 +245,6 @@ Another example to count the number of files/folders in the current directory is
 $ echo There are $(ls -a | wc -w) files in this directory.
 There are 69 files in this directory.
 \end{lstlisting}
-where \verb|wc| counts the number of lines, words or bytes in a file. 
+where \verb|wc| counts the number of lines, words or bytes in a file.
 
 Last but not least, \verb|$| is used to expand the value of a variable, either environmental variable or self-defined variable, as explained previously in \ref{ch2subsec:shellenvvar}.

@@ -15,7 +15,7 @@ where the first \verb|/| in each row represents the root directory, and sequenti
 
 \subsection{Hierarchy Standard}
 
-Upon Linux installation, a file hierarchy is by default created under the root directory. A user can create new files under this hierarchy framework, but should not change the framework itself. The hierarchy is given in Fig. \ref{ch4fig:hierarchy}. 
+Upon Linux installation, a file hierarchy is by default created under the root directory. A user can create new files under this hierarchy framework, but should not change the framework itself. The hierarchy is given in Fig. \ref{ch4fig:hierarchy}.
 
 Notice that ``\verb|/|'' in the figure, as introduced, stands for the root directory, and ``\verb|root|'' in the figure is a subdirectory under \verb|/| whose directory name is ``root'' and it is used store root user related documents. They are two different directories.
 
@@ -48,7 +48,7 @@ A brief introduction to the directories are summarized in Table \ref{ch4tab:hier
     \verb|/usr/lib| & Libraries to support \verb|/usr/bin| and \verb|/usr/sbin|. \\ \hdashline
     \verb|/opt| & Application software installed by OS and administrator for all users. \\ \hdashline
     \verb|/var| & Directories of data used by applications. \\ \hdashline
-    \verb|/usr/local| & Application software installed by administrator for all users.. \\ \hdashline
+    \verb|/usr/local| & Application software installed by administrator for all users. \\ \hdashline
     \verb|/usr/share| & Architecture-independent sharable text files for applications. \\ \hdashline
     \verb|/usr/src| & Source files or packages managed by software manager. \\ \hdashline
     \verb|/dev| & Files representation of devices, such as CPU, RAM, hard disks. \\ \hdashline
@@ -71,11 +71,27 @@ Magic numbers of a file refer to the first few bytes of a file that are unique t
 
 \section{File Management} \label{ch4sec:filemanagement}
 
+Some of the most widely used file management commands are summarized in Table \ref{ch4tab:commonfilecommands}. Notice that \verb|chmod| and \verb|chown| are administration related commands that change the accessibility of a directory or a file, and will be introduced in a later sections together with the Linux permission system.
 
+\begin{table}
+  \centering \caption{Commonly used commands to navigate in the Linux file system.}\label{ch4tab:commonfilecommands}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Command & Description \\ \hline
+    \verb|pwd| & Print working directory. \\ \hdashline
+    \verb|ls| & List the subdirectories and files (and their detail information) in a given directory. \\ \hdashline
+    \verb|touch| & Create an empty file. \\ \hdashline
+    \verb|mkdir| & Create an empty subdirectory. \\ \hdashline
+    \verb|mv| & Cut-ant-paste a directory or a file; change name of a directory or a file. \\ \hdashline
+    \verb|cp| & Copy-and-paste a directory or a file. \\ \hdashline
+    \verb|rm|, \verb|rmdir| & Remove a directory or a file (not to Trash, but just gone). \\ \hdashline
+    \verb|chmod| & Change permission. \\ \hdashline
+    \verb|chown| & Change ownership. \\
+    \hline
+  \end{tabularx}
+\end{table}
 
-
-
-
+As introduced earlier in Chapter \ref{ch2} Table \ref{ch2tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect.
 
 
 
