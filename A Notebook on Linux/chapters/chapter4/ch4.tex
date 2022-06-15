@@ -87,20 +87,86 @@ Some of the most widely used file management commands are summarized in Table \r
   \end{tabularx}
 \end{table}
 
-\subsection{Print Working Directory}
+\textbf{Print Working Directory}
 
-As introduced earlier in Chapter \ref{ch2} Table \ref{ch2tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect.
+As introduced earlier in Chapter \ref{ch2} Table \ref{ch2tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect, as follows.
 
-\subsection{List Information about the Files}
+\begin{lstlisting}
+$ pwd
+\end{lstlisting}
 
-As one of the most frequently used commands, \verb|ls| lists down information about the files in the current directory, and by default sort the entries alphabetically. 
+\textbf{List Information about the Files}
+
+As one of the most frequently used commands, \verb|ls| lists down information about the files in the current directory (or any other directory if specified), and by default sort the entries alphabetically. Features can be specified for the items to be listed, to make the result more selective. The user is able to decide what information to be displayed, such as file name, file access control list, etc., as follows.
+\begin{lstlisting}
+$ ls [PATH] [ARGUMENTS]
+\end{lstlisting}
+
+An example is given in Fig. \ref{ch4fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments, more information can be displayed. For example in Fig. \ref{ch4fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{chapters/chapter4/figures/ls_command_example.png}
+	\caption{List down information of files and subdirectories in the current working directory.} \label{ch4fig:lscommandexample}
+\end{figure}
+
+More information can be found by reading the \verb|ls| command manual, which is accessible via \verb|ls --help|. Some commonly used \verb|ls| arguments are summarized in Table \ref{ch4tab:lscommandargument}. It is also possible to use a combination of arguments in a single line of command. For example, \verb|ls -al| aggregates the effects of using \verb|ls -a| and \verb|ls -l|.
+
+\begin{table}
+  \centering \caption{Commonly used arguments and their effects for \textit{ls} command.}\label{ch4tab:lscommandargument}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Directory & Description \\ \hline
+    \verb|-a|, \verb|--all| & Include hidden files and subdirectories in the display, including current directory ``\verb|.|'' and parent directory ``\verb|..|'' in the list. \\ \hdashline
+    \verb|-A|, \verb|--almost-all| & Include hidden files and subdirectories in the display, excluding ``\verb|.|'' and ``\verb|..|''. \\ \hdashline
+    \verb|-C|, \verb|--color[=WHEN]| & Colorize the output. \\ \hdashline
+    \verb|-l| & Use a long listing format. \\ \hdashline
+    \verb|-s|, \verb|--size| & Print the allocated size of each file, in blocks. \\ \hdashline
+    \verb|-S| & Sort the displayed content. \\ \hdashline
+    \verb|-t| & Sort by modification time. \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Notice that some Linux distributions may come by default an alias about \verb|ls|, which usually helps to displays the information in a clearer manner. For example, when \verb|ls='ls --color-auto'| is used, the displayed content will be colored based on the type of the files and subdirectories.
+
+\textbf{Create an Empty or a Simple Text File}
+
+To create an empty file in the current working directory, simply use \verb|touch| followed by the path of the file (including file name) as follows.
+\begin{lstlisting}
+$ touch [PATH]
+\end{lstlisting}
+For example, 
+\begin{lstlisting}
+$ touch ~/test
+\end{lstlisting}
+will create an empty file ``\textit{test}'' under the user's home directory. If only the name of the file is given, it will by default create the file under the current working directory. Notice that if a file or subdirectory name starts with ``\verb|.|'', it will be treated as a hidden file or subdirectory automatically.
+
+Multiple empty files will be created if multiple paths are given in the command separated by spaces.
+
+To create a simple text file, such as a text file with a single line of contents inside, consider using \verb|echo| command with \verb|>| as follows. It is more convenient than using \textit{Vim} for the same task, although also possible.
+\begin{lstlisting}
+$ echo 'content' > [PATH]
+\end{lstlisting} 
+For example,
+\begin{lstlisting}
+$ echo '<html><body><h1>Hello world!</h1></body></html>' > ~/test.html
+\end{lstlisting}
+creates a simple static HTML web page that says ``Hello world!'' in the home directory.
+
+\textbf{Create an Empty Directory}
+
+Similar with \verb|touch|, use \verb|mkdir| followed by the path of the directory (including directory name) to create a directory as follows.
+\begin{lstlisting}
+$ mkdir [PATH]
+\end{lstlisting}
+
+\textbf{Cut, Copy-and-Paste, and Remove Files and Directories}
 
 
 
 
 
-
-
-
+\section{Access Control List}
 
 
