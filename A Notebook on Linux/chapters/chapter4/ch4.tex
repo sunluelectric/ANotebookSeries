@@ -1,6 +1,6 @@
 %\chapterauthor{Author Name}{Author Affiliation}
 %\chapterauthor{Second Author}{Second Author Affiliation}
-\chapter{Files Management}
+\chapter{Files Management} \label{ch4}
 
 File management is a big portion of OS functionality. In Linux, each device (such as a printer) is treated and managed as a file, and Linux uses a tree hierarchy to manage devices and files. This chapter introduces the filesystem hierarchy and commonly used file management commands.
 
@@ -78,7 +78,7 @@ Some of the most widely used file management commands are summarized in Table \r
     \verb|ls| & List the subdirectories and files (and their detail information) in a given directory. \\ \hdashline
     \verb|touch| & Create an empty file. \\ \hdashline
     \verb|mkdir| & Create an empty subdirectory. \\ \hdashline
-    \verb|mv| & Cut-ant-paste a directory or a file; change name of a directory or a file. \\ \hdashline
+    \verb|mv| & Move (cut-and-paste) a directory or a file; change name of a directory or a file. \\ \hdashline
     \verb|cp| & Copy-and-paste a directory or a file. \\ \hdashline
     \verb|rm|, \verb|rmdir| & Remove a directory or a file (not to Trash, but just gone). \\ \hdashline
     \verb|chmod| & Change permission. \\ \hdashline
@@ -99,10 +99,10 @@ $ pwd
 
 As one of the most frequently used commands, \verb|ls| lists down information about the files in the current directory (or any other directory if specified), and by default sort the entries alphabetically. Features can be specified for the items to be listed, to make the result more selective. The user is able to decide what information to be displayed, such as file name, file access control list, etc., as follows.
 \begin{lstlisting}
-$ ls [PATH] [ARGUMENTS]
+$ ls [OPTION] [PATH]
 \end{lstlisting}
 
-An example is given in Fig. \ref{ch4fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments, more information can be displayed. For example in Fig. \ref{ch4fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
+An example is given in Fig. \ref{ch4fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments (option, as given in the syntax above), more information can be displayed. For example in Fig. \ref{ch4fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
 
 \begin{figure}
 	\centering
@@ -134,9 +134,9 @@ Notice that some Linux distributions may come by default an alias about \verb|ls
 
 To create an empty file in the current working directory, simply use \verb|touch| followed by the path of the file (including file name) as follows.
 \begin{lstlisting}
-$ touch [PATH]
+$ touch [OPTION] [PATH]
 \end{lstlisting}
-For example, 
+For example,
 \begin{lstlisting}
 $ touch ~/test
 \end{lstlisting}
@@ -147,7 +147,7 @@ Multiple empty files will be created if multiple paths are given in the command 
 To create a simple text file, such as a text file with a single line of contents inside, consider using \verb|echo| command with \verb|>| as follows. It is more convenient than using \textit{Vim} for the same task, although also possible.
 \begin{lstlisting}
 $ echo 'content' > [PATH]
-\end{lstlisting} 
+\end{lstlisting}
 For example,
 \begin{lstlisting}
 $ echo '<html><body><h1>Hello world!</h1></body></html>' > ~/test.html
@@ -158,10 +158,73 @@ creates a simple static HTML web page that says ``Hello world!'' in the home dir
 
 Similar with \verb|touch|, use \verb|mkdir| followed by the path of the directory (including directory name) to create a directory as follows.
 \begin{lstlisting}
-$ mkdir [PATH]
+$ mkdir [OPTION] [PATH]
 \end{lstlisting}
 
-\textbf{Cut, Copy-and-Paste, and Remove Files and Directories}
+\textbf{Move, Copy-and-Paste, and Remove Files and Directories}
+
+To move a file or a directory from an existing PATH to a new PATH, simply use \verb|mv| command as follows.
+\begin{lstlisting}
+$ mv [OPTION] [SOURCE_PATH] [TARGET_PATH]
+\end{lstlisting}
+Different from the conventional cut-and-paste, while moving the item, it is possible to also rename the item simultaneously. For example,
+\begin{lstlisting}
+$ mv ~/dog.png ~/Pictures/puppy.png
+\end{lstlisting}
+will not only move the file \verb|dog.png| in the home directory to the subdirectory \verb|Pictures|, but also chance the file name to \verb|puppy.png|. For this reason, \verb|mv| can also be used to rename an item rather than moving the item, just by ``move'' it to the same directory but with a differen name.
+
+Some commonly used arguments of \verb|mv| is summarized in Table \ref{ch4tab:mvcpcommandargument}, many of which concerns about the case where there is already an existing item with the identical name in the target path.
+
+\begin{table}
+  \centering \caption{Commonly used arguments and their effects for \textit{mv} and \textit{cp} command.}\label{ch4tab:mvcpcommandargument}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Directory & Description \\ \hline
+    \verb|-b| & Make a backup before overwrite. \\ \hdashline
+    \verb|-u| & Overwrite only when source target item is newer than the target path item. \\ \hdashline
+    \verb|-i| & Prompt before overwrite. \\ \hdashline
+    \verb|-f| & Do not prompt before overwrite. \\ 
+    \hline
+  \end{tabularx}
+\end{table}
+
+The copy-and-paste command \verb|cp| works similar with the move command \verb|mv|, except that it will not remove the item from the source path. Similar syntax applies to \verb|cp| as follows, and arguments in Table \ref{ch4tab:mvcpcommandargument} also apply to \verb|cp|.
+\begin{lstlisting}
+$ cp [OPTION] [SOURCE_PATH] [TARGET_PATH]
+\end{lstlisting}
+
+To permanently delete an item, use \verb|rm| command as follows.
+\begin{lstlisting}
+$ rm [OPTION] [PATH]
+\end{lstlisting}
+For safety, usualy when using \verb|rm|, the OS will keep prompting messages asking user to confirm whether to permenantly delete an item or not. In some OS setups, it is by default forbidden to delete a directory, unless all files and subdirectories in that file have been priorily removed. The following arguments in Table \ref{ch4tab:rmcommandargument} can be used to change the setup.
+
+\begin{table}
+  \centering \caption{Commonly used arguments and their effects for \textit{rm} command.}\label{ch4tab:rmcommandargument}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Directory & Description \\ \hline
+    \verb|-f| & Ignore nonexistent files and arguments and do not prompt. \\ \hdashline
+    \verb|-r| & Remove directories and their contents recursively. \\ \hdashline
+    \verb|-i| & Prompt before every removal. \\ \hdashline
+    \verb|-d| & Remove empty directories. \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+It is possible though, that removed items using \verb|rm| be recovered by expertise. For greater assurance that the deleted contents are truly unrecoverable, consider using \verb|shred| which can physically overwrite a specified hard drive.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
