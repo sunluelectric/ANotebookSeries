@@ -87,7 +87,7 @@ Some of the most widely used file management commands are summarized in Table \r
   \end{tabularx}
 \end{table}
 
-\textbf{Print Working Directory}
+\subsection{Print Working Directory}
 
 As introduced earlier in Chapter \ref{ch2} Table \ref{ch2tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect, as follows.
 
@@ -95,7 +95,7 @@ As introduced earlier in Chapter \ref{ch2} Table \ref{ch2tab:shellenvironmentvar
 $ pwd
 \end{lstlisting}
 
-\textbf{List Information about the Files}
+\subsection{List Information about the Files}
 
 As one of the most frequently used commands, \verb|ls| lists down information about the files in the current directory (or any other directory if specified), and by default sort the entries alphabetically. Features can be specified for the items to be listed, to make the result more selective. The user is able to decide what information to be displayed, such as file name, file access control list, etc., as follows.
 \begin{lstlisting}
@@ -130,7 +130,7 @@ More information can be found by reading the \verb|ls| command manual, which is 
 
 Notice that some Linux distributions may come by default an alias about \verb|ls|, which usually helps to displays the information in a clearer manner. For example, when \verb|ls='ls --color-auto'| is used, the displayed content will be colored based on the type of the files and subdirectories.
 
-\textbf{Create an Empty or a Simple Text File}
+\subsection{Create an Empty or a Simple Text File}
 
 To create an empty file in the current working directory, simply use \verb|touch| followed by the path of the file (including file name) as follows.
 \begin{lstlisting}
@@ -154,14 +154,14 @@ $ echo '<html><body><h1>Hello world!</h1></body></html>' > ~/test.html
 \end{lstlisting}
 creates a simple static HTML web page that says ``Hello world!'' in the home directory.
 
-\textbf{Create an Empty Directory}
+\subsection{Create an Empty Directory}
 
 Similar with \verb|touch|, use \verb|mkdir| followed by the path of the directory (including directory name) to create a directory as follows.
 \begin{lstlisting}
 $ mkdir [OPTION] [PATH]
 \end{lstlisting}
 
-\textbf{Move, Copy-and-Paste, and Remove Files and Directories}
+\subsection{Move, Copy-and-Paste, and Remove Files and Directories}
 
 To move a file or a directory from an existing PATH to a new PATH, simply use \verb|mv| command as follows.
 \begin{lstlisting}
@@ -183,7 +183,7 @@ Some commonly used arguments of \verb|mv| is summarized in Table \ref{ch4tab:mvc
     \verb|-b| & Make a backup before overwrite. \\ \hdashline
     \verb|-u| & Overwrite only when source target item is newer than the target path item. \\ \hdashline
     \verb|-i| & Prompt before overwrite. \\ \hdashline
-    \verb|-f| & Do not prompt before overwrite. \\ 
+    \verb|-f| & Do not prompt before overwrite. \\
     \hline
   \end{tabularx}
 \end{table}
@@ -212,24 +212,69 @@ For safety, usualy when using \verb|rm|, the OS will keep prompting messages ask
   \end{tabularx}
 \end{table}
 
-It is possible though, that removed items using \verb|rm| be recovered by expertise. For greater assurance that the deleted contents are truly unrecoverable, consider using \verb|shred| which can physically overwrite a specified hard drive.
+It is possible though, that removed items using \verb|rm| be recovered by expertise. For greater assurance that the deleted contents are truly unrecoverable, consider using \verb|shred| which can physically overwrite the portion of hardware drive where the item is located. More details of \verb|shred| can be found by using
+\begin{lstlisting}
+$ shred --help
+\end{lstlisting}
 
+\subsection{Use of Metacharacters}
 
+When performing moving, copying, removing or otherwise acting on files, metacharacters can be used to make the work more efficient sometimes. For example, \verb|ls a*| will list all items in the current directory that starts with letter ``a''. Commonly used metacharacters are summarized in Table .
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{table}
+  \centering \caption{Commonly used metacharacters.}\label{ch4tab:metacharacters}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Directory & Description \\ \hline
+    \verb|*| & Matches any number of characters. \\ \hdashline
+    \verb|?| & Matches one character. \\ \hdashline
+    \verb|[...]| & Matches characters given in the square bracket, which can include a hyphen-separated range of characters. \\
+    \hline
+  \end{tabularx}
+\end{table}
 
 \section{Access Control List}
+
+Each file or directory in the Linux OS is assigned with an owner and a permission list. The permission list prevents unauthorized persons to access the item. The permission list of a file can be checked by using \verb|ls -l|. An example is given in Fig. \ref{ch4fig:lscommandexample}.
+
+The first column of the output in Fig. \ref{ch4fig:lscommandexample} gives the type and permission of the item. The leading \verb|d| and \verb|-| indicate subdirectory and regular file respectively. Other commonly seen indicators are \verb|l| for a symbolic link, \verb|b| for a block device, \verb|c| for a character device, \verb|s| for a socket and \verb|p| for a named pipe.
+
+Following by the item type indicator is the 9-bit permission that may look like \verb|rwxrwxrwx|. The characters \verb|r|, \verb|w| and \verb|x| stand for three types of permissions ``read'', ``write'' and ``execute'' respectively. An explanation to these permissions is summarized in Table \ref{ch4tab:threepermissions} and more details can be found in the \verb|ls| command manual available using \verb|ls --help|. The 9-bit permission of an item indicates the permissions of 3 types of users to the item, the first 3 bits the file owner, the middle 3 bits the file group, and the last 3 bits other users. If any bit in the 9-bit permission is overwritten by a dash \verb|-|, it means that the associated permission for the associated users is banned.
+
+\begin{table}
+  \centering \caption{Three types of permissions.}\label{ch4tab:threepermissions}
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    Directory & Description \\ \hline
+    \verb|r| & View what is in the file or directory. \\ \hdashline
+    \verb|w| & Change file contents; rename file; delete file. Add or remove files or subdirectories in a directory. \\ \hdashline
+    \verb|x| & Run a file as a program. Change to the directory as the current directory; search through the directory; access metadata (file size, etc.) of files in the directory. \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Commands \verb|chown| and \verb|chmod| can be used to change the ownership and 9-bit permission of an item respectively.
+
+\subsection{Change Ownership and Group of a File or Directory}
+
+...
+
+\subsection{Change Permissions of a File or Directory}
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
