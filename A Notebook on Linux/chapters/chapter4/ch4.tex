@@ -6,7 +6,7 @@ File management is a big portion of OS functionality. In Linux, each device (suc
 
 \section{Filesystem Hierarchy Standard} \label{ch4sec:hierarchy}
 
-The root directory is denoted by \verb|/|. All sub directories or files can be located by its full path, which looks like the following
+The root directory is denoted by a single forward slash ``\verb|/|''. All sub directories or files can be located by its full path, which looks like the following
 \begin{lstlisting}
 /<subdirectory>/<subsubdirectory>/.../<directoryname>
 /<subdirectory>/<subsubdirectory>/.../<filename>
@@ -134,7 +134,7 @@ Notice that some Linux distributions may come by default an alias about \verb|ls
 
 To create an empty file in the current working directory, simply use \verb|touch| followed by the path of the file (including file name) as follows.
 \begin{lstlisting}
-$ touch [OPTION] [PATH]
+$ touch [OPTION] PATH
 \end{lstlisting}
 For example,
 \begin{lstlisting}
@@ -146,7 +146,7 @@ Multiple empty files will be created if multiple paths are given in the command 
 
 To create a simple text file, such as a text file with a single line of contents inside, consider using \verb|echo| command with \verb|>| as follows. It is more convenient than using \textit{Vim} for the same task, although also possible.
 \begin{lstlisting}
-$ echo 'content' > [PATH]
+$ echo 'content' > PATH
 \end{lstlisting}
 For example,
 \begin{lstlisting}
@@ -158,14 +158,14 @@ creates a simple static HTML web page that says ``Hello world!'' in the home dir
 
 Similar with \verb|touch|, use \verb|mkdir| followed by the path of the directory (including directory name) to create a directory as follows.
 \begin{lstlisting}
-$ mkdir [OPTION] [PATH]
+$ mkdir [OPTION] PATH
 \end{lstlisting}
 
 \subsection{Move, Copy-and-Paste, and Remove Files and Directories}
 
 To move a file or a directory from an existing PATH to a new PATH, simply use \verb|mv| command as follows.
 \begin{lstlisting}
-$ mv [OPTION] [SOURCE_PATH] [TARGET_PATH]
+$ mv [OPTION] SOURCE_PATH TARGET_PATH
 \end{lstlisting}
 Different from the conventional cut-and-paste, while moving the item, it is possible to also rename the item simultaneously. For example,
 \begin{lstlisting}
@@ -190,12 +190,12 @@ Some commonly used arguments of \verb|mv| is summarized in Table \ref{ch4tab:mvc
 
 The copy-and-paste command \verb|cp| works similar with the move command \verb|mv|, except that it will not remove the item from the source path. Similar syntax applies to \verb|cp| as follows, and arguments in Table \ref{ch4tab:mvcpcommandargument} also apply to \verb|cp|.
 \begin{lstlisting}
-$ cp [OPTION] [SOURCE_PATH] [TARGET_PATH]
+$ cp [OPTION] SOURCE_PATH TARGET_PATH
 \end{lstlisting}
 
 To permanently delete an item, use \verb|rm| command as follows.
 \begin{lstlisting}
-$ rm [OPTION] [PATH]
+$ rm [OPTION] PATH
 \end{lstlisting}
 For safety, usualy when using \verb|rm|, the OS will keep prompting messages asking user to confirm whether to permenantly delete an item or not. In some OS setups, it is by default forbidden to delete a directory, unless all files and subdirectories in that file have been priorily removed. The following arguments in Table \ref{ch4tab:rmcommandargument} can be used to change the setup.
 
@@ -253,18 +253,39 @@ Following by the item type indicator is the 9-bit permission that may look like 
   \end{tabularx}
 \end{table}
 
-Commands \verb|chown| and \verb|chmod| can be used to change the ownership and 9-bit permission of an item respectively.
+Commands \verb|chown| and \verb|chmod| can be used to change the ownership and 9-bit permission of an item respectively. Details are given in following subsections.
 
 \subsection{Change Ownership and Group of a File or Directory}
 
-...
+Administrative privilege is required to run \verb|chown| command to change the ownership and group of a file or a directory as follows.
+\begin{lstlisting}
+# chown [OPTION] [NEW_OWNER][:NEW_GROUP] PATH
+\end{lstlisting}
+For example, in Fig. \ref{ch4fig:chownexp},
+\begin{lstlisting}
+$ sudo chown root:root calculate_fib.sh
+\end{lstlisting}
+is used to change the ownership and group of file \verb|calculate_fib.sh| from \verb|sunlu| to \verb|root|. Use \verb|ls| with longlist to check the ownership of a file. Notice that elevated privilage is required to change its ownership, otherwise the request will be rejected as shown in Fig. \ref{ch4fig:chownexp}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{chapters/chapter4/figures/chownexp.png}
+	\caption{Change ownership and group of a file.} \label{ch4fig:chownexp}
+\end{figure}
 
 \subsection{Change Permissions of a File or Directory}
 
-...
-
-
-
+Both the owner of a file or directory and the users with administrative privilege can change the 9-bit permission of the file using \verb|chmod| as follows. The 9-bit permission, in this context, is called the mode of the file.
+\begin{lstlisting}
+$ chmod [OPTION] MODE PATH
+\end{lstlisting}
+For example, in Fig. \ref{ch4fig:chmodexp}, \verb|g-w| is used to subtract ``writing'' permission from ``group'', and \verb|go+w| is used to add ``writing'' permission to `group'' and ``other'', respectively. Here, \verb|u|, \verb|g| and \verb|o| represents ``user'' (owner), ``group'' and ``other'', and \verb|r|, \verb|w| and \verb|x|, ``read'', ``write'' and ``execute'', respectively.
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{chapters/chapter4/figures/chmodexp.png}
+	\caption{Change 9-bit permission (mode) of a file.} \label{ch4fig:chmodexp}
+\end{figure}
+Alternatively, 3-digit numbers such as \verb|664| as shown in Fig. \ref{ch4fig:chmodexp} can also represent a permission. The first digit is associated with the permission given to the ``user'', where in this example \verb|6| represents \verb|rw-|. Notice that each permission is assigned a number: \verb|r| is 4, \verb|w| is 2, and \verb|x| is 1. From the sum of the numbers, the OS understands which permission(s) are assigned. For example, $6=4+2$, hense \verb|r| and \verb|w| permissions. Likewise as another two quick examples, a \verb|7| would mean \verb|rwx| and \verb|5|, \verb|r-x|, respectively. The second and third digits are associated with the permission given to ``group'' and ``other'' respectively. Hense, \verb|664| would assign \verb|rw-rw-r--| to the file.
 
 
 
