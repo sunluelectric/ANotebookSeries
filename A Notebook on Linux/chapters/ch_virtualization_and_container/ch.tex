@@ -1,0 +1,18 @@
+%\chapterauthor{Author Name}{Author Affiliation}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Virtualization and Containerization}
+
+One of the major differences between a server and a personal computer, is that the server is usually shared among multiple users at the same time. This allows easier and faster scaling up and down of the number of users. Traditionally a new joining user needs to be equipped with a personal computer, which may require a few days of time procuring and configuring the hardware. Whereas in a server, it takes only a few minutes to add a user without touching any hardware.
+
+Though working on the same physical server, a user would usually want his operations in the server not to be interrupted by other users. In other words, each and every user would want to ``virtually'' work on an independent and separated computer with his own CPU, RAM, I/O, OS, drives and hard disk storage, with the actual hardware setup and other users completely transparent. This is done through \textit{Virtualization}, which enables running multiple operating systems on a single physical server in an uninterrupted and logically separated manner. The virtually independent computer of such kind is often called a \textit{virtual machine} (VM).
+
+Deploying a new VM would generally consume a lot of time and computational load, because it needs to load the OS in its first startup. Consider a case where there are hundreds of applications, each requiring a similar but separate environment to run. Launching the same number of VMs can be a solution, but it can be expensive due to the time and computational burden. It would be rather batter to deploy only one VM (or physical server) with one OS, and put each application in a ``container'' with its own customized drives and configurations. A container is similar with a VM in the sense that it runs separately from other containers. However, a container is much ``lighter'' than a VM, thus is cheaper to launch and manage. This becomes possible thanks to the \textit{containerization} technology. It is worth mentioning that since a container contains all the configuration and minimum requirement information of the application, running a container on different platforms would generate the same stable result. This is handy when comes to code transferring and cross-platform testing.
+
+The similarity and differences of personal PC, VM, and container applications are summarized in Fig. XXX.
+
+\section{Virtual Machine}
+...
+\section{Container}
+...
+\section{Docker}
+... 
