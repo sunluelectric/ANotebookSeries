@@ -43,11 +43,11 @@ A cookbook is a instruction of a dish. It guarantees that the same dish, even on
 ...
 \section{Container}
 ...
-\section{Docker}
+\section{Docker Basics} \label{ch:vac:sec:db}
 
 \subsection{Docker Installation}
 
-Docker engine is one of the most popular container management engine available online, and it is free of charge for personal non-commercial usage. To install Docker on a Linux machine, go to \textit{https://www.docker.com/} to for the instruction. 
+Docker engine is one of the most popular container management engine available online, and it is free of charge for personal non-commercial usage. To install Docker on a Linux machine, go to \textit{https://www.docker.com/} to for the instruction.
 
 As an example, consider installing Docker engine on Ubuntu. Some of the key steps are summarized as follows.
 
@@ -77,7 +77,7 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 \end{lstlisting}
 
-To test whether docker is installed correctly, run 
+To test whether docker is installed correctly, run
 \begin{lstlisting}
 $ sudo docker run hello-world
 \end{lstlisting}
@@ -90,7 +90,7 @@ $ sudo usermod [user_name] -aG docker
 
 In the rest of the section, \verb|sudo| is neglected for docker commands.
 
-\subsection{Basic Docker Commands}
+\subsection{Launch a Container}
 
 To run a container from an image, simply use
 \begin{lstlisting}
@@ -107,7 +107,7 @@ To check the status of a container, use
 \begin{lstlisting}
 $ docker container ls
 \end{lstlisting}
-or 
+or
 \begin{lstlisting}
 $ docker container ls -a
 \end{lstlisting}
@@ -137,6 +137,126 @@ If exit from Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexp} (by
 	\includegraphics[width=250pt]{chapters/ch_virtualization_and_containerization/figures/dockerrunexppart3.png}
 	\caption{List the exited container \textit{test-apline}.} \label{chvirtualizationandcontainerization:fig:dockerrunexppart3}
 \end{figure}
+
+It is also possible to launch a container and let it run in the background using \verb|-d| flag. An example is given below.
+\begin{lstlisting}
+$ docker run -dt --name test-background-alpine alpine
+\end{lstlisting}
+By changing \verb|-i| to \verb|-d|, the container runs in the background without accessing its interactive shell interface. The status of the container, after executing the above command, will stary up running and can be listed by \verb|docker container ls|.
+
+In summary, selected key commands regarding launching a container is given in Table \ref{chvirtualizationandcontainerization:tab:launchcontainer}.
+
+\begin{table}
+	\centering \caption{Commonly used docker commands to launch a container.}\label{chvirtualizationandcontainerization:tab:launchcontainer}
+	\begin{tabularx}{\textwidth}{llX}
+		\hline
+		Command & Flag & Description \\ \hline
+		\verb|docker run| & --- & Launch a container of the image followed by the command. If the image cannot be found locally, it downloads the image from the remote repository automatically. Assign a random name to the container. Exit the container after execution. \\ \hdashline
+        \verb|docker run| & \verb|-i| & Keep the standard input of the container open when launching the container. \\ \hdashline
+        \verb|docker run| & \verb|-d| & Launch the container in the background and keep it up running. \\ \hdashline
+        \verb|docker run| & \verb|-rm| & Automatically remove the container when exiting. The removed container will not be listed in \verb|docker container ls -a|. This is usually used for testing and debugging. \\ \hdashline
+        \verb|docker run| & \verb|-t| & Allocate a pseudo-TTY. TTY stands for ``TeleTYpewriter''. A simplified explanation to \verb|-t| is that it makes sure that the I/O of the container follows the typical terminal format. The flag usually comes with the flags \verb|-i| or \verb|-d|, to form \verb|-it| or \verb|-dt|. \\ \hdashline
+        \verb|docker run| & \verb|--restart| & Indicates in which condition the container needs to restart. This is usually used on containers running in the background, i.e., it usually comes with the flag \verb|-dt|. Commonly used restart configurations include \verb|--restart no| (do not automatically restart container when it exits), \verb|--restart on-failure[:max_retries]| (restart if the container exits with a non-zero exit status), \verb|--restart always| (restart regardless of the exit status). Notice that for a container with \verb|--restart| flag, it is still possible to stop and remove the container manually. \\ \hdashline
+        \verb|docker run| & \verb|--name| & Assign a name to the container. \\ \hline
+        \verb|docker image ls| & --- & List local images. \\ \hline
+        \verb|docker container ls| & --- & List up running containers. \\ \hdashline
+        \verb|docker container ls| & \verb|-a| & List all containers. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\subsection{Access and Manage a Container}
+
+To start an existing (but exited) container, use
+\begin{lstlisting}
+$ docker start [container_name]
+\end{lstlisting}
+This command starts the exited container, and keep it up running in the background.
+
+For a container running in the background, use \verb|docker exec| to execute a shell command as follows.
+\begin{lstlisting}
+$ docker exec [container_name] [command]
+\end{lstlisting}
+
+To enable the TTY shell of a container running in the background, use
+\begin{lstlisting}
+$ docker exec -it [container_name] [shell_name]
+\end{lstlisting}
+where depending on the environment of the container, the shell can be different. In the case of an \textit{alpine} imgae based container, \verb|ash| is the default shell. For a \textit{ubuntu} image based container, on the other hand, usually \verb|bash| should be specified.
+
+There are multiple ways and protocols to interact with the file systems in a container, depending the I/O setup of the container. For a container running locally, \verb|docker cp| can be conveniently used for file transfer between the container and the host machine as follows. From container to host machine:
+\begin{lstlisting}
+$ docker cp [container_name]:[source] [destination]
+\end{lstlisting}
+and from host machine to container:
+\begin{lstlisting}
+$ docker cp [source] [container_name]:[destination]
+\end{lstlisting}
+where \verb|[source]| and \verb|[destination]| refer to the path to the source and destination, respectively, located in the host machine or the container. 
+
+To stop or restart a container running in the background, use
+\begin{lstlisting}
+$ docker stop [container_name]
+$ docker restart [container_name]
+\end{lstlisting}
+respectively. When a container is stopped, it enters exited status.
+
+To remove a stopped container, use
+\begin{lstlisting}
+$ docker container rm [container_name]
+\end{lstlisting}
+to remove a specific container, or
+\begin{lstlisting}
+$ docker container prune
+\end{lstlisting}
+to remove all stopped containers.
+
+To rename a container (without changing its container ID or anything else), use
+\begin{lstlisting}
+$ docker rename [old_container_name] [new_container_name]
+\end{lstlisting}
+
+To quickly check container status (CPU, memory usage, etc.) of an up running container or all up running containers, use
+\begin{lstlisting}
+$ docker stats [container_name]
+\end{lstlisting} 
+where the container name can be specified as an option.
+
+To list down more detailed information of a container, including its status, gateway, IP address, etc., use
+\begin{lstlisting}
+$ docker inspect [container_name]
+\end{lstlisting}
+
+To create an image from a container, use
+\begin{lstlisting}
+$ docker commit [container_name] [image_name]
+\end{lstlisting}
+The \verb|docker commit| command saves the container's file changes or settings into a new image, which allows easier populating containers or debugging in a later stage. Notice that \verb|docker commit| does not save everything of the container into the image.
+
+\subsection{Publish a Container}
+
+A container can be configured to be accessible from not only the host machine but also other computers from outside the world. In a typical web service application, the host machine and the containers are often designed following the simplified architecture in Fig. \ref{chvirtualizationandcontainerization:fig:containerwebserverarchitecture}. The containers shall be configured similarly to provide consistent services. A web server, such as \textit{apache} or \textit{nginx}, shall be installed and kept running in the containers. The load balancer is a special software toolkit that monitor the status of the containers, manage the dataflow, and scale up and down the number of containers depending on the total service requests.
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/containerwebserverarchitecture.png}
+	\caption{A simplified architecture where containers are used to host the web service.} \label{chvirtualizationandcontainerization:fig:containerwebserverarchitecture}
+\end{figure}
+
+An example of setting up a web server in containers from scratch is given in this section, where a static web service is established in the containers, and one of the container's IP port 80 (for HTTP protocol) is mapped with the host machine's IP port 80, thus published to the internet. Notice that in the example, for simplicity, the load balancer and the shared services are neglected, and only one container's IP port 80 is mapped with the host machine's IP port 80 (i.e., the internet can access only one of the containers).
+
+\section{Docker Images}
+
+In earlier Section \ref{ch:vac:sec:db}, images have been used to create containers. An image performs like a template or source of a container, including its basic settings, initial configurations, required libraries, and other metadata. The above information is stored in \textit{Dockerfile}. A minimal Dockerfile may look like the following
+\begin{lstlisting}
+FROM alpine
+CMD ["echo", "Hello World!"]
+\end{lstlisting}
+More details about the formulation and function of a docker image are introduced in the rest of this section.
+
+
+
+
+
 
 
 
