@@ -6,35 +6,35 @@ One of the major differences between a server and a personal computer is that th
 
 Deploying a new VM would generally consume considerably large amount of time and computational load, because it needs to load the OS in its first startup. Consider a case where there are hundreds of applications, each requiring running in a similar but separate environment. Launching a VM for each application can be a solution, but it can be expensive due to the time and computational burden. It would be batter to rather deploy only one VM (or physical server) with one OS, and put each application in a ``container'' with its own customized drives and configurations. A container is similar with a VM in the sense that it runs separately from other containers. However, a container is much ``lighter'' than a VM, thus is cheaper to launch and manage. This becomes possible thanks to \textit{containerization}. It is worth mentioning that since a container contains all the configuration and minimum requirement information of the application, running a container on different platforms would generate the same stable result. This is handy when comes to code transferring and cross-platform testing.
 
-The similarity and differences of personal PC, VM, and container applications are summarized in Fig. \ref{chvirtualizationandcontainerization:fig:pcvmcontainersructure}.
+The similarity and differences of personal PC, VM, and container applications are summarized in Fig. \ref{ch:vac:fig:pcvmcontainersructure}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=250pt]{chapters/ch_virtualization_and_containerization/figures/pcvmcontainerstructure.png}
-	\caption{System architectures of PC, VM and container.} \label{chvirtualizationandcontainerization:fig:pcvmcontainersructure}
+	\caption{System architectures of PC, VM and container.} \label{ch:vac:fig:pcvmcontainersructure}
 \end{figure}
 
 An an analogy, think of running an APP as asking a restaurant to prepare a dish. The hardware is corresponding with kitchen (along with the cooktop, the frying pan, etc.) of the restaurant where every cooking procedure actually happens. The OS is corresponding with the cook, who uses the materials in the kitchen to make the dish. The OS needs associated drivers and libraries to run the APP correctly. The drivers and libraries are like the skill set expected from the cook in order to prepare the dish correctly. Therefore, installing and configuring drivers and libraries in the OS is like teaching the cook new skills (probably from a cookbook) so that he would know how to cook the dish. Finally, the APP is corresponding with the prepared dish.
 
-In a traditional PC implementation, for each customer (user) or dish (APP), a new kitchen is constructed and its associated cook is hired. The cook is trained to master all necessary skills required by the customer or for the dish. A metaphor of the PC implementation is given in Fig. \ref{chvirtualizationandcontainerization:fig:acookinakitchen}.
+In a traditional PC implementation, for each customer (user) or dish (APP), a new kitchen is constructed and its associated cook is hired. The cook is trained to master all necessary skills required by the customer or for the dish. A metaphor of the PC implementation is given in Fig. \ref{ch:vac:fig:acookinakitchen}.
 \begin{figure}
 	\centering
 	\includegraphics[width=200pt]{chapters/ch_virtualization_and_containerization/figures/acookinakitchen.png}
-	\caption{PC implementation: a cook in a kitchen.} \label{chvirtualizationandcontainerization:fig:acookinakitchen}
+	\caption{PC implementation: a cook in a kitchen.} \label{ch:vac:fig:acookinakitchen}
 \end{figure}
 
-In a VM implementation, a larger and more capable kitchen is setup in advance. For each customer or a dish, a cook is hired. Each cook is trained with the skills necessary for his associated customer or dish. All cooks share the same kitchen. This implementation is more efficient than the previous ``a cook in a kitchen'' implementation in Fig. \ref{chvirtualizationandcontainerization:fig:acookinakitchen}, as there is no need to scale up the kitchen for each new customer or APP. By sharing the resources among the cooks, it is more probable that the resources in the kitchen be used more effectively. A metaphor of the VM implementation is given in Fig. \ref{chvirtualizationandcontainerization:fig:manycooksinakitchen}. This is indeed a popular implementation when comes to both enterprise-level server management and a local restaurant.
+In a VM implementation, a larger and more capable kitchen is setup in advance. For each customer or a dish, a cook is hired. Each cook is trained with the skills necessary for his associated customer or dish. All cooks share the same kitchen. This implementation is more efficient than the previous ``a cook in a kitchen'' implementation in Fig. \ref{ch:vac:fig:acookinakitchen}, as there is no need to scale up the kitchen for each new customer or APP. By sharing the resources among the cooks, it is more probable that the resources in the kitchen be used more effectively. A metaphor of the VM implementation is given in Fig. \ref{ch:vac:fig:manycooksinakitchen}. This is indeed a popular implementation when comes to both enterprise-level server management and a local restaurant.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/manycooksinakitchen.png}
-	\caption{VM implementation: many cooks in a kitchen, each with a different cookbook.} \label{chvirtualizationandcontainerization:fig:manycooksinakitchen}
+	\caption{VM implementation: many cooks in a kitchen, each with a different cookbook.} \label{ch:vac:fig:manycooksinakitchen}
 \end{figure}
 
-Deploy dedicated OS for each APP can be time consuming when the number of the APPs is large. This is also true in the restaurant, where it is very rare for each dish to have a dedicated cook. Instead, a cook usually handles a category of dishes that requires similar skill sets. A cook good at multi-task can handle many dishes by himself alone, as long as the dish recipes are provided. Of course, each dish will stay in its own frypan so that they would not affect each other. This is similar with a container implementation. The recipe for a dish, which describes the skill set of the dish, is called an ``image'' of the container that describes the drivers, libraries and basic configurations for the APP to run. The food cooked in the frypan is the APP. The frypan, the food, and the recipe, together form an instance of a container. A metaphor of the container implementation is given in Fig. \ref{chvirtualizationandcontainerization:fig:multitaskcook}. Luckily, the cook (OS) is good at multi-tasking by nature, and with the help of a front desk manager (container management tool such as Docker), he can perform quite well.
+Deploy dedicated OS for each APP can be time consuming when the number of the APPs is large. This is also true in the restaurant, where it is very rare for each dish to have a dedicated cook. Instead, a cook usually handles a category of dishes that requires similar skill sets. A cook good at multi-task can handle many dishes by himself alone, as long as the dish recipes are provided. Of course, each dish will stay in its own frypan so that they would not affect each other. This is similar with a container implementation. The recipe for a dish, which describes the skill set of the dish, is called an ``image'' of the container that describes the drivers, libraries and basic configurations for the APP to run. The food cooked in the frypan is the APP. The frypan, the food, and the recipe, together form an instance of a container. A metaphor of the container implementation is given in Fig. \ref{ch:vac:fig:multitaskcook}. Luckily, the cook (OS) is good at multi-tasking by nature, and with the help of a front desk manager (container management tool such as Docker), he can perform quite well.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/multitaskcook.png}
-	\caption{Container implementation: one in a kitchen, handling multiple dishes, each has a cookbook and stays in its own pan.} \label{chvirtualizationandcontainerization:fig:multitaskcook}
+	\caption{Container implementation: one in a kitchen, handling multiple dishes, each has a cookbook and stays in its own pan.} \label{ch:vac:fig:multitaskcook}
 \end{figure}
 
 A cookbook is a instruction of a dish. It guarantees that the same dish, even one day to be cooked in a different restaurant by a different cook, would taste the same. Similarly, the image of a container serves as the start-up instruction of the container, and it helps to maintain consistency of the performance of the APP even running on different machines between developers and machines, guaranteeing that a APP runs correctly on different machines. With an image, it is convenient to deploy similar container instances quickly.
@@ -44,6 +44,8 @@ A cookbook is a instruction of a dish. It guarantees that the same dish, even on
 \section{Container}
 ...
 \section{Docker Basics} \label{ch:vac:sec:db}
+
+Docker and docker hub are widely used container management engine and a platform for sharing container images, respectively. The basic operations of docker engine, including installation of docker engine, using docker engine to run and manage containers, etc., are introduced in this section.
 
 \subsection{Docker Installation}
 
@@ -113,7 +115,7 @@ $ docker container ls -a
 \end{lstlisting}
 where \verb|-a| indicates displaying both running and exited containers. Without \verb|-a|, exited containers will not be displayed.
 
-For example, consider running a container of \textit{alpine} as follows. A screen shot is given in Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexp}.
+For example, consider running a container of \textit{alpine} as follows. A screen shot is given in Fig. \ref{ch:vac:fig:dockerrunexp}.
 \begin{lstlisting}
 $ docker run -it --name test-alpine alpine
 \end{lstlisting}
@@ -121,21 +123,21 @@ where \verb|-i| stands for interactive, which will keep the container's standard
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/dockerrunexp.png}
-	\caption{An example of running \textit{apline} container, with interactive TTY and name \textit{test-apline}.} \label{chvirtualizationandcontainerization:fig:dockerrunexp}
+	\caption{An example of running \textit{apline} container, with interactive TTY and name \textit{test-apline}.} \label{ch:vac:fig:dockerrunexp}
 \end{figure}
 
-It can be seen from Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexp} that once the container is started, the user can interact with the container using its shell, and perform actions such as upgrading the container, or deploy a web server, etc. While keep the container up running, open another terminal and use \verb|docker container ls|. The container \verb|test-alpine| shall appear in the list, as shown in Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexppart2}.
+It can be seen from Fig. \ref{ch:vac:fig:dockerrunexp} that once the container is started, the user can interact with the container using its shell, and perform actions such as upgrading the container, or deploy a web server, etc. While keep the container up running, open another terminal and use \verb|docker container ls|. The container \verb|test-alpine| shall appear in the list, as shown in Fig. \ref{ch:vac:fig:dockerrunexppart2}.
 \begin{figure}
 	\centering
 	\includegraphics[width=250pt]{chapters/ch_virtualization_and_containerization/figures/dockerrunexppart2.png}
-	\caption{List the up running container \textit{test-apline}.} \label{chvirtualizationandcontainerization:fig:dockerrunexppart2}
+	\caption{List the up running container \textit{test-apline}.} \label{ch:vac:fig:dockerrunexppart2}
 \end{figure}
 
-If exit from Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexp} (by using \verb|exit| in the container), the container will transfer its status from up running to exited, as shown in Fig. \ref{chvirtualizationandcontainerization:fig:dockerrunexppart3}.
+If exit from Fig. \ref{ch:vac:fig:dockerrunexp} (by using \verb|exit| in the container), the container will transfer its status from up running to exited, as shown in Fig. \ref{ch:vac:fig:dockerrunexppart3}.
 \begin{figure}
 	\centering
 	\includegraphics[width=250pt]{chapters/ch_virtualization_and_containerization/figures/dockerrunexppart3.png}
-	\caption{List the exited container \textit{test-apline}.} \label{chvirtualizationandcontainerization:fig:dockerrunexppart3}
+	\caption{List the exited container \textit{test-apline}.} \label{ch:vac:fig:dockerrunexppart3}
 \end{figure}
 
 It is also possible to launch a container and let it run in the background using \verb|-d| flag. An example is given below.
@@ -144,10 +146,10 @@ $ docker run -dt --name test-background-alpine alpine
 \end{lstlisting}
 By changing \verb|-i| to \verb|-d|, the container runs in the background without accessing its interactive shell interface. The status of the container, after executing the above command, will stary up running and can be listed by \verb|docker container ls|.
 
-In summary, selected key commands regarding launching a container is given in Table \ref{chvirtualizationandcontainerization:tab:launchcontainer}.
+In summary, selected key commands regarding launching a container is given in Table \ref{ch:vac:tab:launchcontainer}.
 
 \begin{table}
-	\centering \caption{Commonly used docker commands to launch a container.}\label{chvirtualizationandcontainerization:tab:launchcontainer}
+	\centering \caption{Commonly used docker commands to launch a container.}\label{ch:vac:tab:launchcontainer}
 	\begin{tabularx}{\textwidth}{llX}
 		\hline
 		Command & Flag & Description \\ \hline
@@ -192,7 +194,7 @@ and from host machine to container:
 \begin{lstlisting}
 $ docker cp [source] [container_name]:[destination]
 \end{lstlisting}
-where \verb|[source]| and \verb|[destination]| refer to the path to the source and destination, respectively, located in the host machine or the container. 
+where \verb|[source]| and \verb|[destination]| refer to the path to the source and destination, respectively, located in the host machine or the container.
 
 To stop or restart a container running in the background, use
 \begin{lstlisting}
@@ -219,7 +221,7 @@ $ docker rename [old_container_name] [new_container_name]
 To quickly check container status (CPU, memory usage, etc.) of an up running container or all up running containers, use
 \begin{lstlisting}
 $ docker stats [container_name]
-\end{lstlisting} 
+\end{lstlisting}
 where the container name can be specified as an option.
 
 To list down more detailed information of a container, including its status, gateway, IP address, etc., use
@@ -235,14 +237,68 @@ The \verb|docker commit| command saves the container's file changes or settings 
 
 \subsection{Publish a Container}
 
-A container can be configured to be accessible from not only the host machine but also other computers from outside the world. In a typical web service application, the host machine and the containers are often designed following the simplified architecture in Fig. \ref{chvirtualizationandcontainerization:fig:containerwebserverarchitecture}. The containers shall be configured similarly to provide consistent services. A web server, such as \textit{apache} or \textit{nginx}, shall be installed and kept running in the containers. The load balancer is a special software toolkit that monitor the status of the containers, manage the dataflow, and scale up and down the number of containers depending on the total service requests.
+A container can be configured to be accessible from not only the host machine but also other computers from outside the world. In a typical web service application, the host machine and the containers are often designed following the architecture similar with Fig. \ref{ch:vac:fig:containerwebserverarchitecture}. The containers shall be configured similarly to provide consistent services. A web server, such as \textit{apache} or \textit{nginx}, shall be installed and kept running in the containers. The load balancer is a special software toolkit that monitor the status of the containers, manage the dataflow, and scale up and down the number of containers depending on the total service requests.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/containerwebserverarchitecture.png}
-	\caption{A simplified architecture where containers are used to host the web service.} \label{chvirtualizationandcontainerization:fig:containerwebserverarchitecture}
+	\caption{A simplified architecture where containers are used to host the web service.} \label{ch:vac:fig:containerwebserverarchitecture}
 \end{figure}
 
-An example of setting up a web server in containers from scratch is given in this section, where a static web service is established in the containers, and one of the container's IP port 80 (for HTTP protocol) is mapped with the host machine's IP port 80, thus published to the internet. Notice that in the example, for simplicity, the load balancer and the shared services are neglected, and only one container's IP port 80 is mapped with the host machine's IP port 80 (i.e., the internet can access only one of the containers).
+An example of setting up a web server in containers from scratch is given in this section. For simplicity, only one container is used and the load balancer and the shared services are not included in the example.
+
+As a first step, create a container from the official \textit{nginx} image as follows. Notice that it is also possible to create containers from \textit{apline}, and install \textit{nginx} on the container.
+\begin{lstlisting}
+$ docker run -dt --name simple-web nginx
+\end{lstlisting}
+
+The second step is to create configuration file for \textit{nginx}, and also the \textit{html} files to used as the static web page. For convenience, the files are created and edited in the host machine, then copied to the container. The following \textit{default.conf} and \textit{index.html} have been created, respectively. The configuration file \textit{default.conf}:
+\begin{lstlisting}
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html/;
+}
+\end{lstlisting}
+and the \textit{html} file \textit{index.html}:
+\begin{lstlisting}
+<html>
+	<body>
+		<h1>Hello World!</h1>
+	</body>
+</html>
+\end{lstlisting}
+
+Use \verb|docker copy| to copy the two files to the designed locations in the container as follows.
+\begin{lstlisting}
+$ docker exec simple-web mkdir /var/www
+$ docker exec simple-web mkdir /var/www/html
+$ docker cp default.conf simple-web:/etc/nginx/conf.d/default.conf
+$ docker cp index.html simple-web:/var/www/html/index.html
+\end{lstlisting}
+
+Change the ownership of the \textit{html} file as follows, so that the current user \textit{nginx} is able to access that file.
+\begin{lstlisting}
+docker exec simple-web chown -R nginx:nginx /var/www/html
+\end{lstlisting}
+
+Reload and configuration file and restart the web server as follows.
+\begin{lstlisting}
+docker exec simple-web nginx -s reload
+\end{lstlisting}
+
+To test the web server running inside the container, obtain the IP address of the container using
+\begin{lstlisting}
+$ docker inspect simple-web | grep IPAddress
+\end{lstlisting}
+and open a browser with the obtained IP address keyed in. By default, the browser would try to access port 80 of the container, and the ``Hello World!'' web page shall show up.
+
+The last step is to commit the container into a new image using \verb|docker commit|, and subsequently populate the containers as follows.
+\begin{lstlisting}
+$ docker commit simple-web simple-web-image
+$ docker run -dt --name web01 -p 80:80 simple-web-image
+\end{lstlisting}
+
+Notice that different from the previous container ``\textit{simple-web}'', the new container ``\textit{web01}'' IP address port 80 is mapped with the port 80 of the host machine. Therefore, the web page hosted in ``\textit{web01}'' can be accessed not only by the container's IP address, but also by the host machine IP address. Key in \verb|localhost| in the browser on the host machine and the ``Hello World!'' web page shall show up.
 
 \section{Docker Images}
 
@@ -252,6 +308,27 @@ FROM alpine
 CMD ["echo", "Hello World!"]
 \end{lstlisting}
 More details about the formulation and function of a docker image are introduced in the rest of this section.
+
+\subsection{Image Architecture}
+
+...
+
+\subsection{Dockerfile}
+
+Dockerfile is the human-readable text document and it serves as an instruction file for building an image.
+
+\subsection{Basic Docker Image Operations}
+
+...
+
+\subsection{Image Sharing on Docker Hub}
+
+
+...
+
+
+
+
 
 
 

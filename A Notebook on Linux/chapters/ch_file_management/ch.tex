@@ -1,10 +1,10 @@
 %\chapterauthor{Author Name}{Author Affiliation}
 %\chapterauthor{Second Author}{Second Author Affiliation}
-\chapter{File Management} \label{chfilemanagement}
+\chapter{File Management} \label{ch:fm}
 
 File management is a big portion of OS functionality. In Linux, each device (such as a printer) is treated and managed as a file, and Linux uses a tree hierarchy to manage devices and files. This chapter introduces the filesystem hierarchy and commonly used file management commands.
 
-\section{Filesystem Hierarchy Standard} \label{chfilemanagement:sec:hierarchy}
+\section{Filesystem Hierarchy Standard} \label{ch:fm:sec:hierarchy}
 
 The root directory is denoted by a single forward slash ``\verb|/|''. All sub directories or files can be located by its full path, which looks like the following
 \begin{lstlisting}
@@ -13,28 +13,28 @@ The root directory is denoted by a single forward slash ``\verb|/|''. All sub di
 \end{lstlisting}
 where the first \verb|/| in each row represents the root directory, and sequential \verb|/| represents entering a subdirectory.
 
-Upon Linux installation, a file hierarchy is by default created under the root directory. A user can create new files under this hierarchy framework, but should not change the framework itself. The hierarchy is given in Fig. \ref{chfilemanagement:fig:hierarchy}. Notice that ``\verb|/|'' in the figure, as introduced, stands for the root directory, and ``\verb|root|'' in the figure is a subdirectory under \verb|/| whose directory name is ``root'' and it is used store root user related documents. They are two different directories.
+Upon Linux installation, a file hierarchy is by default created under the root directory. A user can create new files under this hierarchy framework, but should not change the framework itself. The hierarchy is given in Fig. \ref{ch:fm:fig:hierarchy}. Notice that ``\verb|/|'' in the figure, as introduced, stands for the root directory, and ``\verb|root|'' in the figure is a subdirectory under \verb|/| whose directory name is ``root'' and it is used store root user related documents. They are two different directories.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=250pt]{chapters/ch_file_management/figures/linux_file_hierarchy.png}
-	\caption{Linux file system hierarchy.} \label{chfilemanagement:fig:hierarchy}
+	\caption{Linux file system hierarchy.} \label{ch:fm:fig:hierarchy}
 \end{figure}
 
 A (regular) user's home directory is often located at \verb|/home/<user name>|. When logging in as a regular user, his home directory is shorten by the tilde \verb|~| for convenience. Hence, for example \verb|ls ~| will list down the files and directories under his home directory.
 
-As can be seen from Fig. \ref{chfilemanagement:fig:hierarchy}, the hierarchy contains quite a few pre-determined subdirectories, each has some unique purpose. For convenience of illustration, these subdirectories are categorized by functionalities and depressibilities given in Fig. \ref{chfilemanagement:fig:directorycate}. Notice that this categorization is rough and may not reflect the truth for all applications. For example, the commonly used command \verb|ls| may appear under \verb|/bin| or \verb|/usr/bin| depending on the Linux distributions.
+As can be seen from Fig. \ref{ch:fm:fig:hierarchy}, the hierarchy contains quite a few pre-determined subdirectories, each has some unique purpose. For convenience of illustration, these subdirectories are categorized by functionalities and depressibilities given in Fig. \ref{ch:fm:fig:directorycate}. Notice that this categorization is rough and may not reflect the truth for all applications. For example, the commonly used command \verb|ls| may appear under \verb|/bin| or \verb|/usr/bin| depending on the Linux distributions.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_file_management/figures/linux_directory_cate.png}
-	\caption{A rough categorization of commonly used directories in Linux file hierarchy standard.} \label{chfilemanagement:fig:directorycate}
+	\caption{A rough categorization of commonly used directories in Linux file hierarchy standard.} \label{ch:fm:fig:directorycate}
 \end{figure}
 
-A brief introduction to the directories are summarized in Table \ref{chfilemanagement:tab:hierarchyintro}.
+A brief introduction to the directories are summarized in Table \ref{ch:fm:tab:hierarchyintro}.
 
 \begin{table}
-  \centering \caption{Introduction to commonly used directories in Linux file hierarchy standard.}\label{chfilemanagement:tab:hierarchyintro}
+  \centering \caption{Introduction to commonly used directories in Linux file hierarchy standard.}\label{ch:fm:tab:hierarchyintro}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -65,12 +65,12 @@ Linux file hierarchy standard differs from MS-DOS and Windows in several ways. F
 
 Magic numbers of a file refer to the first few bytes of a file that are unique to a particular file type, for example, PNG file is hex \verb|89 50 4e 47|. Linux compare the magic numbers of a file with an internal database to decide the file types and features.
 
-\section{Commonly Used File Management Commands} \label{chfilemanagement:sec:filemanagement}
+\section{Commonly Used File Management Commands} \label{ch:fm:sec:filemanagement}
 
-Some of the most widely used file management commands are summarized in Table \ref{chfilemanagement:tab:commonfilecommands}. Notice that \verb|chmod| and \verb|chown| are administration related commands that change the accessibility of a directory or a file, and will be introduced in a later sections together with the Linux permission system. The rest commands are categorized and introduced in the following subsections.
+Some of the most widely used file management commands are summarized in Table \ref{ch:fm:tab:commonfilecommands}. Notice that \verb|chmod| and \verb|chown| are administration related commands that change the accessibility of a directory or a file, and will be introduced in a later sections together with the Linux permission system. The rest commands are categorized and introduced in the following subsections.
 
 \begin{table}
-  \centering \caption{Commonly used commands to navigate in the Linux file system.}\label{chfilemanagement:tab:commonfilecommands}
+  \centering \caption{Commonly used commands to navigate in the Linux file system.}\label{ch:fm:tab:commonfilecommands}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Command & Description \\ \hline
@@ -89,7 +89,7 @@ Some of the most widely used file management commands are summarized in Table \r
 
 \subsection{Print Working Directory}
 
-As introduced earlier in Chapter \ref{chshellbasics} Table \ref{chshellbasics:tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect, as follows.
+As introduced earlier in Chapter \ref{ch:sb} Table \ref{ch:sb:tab:shellenvironmentvars}, \verb|HOME|, \verb|PWD| and \verb|OLDPWD| are three default environmental variables used to store the home directory, the current directory and the previous directory of the shell, respectively. Therefore, to print the current working directory in the console, use command \verb|echo $PWD|. Alternatively, just use \verb|pwd| which has the safe effect, as follows.
 
 \begin{lstlisting}
 $ pwd
@@ -102,18 +102,18 @@ As one of the most frequently used commands, \verb|ls| lists down information ab
 $ ls [OPTION] [PATH]
 \end{lstlisting}
 
-An example is given in Fig. \ref{chfilemanagement:fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments (option, as given in the syntax above), more information can be displayed. For example in Fig. \ref{chfilemanagement:fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
+An example is given in Fig. \ref{ch:fm:fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments (option, as given in the syntax above), more information can be displayed. For example in Fig. \ref{ch:fm:fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_file_management/figures/ls_command_example.png}
-	\caption{List down information of files and subdirectories in the current working directory.} \label{chfilemanagement:fig:lscommandexample}
+	\caption{List down information of files and subdirectories in the current working directory.} \label{ch:fm:fig:lscommandexample}
 \end{figure}
 
-More information can be found by reading the \verb|ls| command manual, which is accessible via \verb|ls --help|. Some commonly used \verb|ls| arguments are summarized in Table \ref{chfilemanagement:tab:lscommandargument}. It is also possible to use a combination of arguments in a single line of command. For example, \verb|ls -al| aggregates the effects of using \verb|ls -a| and \verb|ls -l|.
+More information can be found by reading the \verb|ls| command manual, which is accessible via \verb|ls --help|. Some commonly used \verb|ls| arguments are summarized in Table \ref{ch:fm:tab:lscommandargument}. It is also possible to use a combination of arguments in a single line of command. For example, \verb|ls -al| aggregates the effects of using \verb|ls -a| and \verb|ls -l|.
 
 \begin{table}
-  \centering \caption{Commonly used arguments and their effects for \textit{ls} command.}\label{chfilemanagement:tab:lscommandargument}
+  \centering \caption{Commonly used arguments and their effects for \textit{ls} command.}\label{ch:fm:tab:lscommandargument}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -173,10 +173,10 @@ $ mv ~/dog.png ~/Pictures/puppy.png
 \end{lstlisting}
 will not only move the file \verb|dog.png| in the home directory to the subdirectory \verb|Pictures|, but also chance the file name to \verb|puppy.png|. For this reason, \verb|mv| can also be used to rename an item rather than moving the item, just by ``move'' it to the same directory but with a differen name.
 
-Some commonly used arguments of \verb|mv| is summarized in Table \ref{chfilemanagement:tab:mvcpcommandargument}, many of which concerns about the case where there is already an existing item with the identical name in the target path.
+Some commonly used arguments of \verb|mv| is summarized in Table \ref{ch:fm:tab:mvcpcommandargument}, many of which concerns about the case where there is already an existing item with the identical name in the target path.
 
 \begin{table}
-  \centering \caption{Commonly used arguments and their effects for \textit{mv} and \textit{cp} command.}\label{chfilemanagement:tab:mvcpcommandargument}
+  \centering \caption{Commonly used arguments and their effects for \textit{mv} and \textit{cp} command.}\label{ch:fm:tab:mvcpcommandargument}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -188,7 +188,7 @@ Some commonly used arguments of \verb|mv| is summarized in Table \ref{chfilemana
   \end{tabularx}
 \end{table}
 
-The copy-and-paste command \verb|cp| works similar with the move command \verb|mv|, except that it will not remove the item from the source path. Similar syntax applies to \verb|cp| as follows, and arguments in Table \ref{chfilemanagement:tab:mvcpcommandargument} also apply to \verb|cp|.
+The copy-and-paste command \verb|cp| works similar with the move command \verb|mv|, except that it will not remove the item from the source path. Similar syntax applies to \verb|cp| as follows, and arguments in Table \ref{ch:fm:tab:mvcpcommandargument} also apply to \verb|cp|.
 \begin{lstlisting}
 $ cp [OPTION] SOURCE_PATH TARGET_PATH
 \end{lstlisting}
@@ -197,10 +197,10 @@ To permanently delete an item, use \verb|rm| command as follows.
 \begin{lstlisting}
 $ rm [OPTION] PATH
 \end{lstlisting}
-For safety, usualy when using \verb|rm|, the OS will keep prompting messages asking user to confirm whether to permenantly delete an item or not. In some OS setups, it is by default forbidden to delete a directory, unless all files and subdirectories in that file have been priorily removed. The following arguments in Table \ref{chfilemanagement:tab:rmcommandargument} can be used to change the setup.
+For safety, usualy when using \verb|rm|, the OS will keep prompting messages asking user to confirm whether to permenantly delete an item or not. In some OS setups, it is by default forbidden to delete a directory, unless all files and subdirectories in that file have been priorily removed. The following arguments in Table \ref{ch:fm:tab:rmcommandargument} can be used to change the setup.
 
 \begin{table}
-  \centering \caption{Commonly used arguments and their effects for \textit{rm} command.}\label{chfilemanagement:tab:rmcommandargument}
+  \centering \caption{Commonly used arguments and their effects for \textit{rm} command.}\label{ch:fm:tab:rmcommandargument}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -222,7 +222,7 @@ $ shred --help
 When performing moving, copying, removing or otherwise acting on files, metacharacters can be used to make the work more efficient sometimes. For example, \verb|ls a*| will list all items in the current directory that starts with letter ``a''. Commonly used metacharacters are summarized in Table .
 
 \begin{table}
-  \centering \caption{Commonly used metacharacters.}\label{chfilemanagement:tab:metacharacters}
+  \centering \caption{Commonly used metacharacters.}\label{ch:fm:tab:metacharacters}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -235,14 +235,14 @@ When performing moving, copying, removing or otherwise acting on files, metachar
 
 \section{Access Control List}
 
-Each file or directory in the Linux OS is assigned with an owner and a permission list. The permission list prevents unauthorized persons to access the item. The permission list of a file can be checked by using \verb|ls -l|. An example is given in Fig. \ref{chfilemanagement:fig:lscommandexample}.
+Each file or directory in the Linux OS is assigned with an owner and a permission list. The permission list prevents unauthorized persons to access the item. The permission list of a file can be checked by using \verb|ls -l|. An example is given in Fig. \ref{ch:fm:fig:lscommandexample}.
 
-The first column of the output in Fig. \ref{chfilemanagement:fig:lscommandexample} gives the type and permission of the item. The leading \verb|d| and \verb|-| indicate subdirectory and regular file respectively. Other commonly seen indicators are \verb|l| for a symbolic link, \verb|b| for a block device, \verb|c| for a character device, \verb|s| for a socket and \verb|p| for a named pipe.
+The first column of the output in Fig. \ref{ch:fm:fig:lscommandexample} gives the type and permission of the item. The leading \verb|d| and \verb|-| indicate subdirectory and regular file respectively. Other commonly seen indicators are \verb|l| for a symbolic link, \verb|b| for a block device, \verb|c| for a character device, \verb|s| for a socket and \verb|p| for a named pipe.
 
-Following by the item type indicator is the 9-bit permission that may look like \verb|rwxrwxrwx|. The characters \verb|r|, \verb|w| and \verb|x| stand for three types of permissions ``read'', ``write'' and ``execute'' respectively. An explanation to these permissions is summarized in Table \ref{chfilemanagement:tab:threepermissions} and more details can be found in the \verb|ls| command manual available using \verb|ls --help|. The 9-bit permission of an item indicates the permissions of 3 types of users to the item, the first 3 bits the file owner, the middle 3 bits the file group, and the last 3 bits other users. If any bit in the 9-bit permission is overwritten by a dash \verb|-|, it means that the associated permission for the associated users is banned.
+Following by the item type indicator is the 9-bit permission that may look like \verb|rwxrwxrwx|. The characters \verb|r|, \verb|w| and \verb|x| stand for three types of permissions ``read'', ``write'' and ``execute'' respectively. An explanation to these permissions is summarized in Table \ref{ch:fm:tab:threepermissions} and more details can be found in the \verb|ls| command manual available using \verb|ls --help|. The 9-bit permission of an item indicates the permissions of 3 types of users to the item, the first 3 bits the file owner, the middle 3 bits the file group, and the last 3 bits other users. If any bit in the 9-bit permission is overwritten by a dash \verb|-|, it means that the associated permission for the associated users is banned.
 
 \begin{table}
-  \centering \caption{Three types of permissions.}\label{chfilemanagement:tab:threepermissions}
+  \centering \caption{Three types of permissions.}\label{ch:fm:tab:threepermissions}
   \begin{tabularx}{\textwidth}{lX}
     \hline
     Directory & Description \\ \hline
@@ -261,16 +261,16 @@ Administrative privilege is required to run \verb|chown| command to change the o
 \begin{lstlisting}
 # chown [OPTION] [NEW_OWNER][:NEW_GROUP] PATH
 \end{lstlisting}
-For example, in Fig. \ref{chfilemanagement:fig:chownexp},
+For example, in Fig. \ref{ch:fm:fig:chownexp},
 \begin{lstlisting}
 $ sudo chown root:root calculate_fib.sh
 \end{lstlisting}
-is used to change the ownership and group of file \verb|calculate_fib.sh| from \verb|sunlu| to \verb|root|. Use \verb|ls| with longlist to check the ownership of a file. Notice that elevated privilage is required to change its ownership, otherwise the request will be rejected as shown in Fig. \ref{chfilemanagement:fig:chownexp}.
+is used to change the ownership and group of file \verb|calculate_fib.sh| from \verb|sunlu| to \verb|root|. Use \verb|ls| with longlist to check the ownership of a file. Notice that elevated privilage is required to change its ownership, otherwise the request will be rejected as shown in Fig. \ref{ch:fm:fig:chownexp}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_file_management/figures/chownexp.png}
-	\caption{Change ownership and group of a file.} \label{chfilemanagement:fig:chownexp}
+	\caption{Change ownership and group of a file.} \label{ch:fm:fig:chownexp}
 \end{figure}
 
 \subsection{Change Permissions of a File or Directory}
@@ -279,13 +279,13 @@ Both the owner of a file or directory and the users with administrative privileg
 \begin{lstlisting}
 $ chmod [OPTION] MODE PATH
 \end{lstlisting}
-For example, in Fig. \ref{chfilemanagement:fig:chmodexp}, \verb|g-w| is used to subtract ``writing'' permission from ``group'', and \verb|go+w| is used to add ``writing'' permission to `group'' and ``other'', respectively. Here, \verb|u|, \verb|g| and \verb|o| represents ``user'' (owner), ``group'' and ``other'', and \verb|r|, \verb|w| and \verb|x|, ``read'', ``write'' and ``execute'', respectively.
+For example, in Fig. \ref{ch:fm:fig:chmodexp}, \verb|g-w| is used to subtract ``writing'' permission from ``group'', and \verb|go+w| is used to add ``writing'' permission to `group'' and ``other'', respectively. Here, \verb|u|, \verb|g| and \verb|o| represents ``user'' (owner), ``group'' and ``other'', and \verb|r|, \verb|w| and \verb|x|, ``read'', ``write'' and ``execute'', respectively.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_file_management/figures/chmodexp.png}
-	\caption{Change 9-bit permission (mode) of a file.} \label{chfilemanagement:fig:chmodexp}
+	\caption{Change 9-bit permission (mode) of a file.} \label{ch:fm:fig:chmodexp}
 \end{figure}
-Alternatively, 3-digit numbers such as \verb|664| as shown in Fig. \ref{chfilemanagement:fig:chmodexp} can also represent a permission. The first digit is associated with the permission given to the ``user'', where in this example \verb|6| represents \verb|rw-|. Notice that each permission is assigned a number: \verb|r| is 4, \verb|w| is 2, and \verb|x| is 1. From the sum of the numbers, the OS understands which permission(s) are assigned. For example, $6=4+2$, hense \verb|r| and \verb|w| permissions. Likewise as another two quick examples, a \verb|7| would mean \verb|rwx| and \verb|5|, \verb|r-x|, respectively. The second and third digits are associated with the permission given to ``group'' and ``other'' respectively. Hense, \verb|664| would assign \verb|rw-rw-r--| to the file.
+Alternatively, 3-digit numbers such as \verb|664| as shown in Fig. \ref{ch:fm:fig:chmodexp} can also represent a permission. The first digit is associated with the permission given to the ``user'', where in this example \verb|6| represents \verb|rw-|. Notice that each permission is assigned a number: \verb|r| is 4, \verb|w| is 2, and \verb|x| is 1. From the sum of the numbers, the OS understands which permission(s) are assigned. For example, $6=4+2$, hense \verb|r| and \verb|w| permissions. Likewise as another two quick examples, a \verb|7| would mean \verb|rwx| and \verb|5|, \verb|r-x|, respectively. The second and third digits are associated with the permission given to ``group'' and ``other'' respectively. Hense, \verb|664| would assign \verb|rw-rw-r--| to the file.
 
 \section{Search through the System}
 
@@ -313,11 +313,11 @@ The mechanism behind \verb|locate| is that behind the users' eyes, the OS runs \
 
 One may get confused by commands \verb|locate| and \verb|mlocate|. The concepts of the commands are very similar, and when both commands are available on a machine, \verb|mlocate| functions by default even the user types \verb|locate|.
 
-An example of using \verb|locate| is given in Fig. \ref{chfilemanagement:fig:locateexp}. It can be seen from this example that the searching is done globally and does not rely on the current working directory.
+An example of using \verb|locate| is given in Fig. \ref{ch:fm:fig:locateexp}. It can be seen from this example that the searching is done globally and does not rely on the current working directory.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_file_management/figures/locateexp.png}
-	\caption{Search for files and directories using \textit{locate}.} \label{chfilemanagement:fig:locateexp}
+	\caption{Search for files and directories using \textit{locate}.} \label{ch:fm:fig:locateexp}
 \end{figure}
 
 It is worth mentioning that for safety and privacy reasons, \verb|locate| only shows the items that the user would be able to detect manually using \verb|cd| and \verb|ls| in the first place. Therefore, a regular user cannot locate any file under \verb|/root| our other users' home directory using this method.
