@@ -99,7 +99,7 @@ $ pwd
 
 As one of the most frequently used commands, \verb|ls| lists down information about the files in the current directory (or any other directory if specified), and by default sort the entries alphabetically. Features can be specified for the items to be listed, to make the result more selective. The user is able to decide what information to be displayed, such as file name, file access control list, etc., as follows.
 \begin{lstlisting}
-$ ls [OPTION] [PATH]
+$ ls [<option>] [<path>]
 \end{lstlisting}
 
 An example is given in Fig. \ref{ch:fm:fig:lscommandexample} below. By default, command \verb|ls| alone shows only the name of files and subdirectories (excluding hidden files and subdirectories). With the additional arguments (option, as given in the syntax above), more information can be displayed. For example in Fig. \ref{ch:fm:fig:lscommandexample}, the \verb|-l| argument displays the information in long listing mode, which includes the owner and access control list information. More details about files and directories access control list are given in later part of this section.
@@ -134,7 +134,7 @@ Notice that some Linux distributions may come by default an alias about \verb|ls
 
 To create an empty file in the current working directory, simply use \verb|touch| followed by the path of the file (including file name) as follows.
 \begin{lstlisting}
-$ touch [OPTION] PATH
+$ touch [<option>] <path>
 \end{lstlisting}
 For example,
 \begin{lstlisting}
@@ -165,7 +165,7 @@ $ mkdir [OPTION] PATH
 
 To move a file or a directory from an existing PATH to a new PATH, simply use \verb|mv| command as follows.
 \begin{lstlisting}
-$ mv [OPTION] SOURCE_PATH TARGET_PATH
+$ mv [<option>] <source> <target>
 \end{lstlisting}
 Different from the conventional cut-and-paste, while moving the item, it is possible to also rename the item simultaneously. For example,
 \begin{lstlisting}
@@ -190,12 +190,12 @@ Some commonly used arguments of \verb|mv| is summarized in Table \ref{ch:fm:tab:
 
 The copy-and-paste command \verb|cp| works similar with the move command \verb|mv|, except that it will not remove the item from the source path. Similar syntax applies to \verb|cp| as follows, and arguments in Table \ref{ch:fm:tab:mvcpcommandargument} also apply to \verb|cp|.
 \begin{lstlisting}
-$ cp [OPTION] SOURCE_PATH TARGET_PATH
+$ cp [<option>] <source> <target>
 \end{lstlisting}
 
 To permanently delete an item, use \verb|rm| command as follows.
 \begin{lstlisting}
-$ rm [OPTION] PATH
+$ rm [<option>] <path>
 \end{lstlisting}
 For safety, usualy when using \verb|rm|, the OS will keep prompting messages asking user to confirm whether to permenantly delete an item or not. In some OS setups, it is by default forbidden to delete a directory, unless all files and subdirectories in that file have been priorily removed. The following arguments in Table \ref{ch:fm:tab:rmcommandargument} can be used to change the setup.
 
@@ -259,7 +259,7 @@ Commands \verb|chown| and \verb|chmod| can be used to change the ownership and 9
 
 Administrative privilege is required to run \verb|chown| command to change the ownership and group of a file or a directory as follows.
 \begin{lstlisting}
-# chown [OPTION] [NEW_OWNER][:NEW_GROUP] PATH
+# chown [<option>] <new_owner>[:<new_group>] <path>
 \end{lstlisting}
 For example, in Fig. \ref{ch:fm:fig:chownexp},
 \begin{lstlisting}
@@ -277,7 +277,7 @@ is used to change the ownership and group of file \verb|calculate_fib.sh| from \
 
 Both the owner of a file or directory and the users with administrative privilege can change the 9-bit permission of the file using \verb|chmod| as follows. The 9-bit permission, in this context, is called the mode of the file.
 \begin{lstlisting}
-$ chmod [OPTION] MODE PATH
+$ chmod [<option>] <new_mode> <path>
 \end{lstlisting}
 For example, in Fig. \ref{ch:fm:fig:chmodexp}, \verb|g-w| is used to subtract ``writing'' permission from ``group'', and \verb|go+w| is used to add ``writing'' permission to `group'' and ``other'', respectively. Here, \verb|u|, \verb|g| and \verb|o| represents ``user'' (owner), ``group'' and ``other'', and \verb|r|, \verb|w| and \verb|x|, ``read'', ``write'' and ``execute'', respectively.
 \begin{figure}

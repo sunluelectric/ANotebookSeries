@@ -87,7 +87,7 @@ and if everything is done correctly, a message started with ``Hello from Docker!
 
 Notice that to use docker commands, sudo privilege is required. To avoid typing \verb|sudo| each time running a docker command, add the user to the docker group as follows.
 \begin{lstlisting}
-$ sudo usermod [user_name] -aG docker
+$ sudo usermod <user_name> -aG docker
 \end{lstlisting}
 
 In the rest of the section, \verb|sudo| is neglected for docker commands.
@@ -171,41 +171,41 @@ In summary, selected key commands regarding launching a container is given in Ta
 
 To start an existing (but exited) container, use
 \begin{lstlisting}
-$ docker start [container_name]
+$ docker start <container_name>
 \end{lstlisting}
 This command starts the exited container, and keep it up running in the background.
 
 For a container running in the background, use \verb|docker exec| to execute a shell command as follows.
 \begin{lstlisting}
-$ docker exec [container_name] [command]
+$ docker exec <container_name> <command>
 \end{lstlisting}
 
 To enable the TTY shell of a container running in the background, use
 \begin{lstlisting}
-$ docker exec -it [container_name] [shell_name]
+$ docker exec -it <container_name> <shell_name>
 \end{lstlisting}
 where depending on the environment of the container, the shell can be different. In the case of an \textit{alpine} imgae based container, \verb|ash| is the default shell. For a \textit{ubuntu} image based container, on the other hand, usually \verb|bash| should be specified.
 
 There are multiple ways and protocols to interact with the file systems in a container, depending the I/O setup of the container. For a container running locally, \verb|docker cp| can be conveniently used for file transfer between the container and the host machine as follows. From container to host machine:
 \begin{lstlisting}
-$ docker cp [container_name]:[source] [destination]
+$ docker cp <container_name>:<source> <destination>
 \end{lstlisting}
 and from host machine to container:
 \begin{lstlisting}
-$ docker cp [source] [container_name]:[destination]
+$ docker cp <source> <container_name>:<destination>
 \end{lstlisting}
 where \verb|[source]| and \verb|[destination]| refer to the path to the source and destination, respectively, located in the host machine or the container.
 
 To stop or restart a container running in the background, use
 \begin{lstlisting}
-$ docker stop [container_name]
-$ docker restart [container_name]
+$ docker stop <container_name>
+$ docker restart <container_name>
 \end{lstlisting}
 respectively. When a container is stopped, it enters exited status.
 
 To remove a stopped container, use
 \begin{lstlisting}
-$ docker container rm [container_name]
+$ docker container rm <container_name>
 \end{lstlisting}
 to remove a specific container, or
 \begin{lstlisting}
@@ -215,23 +215,23 @@ to remove all stopped containers.
 
 To rename a container (without changing its container ID or anything else), use
 \begin{lstlisting}
-$ docker rename [old_container_name] [new_container_name]
+$ docker rename <old_container_name> <new_container_name>
 \end{lstlisting}
 
 To quickly check container status (CPU, memory usage, etc.) of an up running container or all up running containers, use
 \begin{lstlisting}
-$ docker stats [container_name]
+$ docker stats <container_name>
 \end{lstlisting}
 where the container name can be specified as an option.
 
 To list down more detailed information of a container, including its status, gateway, IP address, etc., use
 \begin{lstlisting}
-$ docker inspect [container_name]
+$ docker inspect <container_name>
 \end{lstlisting}
 
 To create an image from a container, use
 \begin{lstlisting}
-$ docker commit [container_name] [image_name]
+$ docker commit <container_name> <image_name>
 \end{lstlisting}
 The \verb|docker commit| command saves the container's file changes or settings into a new image, which allows easier populating containers or debugging in a later stage. Notice that \verb|docker commit| does not save everything of the container into the image.
 
@@ -302,20 +302,44 @@ Notice that different from the previous container ``\textit{simple-web}'', the n
 
 \section{Docker Images}
 
-In earlier Section \ref{ch:vac:sec:db}, images have been used to create containers. An image performs like a template or source of a container, including its basic settings, initial configurations, required libraries, and other metadata. The above information is stored in \textit{Dockerfile}. A minimal Dockerfile may look like the following
-\begin{lstlisting}
-FROM alpine
-CMD ["echo", "Hello World!"]
-\end{lstlisting}
-More details about the formulation and function of a docker image are introduced in the rest of this section.
+In earlier Section \ref{ch:vac:sec:db}, images have been used to create containers. An image performs like a template or source of a container. It contains the basic settings, initial configurations, required libraries, and other metadata of the container. Every image comes with a ``step-by-step guidance'' to set up the container, known as the \textit{Dockerfile}. More details about the formulation and function of a docker image are introduced in the rest of this section.
 
 \subsection{Image Architecture}
 
-...
+An image shall contain everything needed to create and initialize a container. This include but not limited to:
+\begin{itemize}
+  \item A ``step-by-step guidance'' of all procedures to create the container, i.e., the \textit{Dockerfile}.
+  \item Filesystem architecture of the container.
+  \item All libraries and driver software to be installed in the container upon creation.
+  \item Necessary code for initialization.
+\end{itemize} 
+In addition, an image shall be designed and organized in such a way that it is migratable, reusable and light, and can be used to easily populate large number of containers. For better inheritability, an image might be based on another existing image, which is called its parent image. An image with no parent, such as the official \textit{hello-world} image from Docker Hub, is called a base image.
 
 \subsection{Dockerfile}
 
-Dockerfile is the human-readable text document and it serves as an instruction file for building an image.
+Dockerfile is a human-readable text document that serves as an instruction for building an image. As mentioned earlier, a Dockerfile is essentially a step-by-step guidance to create a container associated with the image. Like other computer languages, Dockerfile has reserved keywords, environmental variables, syntax and grammar rules. Only the basics of forming a Dockerfile is introduced in this section. More details can be found in the docker reference from the official website.
+
+Just as a quick example, the Dockerfile of the official \textit{hello-world} image from Docker Hub look like the following.
+\begin{lstlisting}
+FROM scratch
+COPY hello /
+CMD ["/hello"]
+\end{lstlisting}
+where \verb|FROM scratch| indicates that this image is a base image without a parent. The following \verb|COPY hello /| basically copies the \textit{hello} binary script in the image to the root of the container. Finally, \verb|CMD ["/hello"]| executes \textit{hello} binary script and print the welcome messages in the console.
+
+Intuitively, a typical Dockerfile shall at the minimum include following steps:
+\begin{enumerate}[(1)]
+  \item Define parent image using \verb|FROM|.
+  \item Create filesystem architecture of the container, and correct the ownership of files in the file system using \verb|RUN|.
+  \item Set working directory using \verb|WORKDIR|.
+  \item Copy files to the container using \verb|COPY| or \verb|ADD|.
+  \item Configure registry using \verb|RUN|.
+  \item Install packages from the registry using \verb|RUN|.
+  \item Copy more files to the container using \verb|COPY| or \verb|ADD|.
+  \item Switch to the node user using \verb|USER|.
+  \item Expose port using \verb|EXPORT|.
+  \item Run the APP using \verb|CMD|.
+\end{enumerate}
 
 \subsection{Basic Docker Image Operations}
 
