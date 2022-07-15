@@ -30,7 +30,7 @@ In a VM implementation, a larger and more capable kitchen is setup in advance. F
 	\caption{VM implementation: many cooks in a kitchen, each with a different cookbook.} \label{ch:vac:fig:manycooksinakitchen}
 \end{figure}
 
-Deploy dedicated OS for each APP can be time consuming when the number of the APPs is large. This is also true in the restaurant, where it is very rare for each dish to have a dedicated cook. Instead, a cook usually handles a category of dishes that requires similar skill sets. A cook good at multi-task can handle many dishes by himself alone, as long as the dish recipes are provided. Of course, each dish will stay in its own frypan so that they would not affect each other. This is similar with a container implementation. The recipe for a dish, which describes the skill set of the dish, is called an ``image'' of the container that describes the drivers, libraries and basic configurations for the APP to run. The food cooked in the frypan is the APP. The frypan, the food, and the recipe, together form an instance of a container. A metaphor of the container implementation is given in Fig. \ref{ch:vac:fig:multitaskcook}. Luckily, the cook (OS) is good at multi-tasking by nature, and with the help of a front desk manager (container management tool such as Docker), he can perform quite well.
+Deploy dedicated OS for each APP can be time consuming when the number of the APPs is large. This is also true in the restaurant, where it is very rare for each dish to have a dedicated cook. Instead, a cook usually handles a category of dishes that requires similar skill sets. A cook good at multi-task can handle many dishes by himself alone, as long as the dish recipes are provided. Of course, each dish will stay in its own fry-pan so that they would not affect each other. This is similar with a container implementation. The recipe for a dish, which describes the skill set of the dish, is called an ``image'' of the container that describes the drivers, libraries and basic configurations for the APP to run. The food cooked in the fry-pan is the APP. The fry-pan, the food, and the recipe, together form an instance of a container. A metaphor of the container implementation is given in Fig. \ref{ch:vac:fig:multitaskcook}. Luckily, the cook (OS) is good at multi-tasking by nature, and with the help of a front desk manager (container management tool such as Docker), he can perform quite well.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/multitaskcook.png}
@@ -43,7 +43,7 @@ A cookbook is a instruction of a dish. It guarantees that the same dish, even on
 ...
 \section{Container}
 ...
-\section{Docker Basics} \label{ch:vac:sec:db}
+\section{Docker Container Engine Basics} \label{ch:vac:sec:dceb}
 
 Docker and docker hub are widely used container management engine and a platform for sharing container images, respectively. The basic operations of docker engine, including installation of docker engine, using docker engine to run and manage containers, etc., are introduced in this section.
 
@@ -105,7 +105,7 @@ To check images stored locally, use
 $ docker image ls
 \end{lstlisting}
 
-To check the status of a container, use
+To check the list of containers, use
 \begin{lstlisting}
 $ docker container ls
 \end{lstlisting}
@@ -113,7 +113,7 @@ or
 \begin{lstlisting}
 $ docker container ls -a
 \end{lstlisting}
-where \verb|-a| indicates displaying both running and exited containers. Without \verb|-a|, exited containers will not be displayed.
+where \verb|-a| indicates displaying both running and exited containers. Without \verb|-a|, exited containers will not be displayed. Notice that \verb|docker ps| can also be used to list down containers just like \verb|docker container ls|.
 
 For example, consider running a container of \textit{alpine} as follows. A screen shot is given in Fig. \ref{ch:vac:fig:dockerrunexp}.
 \begin{lstlisting}
@@ -184,7 +184,7 @@ To enable the TTY shell of a container running in the background, use
 \begin{lstlisting}
 $ docker exec -it <container_name> <shell_name>
 \end{lstlisting}
-where depending on the environment of the container, the shell can be different. In the case of an \textit{alpine} imgae based container, \verb|ash| is the default shell. For a \textit{ubuntu} image based container, on the other hand, usually \verb|bash| should be specified.
+where depending on the environment of the container, the shell can be different. In the case of an \textit{alpine} image based container, \verb|ash| is the default shell. For a \textit{ubuntu} image based container, on the other hand, usually \verb|bash| should be specified.
 
 There are multiple ways and protocols to interact with the file systems in a container, depending the I/O setup of the container. For a container running locally, \verb|docker cp| can be conveniently used for file transfer between the container and the host machine as follows. From container to host machine:
 \begin{lstlisting}
@@ -237,7 +237,7 @@ The \verb|docker commit| command saves the container's file changes or settings 
 
 \subsection{Publish a Container}
 
-A container can be configured to be accessible from not only the host machine but also other computers from outside the world. In a typical web service application, the host machine and the containers are often designed following the architecture similar with Fig. \ref{ch:vac:fig:containerwebserverarchitecture}. The containers shall be configured similarly to provide consistent services. A web server, such as \textit{apache} or \textit{nginx}, shall be installed and kept running in the containers. The load balancer is a special software toolkit that monitor the status of the containers, manage the dataflow, and scale up and down the number of containers depending on the total service requests.
+A container can be configured to be accessible from not only the host machine but also other computers from outside the world. In a typical web service application, the host machine and the containers are often designed following the architecture similar with Fig. \ref{ch:vac:fig:containerwebserverarchitecture}. The containers shall be configured similarly to provide consistent services. A web server, such as \textit{apache} or \textit{nginx}, shall be installed and kept running in the containers. The load balancer is a special software toolkit that monitor the status of the containers, manage the data flow, and scale up and down the number of containers depending on the total service requests.
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{chapters/ch_virtualization_and_containerization/figures/containerwebserverarchitecture.png}
@@ -302,17 +302,17 @@ Notice that different from the previous container ``\textit{simple-web}'', the n
 
 \section{Docker Images}
 
-In earlier Section \ref{ch:vac:sec:db}, images have been used to create containers. An image performs like a template or source of a container. It contains the basic settings, initial configurations, required libraries, and other metadata of the container. Every image comes with a ``step-by-step guidance'' to set up the container, known as the \textit{Dockerfile}. More details about the formulation and function of a docker image are introduced in the rest of this section.
+In earlier Section \ref{ch:vac:sec:dceb}, images have been used to create containers. An image performs like a template or source of a container. It contains the basic settings, initial configurations, required libraries, and other metadata of the container. Every image comes with a ``step-by-step guidance'' to set up the container, known as the \textit{Dockerfile}. More details about the formulation and function of a docker image are introduced in the rest of this section.
 
 \subsection{Image Architecture}
 
 An image shall contain everything needed to create and initialize a container. This include but not limited to:
 \begin{itemize}
   \item A ``step-by-step guidance'' of all procedures to create the container, i.e., the \textit{Dockerfile}.
-  \item Filesystem architecture of the container.
+  \item File system architecture of the container.
   \item All libraries and driver software to be installed in the container upon creation.
   \item Necessary code for initialization.
-\end{itemize} 
+\end{itemize}
 In addition, an image shall be designed and organized in such a way that it is migratable, reusable and light, and can be used to easily populate large number of containers. For better inheritability, an image might be based on another existing image, which is called its parent image. An image with no parent, such as the official \textit{hello-world} image from Docker Hub, is called a base image.
 
 \subsection{Dockerfile}
@@ -327,19 +327,40 @@ CMD ["/hello"]
 \end{lstlisting}
 where \verb|FROM scratch| indicates that this image is a base image without a parent. The following \verb|COPY hello /| basically copies the \textit{hello} binary script in the image to the root of the container. Finally, \verb|CMD ["/hello"]| executes \textit{hello} binary script and print the welcome messages in the console.
 
-Intuitively, a typical Dockerfile shall at the minimum include following steps:
+Generally speaking, a typical Dockerfile shall consist of the following instructions (or layers) in order to guide the creation of a container.
 \begin{enumerate}[(1)]
   \item Define parent image using \verb|FROM|.
-  \item Create filesystem architecture of the container, and correct the ownership of files in the file system using \verb|RUN|.
+  \item Create file system architecture of the container, and correct the ownership of files in the file system using \verb|RUN|.
   \item Set working directory using \verb|WORKDIR|.
   \item Copy files to the container using \verb|COPY| or \verb|ADD|.
   \item Configure registry using \verb|RUN|.
   \item Install packages from the registry using \verb|RUN|.
-  \item Copy more files to the container using \verb|COPY| or \verb|ADD|.
-  \item Switch to the node user using \verb|USER|.
+  \item Copy more files to the container using \verb|COPY| or \verb|ADD|, after installation of the packages in the previous step.
+  \item Switch to the correct user using \verb|USER|.
   \item Expose port using \verb|EXPORT|.
   \item Run the APP using \verb|CMD|.
 \end{enumerate}
+
+The keywords mentioned in a Dockerfile, such as \verb|FROM|, \verb|RUN|, and many more, are explained in Table \ref{ch:vac:tab:keywordsdockerfile}.
+
+\begin{table}
+	\centering \caption{Critical keywords used in a Dockerfile.}\label{ch:vac:tab:keywordsdockerfile}
+	\begin{tabularx}{\textwidth}{lX}
+		\hline
+		Syntax & Description \\ \hline
+		\verb|FROM <image>| & Define the parent image. A Dockerfile must start with a \verb|FROM| instruction. An image shall have one \verb|FROM| instruction. In the case a Dockerfile has multiple \verb|FROM| instructions, different images will be created for each \verb|FROM| instruction. An optional \verb|:<tag>| following \verb|<image>| can be used to specify the version of the image to use as the base. By default, the latest version of the image will be used. \\ \hdashline
+		\verb|RUN <command>| & Execute a shell command using by default \verb|/bin/sh -c|. \\ \hdashline
+		\verb|WORKDIR <paht>| & Set the working directory for the instructions beyond this point. This is often a preparation for the upcoming \verb|RUN|, \verb|COPY|, etc., commands. \\ \hdashline
+		\verb|ADD <src> <dest>| & Add \verb|<src>|, either a directory/file in the image or a URL, to \verb|<dest>| in the container. An optional \verb|[--chown=<user>:<group>]| can be used to specify the owner and group of the added files. \\ \hdashline
+		\verb|COPY <src> <dest>| & Copy \verb|<src>|, a directory/file in the image, to \verb|<dest>| in the container. An optional \verb|[--chown=<user>:<group>]| can be used to specify the owner and group of the added files. Notice that \verb|COPY| is similar with \verb|ADD|, except that it is less powerful but easier to use. \\ \hdashline
+		\verb|USER <user>| & Switch user for the instructions beyond this point. \\ \hdashline
+		\verb|EXPOSE <port>| & Specifies the ports that the container shall listen to. An optional \verb|/<protocol>| following \verb|<port>| can be used to specify the protocol for communication. \\ \hdashline
+		\verb|CMD ["<exe>", "p1", ...]| & As the last instruction of a Dockerfile, provide default setups for the container. Notice that a Dockerfile can only contain one \verb|CMD| instruction. The executable command name and the parameters are put into a list. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+Besides Table \ref{ch:vac:tab:keywordsdockerfile}, there are other Dockerfile keywords that can significantly convenient the design and maintenance of the image. For example, \verb|ENV <key>=<value>| assign a value to an environmental variable; \verb|LABEL <key>="<value>"| assigns a tag to the image, which can be displayed when \verb|docker inspect <container>| is used.
 
 \subsection{Basic Docker Image Operations}
 
@@ -351,7 +372,9 @@ Intuitively, a typical Dockerfile shall at the minimum include following steps:
 ...
 
 
+\section{More about Docker}
 
+...
 
 
 
